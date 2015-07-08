@@ -1,0 +1,22 @@
+<div class="block-center animate flipInY speed-1000">
+    <div class="text-center"><img src="assets/images/logo-rekam.svg" style="heigth: auto; width: 80px;" />
+    </div>
+    <h4 class="text-center">KESEHATAN PARU MASYARAKAT</h4>
+    <form class="form-vertical" name="form" ng-submit="login(form)" novalidate>
+        <input type="text" name="email" class="input-control" placeholder="Username" ng-model="user.email" required>
+        <input type="password" name="password" class="input-control" placeholder="Password" ng-model="user.password" required>
+        <div class="has-error">
+            <p class="help-block" ng-show="(form.email.$error.required || form.password.$error.required) && submitted">
+                <i class="fa fa-times-circle fa-fw"></i> Please enter your username and password
+            </p>
+            <p class="help-block" ng-show="errors.other"><i class="fa fa-times-circle fa-fw"></i> {{errors.other}}</p>
+        </div>
+        <button type="submit" class="tmb tmb-default tmb-block"><i class="fa fa-sign-in fa-fw"></i> Login</button>
+    </form>
+    <div class="text-center login-footer">
+        <div>Copyright &copy; {{year1}}<span ng-show="year2>year1"> - {{year2}}</span>
+        </div>
+        <div>UPT. Kesehatan Paru Masyarakat</div>
+        <div>Dinas Kesehatan Provinsi Sumatera Utara</div>
+    </div>
+</div>

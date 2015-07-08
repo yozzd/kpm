@@ -1,0 +1,267 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Profil Pasien</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pull-right"><sup class="req">*</sup><i class="req"> Tidak boleh kosong</i>
+                        </div>
+                        <div class="clearfix"></div>
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nomor <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="nomor" class="input-control" ng-model="data.nomor" disabled required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.nomor.$error.required && submitted">
+                                                Nomor tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Tanggal <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="tanggal" class="input-control" ng-model="data.tanggal" data-date-format="dd MMMM yyyy" bs-datepicker required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin-bottom: 10px;" ng-show="form.tanggal.$error.required && submitted">
+                                                Tanggal tidak boleh kosong
+                                            </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="form.tanggal.$invalid && submitted">
+                                                Invalid format Tanggal
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nama <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="nama" class="input-control" ng-model="data.nama" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.nama.$error.required && submitted">
+                                                Nama tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Umur <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="umur" class="input-control" ng-model="data.umur" ng-pattern="/^(\d)+$/" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.umur.$error.required && submitted">
+                                                Umur tidak boleh kosong
+                                            </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="form.umur.$error.pattern && submitted">
+                                                Umur harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Jenis Kelamin <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="jeniskelamin" ng-model="jeniskelamin.selected" theme="select2" required>
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="jeniskelamin in jeniskelamins | filter: $select.search">
+                                                    <div ng-bind-html="jeniskelamin | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.jeniskelamin.$error.required && submitted">
+                                                Jenis Kelamin tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Alamat</label>
+                                        </td>
+                                        <td></td>
+                                        <td colspan="2"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label>Jalan</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="jalan" class="input-control" ng-model="data.jalan" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label>Lingkungan</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="lingkungan" class="input-control" ng-model="data.lingkungan" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label>Kelurahan / Kecamatan</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="kelkec" class="input-control" ng-model="data.kelkec" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label>Kota / Kabupaten</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="kotkab" class="input-control" ng-model="data.kotkab" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label>Provinsi</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="provinsi" class="input-control" ng-model="data.provinsi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <label>No. Telp. / HP</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="telp" class="input-control" ng-model="data.telp" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Suku</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="suku" class="input-control" ng-model="data.suku" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Agama</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="agama" class="input-control" ng-model="data.agama" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Pekerjaan</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="pekerjaan" class="input-control" ng-model="data.pekerjaan" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Status Keluarga <sup class="req">*</sup></label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="statuskeluarga" ng-model="statuskeluarga.selected" theme="select2" required>
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="statuskeluarga in statuskeluargas | filter: $select.search">
+                                                    <div ng-bind-html="statuskeluarga | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.statuskeluarga.$error.required && submitted">
+                                                Status Keluarga tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Dikirim / Konsul dari</label>
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <ui-select name="dikirim" ng-model="dikirim.selected" theme="select2" ng-change="dikirim.selected==null||dikirim.selected=='Datang Sendiri'">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="dikirim in dikirims | filter: $select.search" null-option="'...'" loose-null>
+                                                    <div ng-bind-html="dikirim | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="kdikirim" class="input-control" ng-model="data.kdikirim" ng-hide="dikirim.selected==null||dikirim.selected=='Datang Sendiri'" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Pembiayaan</label>
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <ui-select name="pembiayaan" ng-model="pembiayaan.selected" theme="select2" ng-change="pembiayaan.selected==null||pembiayaan.selected=='BPJS'||pembiayaan.selected=='Biaya Sendiri'">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="pembiayaan in pembiayaans | filter: $select.search" null-option="'...'" loose-null>
+                                                    <div ng-bind-html="pembiayaan | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="kpembiayaan" class="input-control" ng-model="data.kpembiayaan" ng-hide="pembiayaan.selected==null||pembiayaan.selected=='BPJS'||pembiayaan.selected=='Biaya Sendiri'" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

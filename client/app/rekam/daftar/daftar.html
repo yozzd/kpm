@@ -1,0 +1,25 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Daftar Pasien</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-info" ng-if="!gridOptions.data.length">Tidak ada data. <a ui-sref="rekam.create">Create?</a></div>
+                        <div ui-grid="gridOptions" class="grid" ui-grid-pinning ui-grid-resize-columns ng-if="gridOptions.data.length>0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

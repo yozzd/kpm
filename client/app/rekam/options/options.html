@@ -1,0 +1,37 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>{{data.nama}}</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 3%;"></td>
+                                    <td><a ui-sref=".profil({id: data._id})">Profil</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 3%;">I.</td>
+                                    <td><a ui-sref=".anamnesa({id: data._id})">Anamnesa</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

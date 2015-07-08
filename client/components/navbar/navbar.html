@@ -1,0 +1,18 @@
+<div class="navbar navbar-inverse navbar-static-top" ng-controller="NavbarCtrl">
+    <div class="container">
+        <div class="navbar-header">
+            <a ui-sref="rekam" class="navbar-brand" ng-if="isOprRekam()"><img src="assets/images/logo-rekam-white.svg" class="logo" title="Home" />
+            </a>
+            <a ui-sref="stok" class="navbar-brand" ng-if="isOprStok()"><img src="assets/images/logo-stok-white.svg" class="logo" title="Home" />
+            </a>
+            <a ui-sref="admin" class="navbar-brand" ng-if="isAdmin()"><img src="assets/images/logo-admin-white.svg" class="logo" title="Home" />
+            </a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="isLoggedIn()"><a href="" ng-click="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
