@@ -10,10 +10,10 @@ angular.module('kpmApp')
         $scope.statuskeluargas = ['A', 'I', 'S', 'J', 'D'];
 
         $scope.dikirim = {};
-        $scope.dikirims = ['...', 'Puskesmas', 'Rumah Sakit / Klinik', 'Praktek Dokter Swasta (PDS)', 'Datang Sendiri', 'Dll'];
+        $scope.dikirims = ['Puskesmas', 'Rumah Sakit / Klinik', 'Praktek Dokter Swasta (PDS)', 'Datang Sendiri', 'Dll'];
 
         $scope.pembiayaan = {};
-        $scope.pembiayaans = ['...', 'BPJS', 'Biaya Sendiri', 'Dll'];
+        $scope.pembiayaans = ['BPJS', 'Biaya Sendiri', 'Dll'];
 
         $scope.getData = function () {
             Restangular.one('pasiens').customGET($stateParams.id).then(function (data) {
@@ -51,9 +51,9 @@ angular.module('kpmApp')
                     pekerjaan: $scope.data.pekerjaan,
                     statuskeluarga: $scope.statuskeluarga.selected,
                     dikirim: $scope.dikirim.selected,
-                    kdikirim: $scope.pembiayaan.selected === null || $scope.pembiayaan.selected === 'Datang Sendiri' ? '' : $scope.data.kdikirim,
+                    kdikirim: $scope.pembiayaan.selected === 'Datang Sendiri' ? '' : $scope.data.kdikirim,
                     pembiayaan: $scope.pembiayaan.selected,
-                    kpembiayaan: $scope.pembiayaan.selected === null || $scope.pembiayaan.selected === 'BPJS' || $scope.pembiayaan.selected === 'Biaya Sendiri' ? '' : $scope.data.kpembiayaan
+                    kpembiayaan: $scope.pembiayaan.selected === 'BPJS' || $scope.pembiayaan.selected === 'Biaya Sendiri' ? '' : $scope.data.kpembiayaan
                 }, $stateParams.id).then(function () {
                     $alert({
                         content: 'Data sukses diupdate',

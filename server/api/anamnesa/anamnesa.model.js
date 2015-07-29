@@ -7,6 +7,21 @@ var relationship = require("mongoose-relationship");
 var AnamnesaSchema = new Schema({
     batuk: {
         type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    lamabatuk: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    intensitasbatuk: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    frekuensibatuk: {
+        type: String,
         default: '',
         trim: true
     },

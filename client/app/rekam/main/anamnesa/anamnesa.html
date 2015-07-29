@@ -10,9 +10,6 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="pull-right"><sup class="req">*</sup><i class="req"> Tidak boleh kosong</i>
-                        </div>
-                        <div class="clearfix"></div>
                         <form class="form" name="form" ng-submit="submit(form)" novalidate>
                             <table class="table table-condensed">
                                 <tbody>
@@ -23,8 +20,8 @@
                                         <td colspan="2" style="width: 28%;">
                                             <label>Keluhan Utama</label>
                                         </td>
-                                        <td></td>
-                                        <td style="width: 20%;"></td>
+                                        <td colspan="3"></td>
+                                        <td style="width: 30%;"></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -34,28 +31,96 @@
                                         <td>
                                             <label>Batuk</label>
                                         </td>
-                                        <td>
-                                            <ui-select name="batuk" ng-model="batuk.selected" theme="select2" ng-change="batuk.selected!='Ya'">
+                                        <td colspan="3">
+                                            <ui-select name="batuk" ng-model="batuk.selected" theme="select2" search-enabled="false" ng-change="clbatuk(batuk.selected)">
                                                 <ui-select-match>{{$select.selected}}</ui-select-match>
-                                                <ui-select-choices repeat="batuk in enums | filter: $select.search" null-option="'...'" loose-null>
+                                                <ui-select-choices repeat="batuk in opt1 | filter: $select.search">
                                                     <div ng-bind-html="batuk | highlight: $select.search"></div>
                                                 </ui-select-choices>
                                             </ui-select>
                                         </td>
                                         <td></td>
                                     </tr>
-                                    <tr ng-hide="batuk.selected!='Ya'">
+                                    <tr ng-class="{'text-muted':batuk.selected!='Ya'}">
                                         <td></td>
                                         <td></td>
                                         <td>
                                             <label>Sejak Berapa Lama</label>
                                         </td>
+                                        <td style="width: 10%;">
+                                            <ui-select name="lamabatuk1" ng-model="lamabatuk.selected1" theme="select2" search-enabled="false" ng-disabled="batuk.selected!='Ya'" ng-required="batuk.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="lamabatuk in opt2 | filter: $select.search">
+                                                    <div ng-bind-html="lamabatuk | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="lamabatuk2" class="input-control" ng-model="lamabatuk.selected2" ng-disabled="batuk.selected!='Ya'" ng-required="batuk.selected=='Ya'" />
+                                        </td>
+                                        <td style="width: 15%;">
+                                            <ui-select name="lamabatuk3" ng-model="lamabatuk.selected3" theme="select2" search-enabled="false" ng-disabled="batuk.selected!='Ya'" ng-required="batuk.selected=='Ya'">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="lamabatuk in opt3 | filter: $select.search">
+                                                    <div ng-bind-html="lamabatuk | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="(form.lamabatuk1.$error.required||form.lamabatuk2.$error.required||form.lamabatuk3.$error.required) && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':batuk.selected!='Ya'}">
                                         <td></td>
                                         <td></td>
+                                        <td>
+                                            <label>Intensitas</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="intensitasbatuk" ng-model="intensitasbatuk.selected" theme="select2" search-enabled="false" ng-disabled="batuk.selected!='Ya'" ng-required="batuk.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="intensitasbatuk in opt4 | filter: $select.search">
+                                                    <div ng-bind-html="intensitasbatuk | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.intensitasbatuk.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':batuk.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Frekuensi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="frekuensibatuk" ng-model="frekuensibatuk.selected" theme="select2" search-enabled="false" ng-disabled="batuk.selected!='Ya'" ng-required="batuk.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="frekuensibatuk in opt5 | filter: $select.search">
+                                                    <div ng-bind-html="frekuensibatuk | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.frekuensibatuk.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
-                                        <td>
+                                        <td colspan="3">
                                             <button class="tmb" type="submit">Update</button>
                                         </td>
                                         <td></td>
