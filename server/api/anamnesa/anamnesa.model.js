@@ -85,6 +85,141 @@ var AnamnesaSchema = new Schema({
         default: '',
         trim: true
     },
+    dahak: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    volumedahak: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    warnadahak: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    konsistensidahak: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    nyeridada: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    lokasinyeridada: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    demam: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    lamademam: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    pagisiangdemam: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    soredemam: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    malamdemam: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    keringat: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    nafsu: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    lemah: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    lain: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    penyakit: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    pengobatan: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lamamerokok: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    banyakrokok: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    jenisobat: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lamaobat: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    jenisalkohol: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lamaalkohol: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    tbcparu: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    tbcparuya: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    asma: {
+        type: String,
+        default: 'Tidak',
+        trim: true
+    },
+    asmaya: {
+        type: String,
+        default: '',
+        trim: true
+    },
     _pasien: {
         type: Schema.Types.ObjectId,
         ref: 'Pasien',

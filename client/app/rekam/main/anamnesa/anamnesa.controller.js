@@ -31,7 +31,29 @@ angular.module('kpmApp')
                 $scope.frekuensisesak.selected = $scope.data.frekuensisesak === '' ? null : $scope.data.frekuensisesak;
                 $scope.mengisesak.selected = $scope.data.mengisesak === '' ? null : $scope.data.mengisesak;
                 $scope.bertambahsesak.selected = $scope.data.bertambahsesak === '' ? null : $scope.data.bertambahsesak;
-                
+
+                $scope.dahak.selected = $scope.data.dahak === '' ? null : $scope.data.dahak;
+                $scope.volumedahak.selected = $scope.data.volumedahak === '' ? null : $scope.data.volumedahak;
+                $scope.warnadahak.selected = $scope.data.warnadahak === '' ? null : $scope.data.warnadahak;
+                $scope.konsistensidahak.selected = $scope.data.konsistensidahak === '' ? null : $scope.data.konsistensidahak;
+
+                $scope.nyeridada.selected = $scope.data.nyeridada === '' ? null : $scope.data.nyeridada;
+
+                $scope.demam.selected = $scope.data.demam === '' ? null : $scope.data.demam;
+                $scope.lamademam.selected1 = $scope.data.lamademam === '' ? null : $scope.data.lamademam.split(' ')[0];
+                $scope.lamademam.selected2 = $scope.data.lamademam === '' ? null : $scope.data.lamademam.split(' ')[1];
+                $scope.lamademam.selected3 = $scope.data.lamademam === '' ? null : $scope.data.lamademam.split(' ')[2];
+                $scope.pagisiangdemam.selected = $scope.data.pagisiangdemam === '' ? null : $scope.data.pagisiangdemam;
+                $scope.soredemam.selected = $scope.data.soredemam === '' ? null : $scope.data.soredemam;
+                $scope.malamdemam.selected = $scope.data.malamdemam === '' ? null : $scope.data.malamdemam;
+
+                $scope.keringat.selected = $scope.data.keringat === '' ? null : $scope.data.keringat;
+                $scope.nafsu.selected = $scope.data.nafsu === '' ? null : $scope.data.nafsu;
+                $scope.lemah.selected = $scope.data.lemah === '' ? null : $scope.data.lemah;
+
+                $scope.tbcparu.selected = $scope.data.tbcparu === '' ? null : $scope.data.tbcparu;
+                $scope.asma.selected = $scope.data.asma === '' ? null : $scope.data.asma;
+
                 socket.syncUpdates('anamnesa', [$scope.data], function (event, item, array) {
                     $scope.data = item;
                 });
@@ -47,6 +69,8 @@ angular.module('kpmApp')
         $scope.opt5 = ['Jarang', 'Sering'];
         $scope.opt6 = ['Sedikit', 'Banyak'];
         $scope.opt7 = ['Kumat-kumatan', 'Selalu Ada'];
+        $scope.opt8 = ['Jernih', 'Kuning', 'Hijau', 'Kemerahan campur darah'];
+        $scope.opt9 = ['Encer', 'Kental'];
 
         $scope.batuk = {};
         $scope.lamabatuk = {};
@@ -100,6 +124,64 @@ angular.module('kpmApp')
             }
         };
 
+        $scope.dahak = {};
+        $scope.volumedahak = {};
+        $scope.warnadahak = {};
+        $scope.konsistensidahak = {};
+
+        $scope.cldahak = function (x) {
+            if (x === 'Tidak') {
+                $scope.volumedahak.selected = null;
+                $scope.warnadahak.selected = null;
+                $scope.konsistensidahak.selected = null;
+            }
+        };
+
+        $scope.nyeridada = {};
+
+        $scope.clnyeridada = function (x) {
+            if (x === 'Tidak') {
+                $scope.data.lokasinyeridada = null;
+            }
+        };
+
+        $scope.demam = {};
+        $scope.lamademam = {};
+        $scope.pagisiangdemam = {};
+        $scope.soredemam = {};
+        $scope.malamdemam = {};
+
+        $scope.cldemam = function (x) {
+            if (x === 'Tidak') {
+                $scope.lamademam.selected1 = null;
+                $scope.lamademam.selected2 = null;
+                $scope.lamademam.selected3 = null;
+                $scope.pagisiangdemam.selected = null;
+                $scope.soredemam.selected = null;
+                $scope.malamdemam.selected = null;
+            }
+        };
+
+        $scope.keringat = {};
+        $scope.nafsu = {};
+        $scope.lemah = {};
+
+        $scope.tbcparu = {};
+
+        $scope.cltbcparu = function (x) {
+            if (x === 'Tidak') {
+                $scope.data.tbcparuya = null;
+            }
+        };
+
+        $scope.asma = {};
+
+        $scope.clasma = function (x) {
+            if (x === 'Tidak') {
+                $scope.data.asmaya = null;
+            }
+        };
+
         $scope.submit = function (form) {
             $scope.submitted = true;
             if (form.$valid) {
@@ -120,6 +202,33 @@ angular.module('kpmApp')
                     mengisesak: $scope.sesak.selected === 'Tidak' ? '' : $scope.mengisesak.selected,
                     bertambahsesak: $scope.sesak.selected === 'Tidak' ? '' : $scope.bertambahsesak.selected,
                     pencetussesak: $scope.sesak.selected === 'Tidak' ? '' : $scope.data.pencetussesak,
+                    dahak: $scope.dahak.selected,
+                    volumedahak: $scope.dahak.selected === 'Tidak' ? '' : $scope.volumedahak.selected,
+                    warnadahak: $scope.dahak.selected === 'Tidak' ? '' : $scope.warnadahak.selected,
+                    konsistensidahak: $scope.dahak.selected === 'Tidak' ? '' : $scope.konsistensidahak.selected,
+                    nyeridada: $scope.nyeridada.selected,
+                    lokasinyeridada: $scope.nyeridada.selected === 'Tidak' ? '' : $scope.data.lokasinyeridada,
+                    demam: $scope.demam.selected,
+                    lamademam: $scope.demam.selected === 'Tidak' ? '' : $scope.lamademam.selected1 + ' ' + $scope.lamademam.selected2 + ' ' + $scope.lamademam.selected3,
+                    pagisiangdemam: $scope.demam.selected === 'Tidak' ? '' : $scope.pagisiangdemam.selected,
+                    soredemam: $scope.demam.selected === 'Tidak' ? '' : $scope.soredemam.selected,
+                    malamdemam: $scope.demam.selected === 'Tidak' ? '' : $scope.malamdemam.selected,
+                    keringat: $scope.keringat.selected,
+                    nafsu: $scope.nafsu.selected,
+                    lemah: $scope.lemah.selected,
+                    lain: $scope.data.lain,
+                    penyakit: $scope.data.penyakit,
+                    pengobatan: $scope.data.pengobatan,
+                    lamamerokok: $scope.data.lamamerokok,
+                    banyakrokok: $scope.data.banyakrokok,
+                    jenisobat: $scope.data.jenisobat,
+                    lamaobat: $scope.data.lamaobat,
+                    jenisalkohol: $scope.data.jenisalkohol,
+                    lamaalkohol: $scope.data.lamaalkohol,
+                    tbcparu: $scope.tbcparu.selected,
+                    tbcparuya: $scope.tbcparu.selected === 'Tidak' ? '' : $scope.data.tbcparuya,
+                    asma: $scope.asma.selected,
+                    asmaya: $scope.asma.selected === 'Tidak' ? '' : $scope.data.asmaya
                 }, $scope.data._id).then(function () {
                     $alert({
                         content: 'Data sukses diupdate',

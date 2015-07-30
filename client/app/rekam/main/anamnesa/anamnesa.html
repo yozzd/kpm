@@ -45,7 +45,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <label>Sejak Berapa Lama</label>
+                                            <label>Sejak berapa lama</label>
                                         </td>
                                         <td style="width: 10%;">
                                             <ui-select name="lamabatuk1" ng-model="lamabatuk.selected1" theme="select2" search-enabled="false" ng-disabled="batuk.selected!='Ya'" ng-required="batuk.selected=='Ya'">
@@ -140,7 +140,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <label>Sejak Berapa Lama</label>
+                                            <label>Sejak berapa lama</label>
                                         </td>
                                         <td style="width: 10%;">
                                             <ui-select name="lamabatukdarah1" ng-model="lamabatukdarah.selected1" theme="select2" search-enabled="false" ng-disabled="batukdarah.selected!='Ya'" ng-required="batukdarah.selected=='Ya'">
@@ -235,7 +235,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <label>Sejak Berapa Lama</label>
+                                            <label>Sejak berapa lama</label>
                                         </td>
                                         <td style="width: 10%;">
                                             <ui-select name="lamasesak1" ng-model="lamasesak.selected1" theme="select2" search-enabled="false" ng-disabled="sesak.selected!='Ya'" ng-required="sesak.selected=='Ya'">
@@ -385,6 +385,546 @@
                                         </td>
                                         <td class="has-error">
                                             <p class="help-block" style="margin: 0;" ng-show="form.pencetussesak.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Dahak</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="dahak" ng-model="dahak.selected" theme="select2" search-enabled="false" ng-change="cldahak(dahak.selected)">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="dahak in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="dahak | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':dahak.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Volume</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="volumedahak" ng-model="volumedahak.selected" theme="select2" search-enabled="false" ng-disabled="dahak.selected!='Ya'" ng-required="dahak.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="volumedahak in opt6 | filter: $select.search">
+                                                    <div ng-bind-html="volumedahak | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.volumedahak.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':dahak.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Warna</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="warnadahak" ng-model="warnadahak.selected" theme="select2" search-enabled="false" ng-disabled="dahak.selected!='Ya'" ng-required="dahak.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="warnadahak in opt8 | filter: $select.search">
+                                                    <div ng-bind-html="warnadahak | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.warnadahak.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':dahak.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Konsistensi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="konsistensidahak" ng-model="konsistensidahak.selected" theme="select2" search-enabled="false" ng-disabled="dahak.selected!='Ya'" ng-required="dahak.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="konsistensidahak in opt9 | filter: $select.search">
+                                                    <div ng-bind-html="konsistensidahak | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.konsistensidahak.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Nyeri Dada</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="nyeridada" ng-model="nyeridada.selected" theme="select2" search-enabled="false" ng-change="clnyeridada(nyeridada.selected)">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="nyeridada in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="nyeridada | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':nyeridada.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Lokasi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lokasinyeridada" class="input-control" ng-model="data.lokasinyeridada" ng-disabled="nyeridada.selected!='Ya'" ng-required="nyeridada.selected=='Ya'" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.lokasinyeridada.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>2.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Keluhan Tambahan</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Demam</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="demam" ng-model="demam.selected" theme="select2" search-enabled="false" ng-change="cldemam(demam.selected)">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="demam in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="demam | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':demam.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Sejak berapa lama</label>
+                                        </td>
+                                        <td style="width: 10%;">
+                                            <ui-select name="lamademam1" ng-model="lamademam.selected1" theme="select2" search-enabled="false" ng-disabled="demam.selected!='Ya'" ng-required="demam.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="lamademam in opt2 | filter: $select.search">
+                                                    <div ng-bind-html="lamademam | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="lamademam2" class="input-control" ng-model="lamademam.selected2" ng-disabled="demam.selected!='Ya'" ng-required="demam.selected=='Ya'" />
+                                        </td>
+                                        <td style="width: 15%;">
+                                            <ui-select name="lamademam3" ng-model="lamademam.selected3" theme="select2" search-enabled="false" ng-disabled="demam.selected!='Ya'" ng-required="demam.selected=='Ya'">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="lamademam in opt3 | filter: $select.search">
+                                                    <div ng-bind-html="lamademam | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="(form.lamademam1.$error.required||form.lamademam2.$error.required||form.lamademam3.$error.required) && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':demam.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Pagi / Siang</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="pagisiangdemam" ng-model="pagisiangdemam.selected" theme="select2" search-enabled="false" ng-disabled="demam.selected!='Ya'" ng-required="demam.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="pagisiangdemam in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="pagisiangdemam | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pagisiangdemam.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':demam.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Sore</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="soredemam" ng-model="soredemam.selected" theme="select2" search-enabled="false" ng-disabled="demam.selected!='Ya'" ng-required="demam.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="soredemam in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="soredemam | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.soredemam.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':demam.selected!='Ya'}">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Malam</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="malamdemam" ng-model="malamdemam.selected" theme="select2" search-enabled="false" ng-disabled="demam.selected!='Ya'" ng-required="demam.selected=='Ya'">
+                                                <ui-select-match>
+                                                    <div ng-bind-html="$select.selected"></div>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="malamdemam in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="malamdemam | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.malamdemam.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Keringat Malam</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="keringat" ng-model="keringat.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="keringat in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="keringat | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Nafsu makan / Berat badan menurun</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="nafsu" ng-model="nafsu.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="nafsu in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="nafsu | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Badan lemah / Tidak enak badan</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="lemah" ng-model="lemah.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="lemah in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="lemah | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Lain-lain</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lain" class="input-control" ng-model="data.lain" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>3.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Riwayat Penyakit Sebelumnya</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="penyakit" class="input-control" ng-model="data.penyakit" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>4.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Riwayat Pengobatan Sebelumnya</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="pengobatan" class="input-control" ng-model="data.pengobatan" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>5.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Kebiasaan</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Merokok</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Lama (tahun)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lamamerokok" class="input-control" ng-model="data.lamamerokok" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.lamamerokok.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Banyak (btg/hari)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="banyakrokok" class="input-control" ng-model="data.banyakrokok" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.banyakrokok.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Obat-obatan</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Jenis</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="jenisobat" class="input-control" ng-model="data.jenisobat" />
+                                        </td>
+                                        <td class="has-error"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Lama (tahun)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lamaobat" class="input-control" ng-model="data.lamaobat" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.lamaobat.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Alkohol</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Jenis</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="jenisalkohol" class="input-control" ng-model="data.jenisalkohol" />
+                                        </td>
+                                        <td class="has-error"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Lama (tahun)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lamaalkohol" class="input-control" ng-model="data.lamaalkohol" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.lamaalkohol.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>6.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Anamnesa Keluarga</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Penderita TBC Paru</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="tbcparu" ng-model="tbcparu.selected" theme="select2" search-enabled="false" ng-change="cltbcparu(tbcparu.selected)">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="tbcparu in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="tbcparu | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':tbcparu.selected!='Ya'}">
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Jika Ya Siapa</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="tbcparuya" class="input-control" ng-model="data.tbcparuya" ng-disabled="tbcparu.selected!='Ya'" ng-required="tbcparu.selected=='Ya'" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.tbcparuya.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Riwayat Asma pada Keluarga</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="tbcparu" ng-model="asma.selected" theme="select2" search-enabled="false" ng-change="clasma(asma.selected)">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="asma in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="asma | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-class="{'text-muted':asma.selected!='Ya'}">
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Jika Ya Siapa</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="asmaya" class="input-control" ng-model="data.asmaya" ng-disabled="asma.selected!='Ya'" ng-required="asma.selected=='Ya'" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.asmaya.$error.required && submitted">
                                                 Tidak boleh kosong
                                             </p>
                                         </td>
