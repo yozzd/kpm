@@ -1,0 +1,414 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Fisik Diagnostik</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>1.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Keadaan Umum</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="keadaan" ng-model="keadaan.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="keadaan in opt2 | filter: $select.search">
+                                                    <div ng-bind-html="keadaan | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>2.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Kesadaran</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="kesadaran" ng-model="kesadaran.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="kesadaran in opt3 | filter: $select.search">
+                                                    <div ng-bind-html="kesadaran | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>3.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Frekuensi Pernafasan (RR) (x/menit)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="frekuensi" class="input-control" ng-model="data.frekuensi" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.frekuensi.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>4.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Pols / Nadi (x/menit)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="nadi" class="input-control" ng-model="data.nadi" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.nadi.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>5.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Suhu tubuh (<sup>o</sup>C)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="suhu" class="input-control" ng-model="data.suhu" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.suhu.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>6.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Dispnoe</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="dispnoe" ng-model="dispnoe.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="dispnoe in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="dispnoe | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>7.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Orthopnoe</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="orthopnoe" ng-model="orthopnoe.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="orthopnoe in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="orthopnoe | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>8.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Odem Pre Tibial / Pre Orbital</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="odem" ng-model="odem.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="odem in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="odem | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>9.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Lain-lain</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lain" class="input-control" ng-model="data.lain" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>10.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Dada</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Paru</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Inspeksi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="inspeksi" class="input-control" ng-model="data.inspeksi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Palpasi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="palpasi" class="input-control" ng-model="data.palpasi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Perkusi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="perkusi" class="input-control" ng-model="data.perkusi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Auskultasi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="auskultasi" class="input-control" ng-model="data.auskultasi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Cor</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>HR</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="hr" class="input-control" ng-model="data.hr" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>ST</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="st" class="input-control" ng-model="data.st" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Abdomen</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="abdomen" class="input-control" ng-model="data.abdomen" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Hepar</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="hepar" class="input-control" ng-model="data.hepar" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Limpa</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="limpa" class="input-control" ng-model="data.limpa" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>f.</label>
+                                        </td>
+                                        <td>
+                                            <label>Extrimitas</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="extrimitas" class="input-control" ng-model="data.extrimitas" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>11.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Anemis</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="anemis" ng-model="anemis.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="anemis in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="anemis | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>12.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Sianisis</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="sianisis" ng-model="sianisis.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="sianisis in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="sianisis | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>13.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Ikhterus</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="ikhterus" ng-model="ikhterus.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="ikhterus in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="ikhterus | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>14.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Berat Badan (kg)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="berat" class="input-control" ng-model="data.berat" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.berat.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>15.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Tinggi Badan (cm)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="tinggi" class="input-control" ng-model="data.tinggi" ng-pattern="/^(\d)+$/" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.tinggi.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="3">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

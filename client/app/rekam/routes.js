@@ -86,5 +86,19 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Anamnesa'
                 }
+            })
+            .state('rekam.daftar.options.fisikdiagnostik', {
+                url: '/fisikdiagnostik',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/fisikdiagnostik/fisikdiagnostik.html',
+                        controller: 'RekamFisikDiagnostikCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Fisik Diagnostik'
+                }
             });
     });

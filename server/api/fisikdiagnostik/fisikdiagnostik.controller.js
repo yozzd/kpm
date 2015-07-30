@@ -4,23 +4,22 @@ var _ = require('lodash');
 var async = require('async');
 
 var Pasien = require('../pasien/pasien.model');
-var Anamnesa = require('./anamnesa.model');
+var FisikDiagnostik = require('./fisikdiagnostik.model');
 
-
-// Get a single anamnesa
+// Get a single fisikdiagnostik
 exports.show = function (req, res) {
-    var anamnesaObj = {};
+    var fisikdiagnostikObj = {};
 
     async.series([
 
         function (callback) {
-            Anamnesa.findOne({
+            FisikDiagnostik.findOne({
                 _pasien: req.params.id
-            }).populate('_pasien').exec(function (err, anamnesa) {
+            }).populate('_pasien').exec(function (err, fisikdiagnostik) {
                 if (err) {
                     return callback(err);
                 }
-                anamnesaObj = anamnesa;
+                fisikdiagnostikObj = fisikdiagnostik;
                 callback();
             });
         }
@@ -28,36 +27,36 @@ exports.show = function (req, res) {
         if (err) {
             return res.send(err);
         }
-        return res.json(anamnesaObj);
+        return res.json(fisikdiagnostikObj);
     });
 };
 
-// Updates an existing anamnesa in the DB.
+// Updates an existing fisikdiagnostik in the DB.
 exports.update = function (req, res) {
-    var anamnesaObj = {};
+    var fisikdiagnostikObj = {};
 
     async.series([
 
         function (callback) {
-            Anamnesa.findById(req.params.id, function (err, anamnesa) {
+            FisikDiagnostik.findById(req.params.id, function (err, fisikdiagnostik) {
                 if (err) {
                     return callback(err);
                 }
-                var updated = _.merge(anamnesa, req.body);
+                var updated = _.merge(fisikdiagnostik, req.body);
                 updated.save(function (data) {
                     callback();
                 });
-                anamnesaObj = anamnesa;
+                fisikdiagnostikObj = fisikdiagnostik;
             });
         },
         function (callback) {
             req.body.updated = Date.now();
             req.body.by = req.user.name;
-            Pasien.findById(anamnesaObj._pasien, function (err, anamnesa) {
+            Pasien.findById(fisikdiagnostikObj._pasien, function (err, fisikdiagnostik) {
                 if (err) {
                     return callback(err);
                 }
-                var updated = _.merge(anamnesa, req.body);
+                var updated = _.merge(fisikdiagnostik, req.body);
                 updated.save(function (data) {
                     callback();
                 });
@@ -67,20 +66,20 @@ exports.update = function (req, res) {
         if (err) {
             return res.send(err);
         }
-        return res.json(anamnesaObj);
+        return res.json(fisikdiagnostikObj);
     });
 };
 
-// Deletes a anamnesa from the DB.
+// Deletes a fisikdiagnostik from the DB.
 exports.destroy = function (req, res) {
-    Anamnesa.findById(req.params.id, function (err, anamnesa) {
+    FisikDiagnostik.findById(req.params.id, function (err, fisikdiagnostik) {
         if (err) {
             return handleError(res, err);
         }
-        if (!anamnesa) {
+        if (!fisikdiagnostik) {
             return res.send(404);
         }
-        anamnesa.remove(function (err) {
+        fisikdiagnostik.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }

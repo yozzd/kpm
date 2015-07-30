@@ -4,21 +4,21 @@
 
 'use strict';
 
-var Anamnesa = require('./anamnesa.model');
+var FisikDiagnostik = require('./fisikdiagnostik.model');
 
 exports.register = function (socket) {
-    Anamnesa.schema.post('save', function (doc) {
+    FisikDiagnostik.schema.post('save', function (doc) {
         onSave(socket, doc);
     });
-    Anamnesa.schema.post('remove', function (doc) {
+    FisikDiagnostik.schema.post('remove', function (doc) {
         onRemove(socket, doc);
     });
 }
 
 function onSave(socket, doc, cb) {
-    socket.emit('anamnesa:save', doc);
+    socket.emit('fisikdiagnostik:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-    socket.emit('anamnesa:remove', doc);
+    socket.emit('fisikdiagnostik:remove', doc);
 }

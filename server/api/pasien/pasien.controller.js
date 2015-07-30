@@ -5,6 +5,7 @@ var async = require('async');
 
 var Pasien = require('./pasien.model');
 var Anamnesa = require('../anamnesa/anamnesa.model');
+var Fisikdiagnostik = require('../fisikdiagnostik/fisikdiagnostik.model');
 
 // Get list of pasiens
 exports.index = function (req, res) {
@@ -86,6 +87,16 @@ exports.create = function (req, res) {
         },
         function (callback) {
             Anamnesa.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Fisikdiagnostik.create({
                 _pasien: pasienObj._id
             }, function (err, pasien) {
                 if (err) {

@@ -224,7 +224,7 @@ var AnamnesaSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Pasien',
         childPath: "_anamnesa"
-    },
+    }
 });
 
 AnamnesaSchema.plugin(relationship, {
