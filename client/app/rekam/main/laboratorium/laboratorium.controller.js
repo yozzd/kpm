@@ -86,7 +86,7 @@ angular.module('kpmApp')
                     ldl: $scope.data.ldl,
                     cholesterol: $scope.data.cholesterol,
                     triglecerida: $scope.data.triglecerida,
-                    lipidtotal: $scope.data.lipidtotal,
+                    lipidtotal: $scope.data.lipidtotal
                 }, $scope.data._id).then(function () {
                     $alert({
                         content: 'Data sukses diupdate',

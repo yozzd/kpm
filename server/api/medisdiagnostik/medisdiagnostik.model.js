@@ -2,154 +2,173 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var relationship = require("mongoose-relationship");
 
-var PasienSchema = new Schema({
-    nomor: {
+var MedisDiagnostikSchema = new Schema({
+    bronkhoskopitgl: {
         type: String,
         default: '',
         trim: true
     },
-    tanggal: {
-        type: Date,
-        default: '',
-        trim: true
-    },
-    nama: {
+    bronkhoskopihasil: {
         type: String,
         default: '',
         trim: true
     },
-    umur: {
-        type: Number,
-        default: '',
-        trim: true
-    },
-    jeniskelamin: {
+    spirometertgl: {
         type: String,
         default: '',
         trim: true
     },
-    jalan: {
+    evc: {
         type: String,
         default: '',
         trim: true
     },
-    lingkungan: {
+    fvc: {
         type: String,
         default: '',
         trim: true
     },
-    kelkec: {
+    fevi: {
         type: String,
         default: '',
         trim: true
     },
-    kotkab: {
+    persenfvc: {
         type: String,
         default: '',
         trim: true
     },
-    provinsi: {
+    persenfevi: {
         type: String,
         default: '',
         trim: true
     },
-    telp: {
+    kesimpulan: {
         type: String,
         default: '',
         trim: true
     },
-    suku: {
+    subkesimpulan: {
         type: String,
         default: '',
         trim: true
     },
-    agama: {
+    pefrtgl: {
         type: String,
         default: '',
         trim: true
     },
-    pekerjaan: {
+    pefr: {
         type: String,
         default: '',
         trim: true
     },
-    statuskeluarga: {
+    bronkhodilatortgl: {
         type: String,
         default: '',
         trim: true
     },
-    dikirim: {
+    bronkhodilator: {
         type: String,
         default: '',
         trim: true
     },
-    kdikirim: {
+    bronkhustgl: {
         type: String,
         default: '',
         trim: true
     },
-    pembiayaan: {
+    bronkhus: {
         type: String,
         default: '',
         trim: true
     },
-    kpembiayaan: {
+    subbronkhus: {
         type: String,
         default: '',
         trim: true
     },
-    _anamnesa: {
+    ekgtgl: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    ekghasil: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    treadmilltgl: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    treadmillhasil: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    lge: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    skin: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    subskin: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    tuberkulin: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    pleuratgl: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    pleurahasil: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    histolitgl: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    histolilokasi: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    histolibahan: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    histolihasil: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    _pasien: {
         type: Schema.Types.ObjectId,
-        ref: 'Anamnesa'
-    },
-    _fisikdiagnostik: {
-        type: Schema.Types.ObjectId,
-        ref: 'FisikDiagnostik'
-    },
-    _radiologi: {
-        type: Schema.Types.ObjectId,
-        ref: 'Radiologi'
-    },
-    _laboratorium: {
-        type: Schema.Types.ObjectId,
-        ref: 'Laboratorium'
-    },
-    _medisdiagnostik: {
-        type: Schema.Types.ObjectId,
-        ref: 'MedisDiagnostik'
-    },
-    _diagnosa: {
-        type: Schema.Types.ObjectId,
-        ref: 'Diagnosa'
-    },
-    _pengobatan: {
-        type: Schema.Types.ObjectId,
-        ref: 'Pengobatan'
-    },
-    _terapi: {
-        type: Schema.Types.ObjectId,
-        ref: 'Terapi'
-    },
-    _rehabilitasi: {
-        type: Schema.Types.ObjectId,
-        ref: 'Rehabilitasi'
-    },
-    created: {
-        type: Date,
-        default: '',
-        trim: true
-    },
-    updated: {
-        type: Date,
-        default: '',
-        trim: true
-    },
-    by: {
-        type: String,
-        default: '',
-        trim: true
+        ref: 'Pasien',
+        childPath: "_medisdiagnostik"
     }
 });
 
-module.exports = mongoose.model('Pasien', PasienSchema);
+MedisDiagnostikSchema.plugin(relationship, {
+    relationshipPathName: '_pasien'
+});
+
+module.exports = mongoose.model('MedisDiagnostik', MedisDiagnostikSchema);

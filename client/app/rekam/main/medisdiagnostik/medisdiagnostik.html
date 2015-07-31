@@ -1,0 +1,462 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Pemeriksaan / Tindakan Medis Diagnostik</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>1.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Bronkhoskopi (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="bronkhoskopitgl" class="input-control" ng-model="data.bronkhoskopitgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.bronkhoskopitgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.bronkhoskopihasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>2.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Tes Faal Paru &amp; Jantung</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Spirometer (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="spirometertgl" class="input-control" ng-model="data.spirometertgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.spirometertgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>EVC</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="evc" class="input-control" ng-model="data.evc" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>FVC (KVP)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="fvc" class="input-control" ng-model="data.fvc" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>FEVI (VEPI)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="fevi" class="input-control" ng-model="data.fevi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>%FVC (%KVP)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="persenfvc" class="input-control" ng-model="data.persenfvc" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>%FEVI (%VEPI)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="persenfevi" class="input-control" ng-model="data.persenfevi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>Kesimpulan</label>
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <ui-select name="kesimpulan" ng-model="kesimpulan.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="kesimpulan in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="kesimpulan | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="subkesimpulan" ng-model="subkesimpulan.selected" theme="select2" search-enabled="false" ng-disabled="!kesimpulan.selected" ng-required="kesimpulan.selected">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="subkesimpulan in opt2 | filter: $select.search">
+                                                    <div ng-bind-html="subkesimpulan | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.subkesimpulan.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>PEFR (APE) (Tgl.)</label>
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <input type="text" name="pefrtgl" class="input-control" ng-model="data.pefrtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="pefr" class="input-control" ng-model="data.pefr" />
+                                        </td>
+                                        <td>
+                                            <label>L/menit</label>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pefrtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Tes Bronkhodilator (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="bronkhodilatortgl" class="input-control" ng-model="data.bronkhodilatortgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.bronkhodilatortgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td></td>
+                                        <td colspan="3">
+                                            <ui-select name="bronkhodilator" ng-model="bronkhodilator.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="bronkhodilator in opt3 | filter: $select.search">
+                                                    <div ng-bind-html="bronkhodilator | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.subbronkhodilator.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Tes Provokasi Bronkhus (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="bronkhustgl" class="input-control" ng-model="data.bronkhustgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.bronkhustgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td></td>
+                                        <td style="width: 25%;">
+                                            <ui-select name="bronkhus" ng-model="bronkhus.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="bronkhus in opt4 | filter: $select.search">
+                                                    <div ng-bind-html="bronkhus | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="subbronkhus" class="input-control" ng-model="data.subbronkhus" ng-disabled="!bronkhus.selected" ng-required="bronkhus.selected" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.subbronkhus.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Elektrokardiograf (EKG) (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ekgtgl" class="input-control" ng-model="data.ekgtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.ekgtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.ekghasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>f.</label>
+                                        </td>
+                                        <td>
+                                            <label>Tes Treadmill (EKG) (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="treadmilltgl" class="input-control" ng-model="data.treadmilltgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.treadmilltgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;"></td>
+                                        <td>
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.treadmillhasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>3.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Immulogo</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>LGE Total</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lge" class="input-control" ng-model="data.lge" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Tes Alergi Kulit (Skin Test)</label>
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <ui-select name="skin" ng-model="skin.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="skin in opt5 | filter: $select.search">
+                                                    <div ng-bind-html="skin | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="subskin" class="input-control" ng-model="data.subskin" ng-disabled="!skin.selected" ng-required="skin.selected" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.subskin.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Tes Tuberkulin (Mantoux Test)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="tuberkulin" ng-model="tuberkulin.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="tuberkulin in opt6 | filter: $select.search">
+                                                    <div ng-bind-html="tuberkulin | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>4.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Proof Punctie Pleura (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="pleuratgl" class="input-control" ng-model="data.pleuratgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pleuratgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.pleurahasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>5.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Histoli, Sitologi (Biopsi Jarum Halus, Biopsi Aspirsi sdb) (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="histolitgl" class="input-control" ng-model="data.histolitgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.histolitgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Lokasi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="histolilokasi" class="input-control" ng-model="data.histolilokasi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Bahan</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="histolibahan" class="input-control" ng-model="data.histolibahan" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.histolihasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="3">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

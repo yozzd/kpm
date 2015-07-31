@@ -1,0 +1,151 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Pengobatan</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>1.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>TB - OAT</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Kategori</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="tb" ng-model="tb.selected" theme="select2" search-enabled="false" ng-change="cltb(tb.selected)">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="tb in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="tb | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>a.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="tba" class="input-control" ng-model="data.tba" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>b.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="tbb" class="input-control" ng-model="data.tbb" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>c.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="tbc" class="input-control" ng-model="data.tbc" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>d.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="tbd" class="input-control" ng-model="data.tbd" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>2.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Non TB</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>a.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="nontba" class="input-control" ng-model="data.nontba" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>b.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="nontbb" class="input-control" ng-model="data.nontbb" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>c.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="nontbc" class="input-control" ng-model="data.nontbc" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>d.</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="nontbd" class="input-control" ng-model="data.nontbd" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="3">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

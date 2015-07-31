@@ -236,6 +236,30 @@ form,
     cursor: not-allowed;
 }
 
+/*textarea*/
+
+.textarea-control {
+    width: 100%;
+    border: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d8d8d8;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #444444;
+    vertical-align: middle;
+    margin: 0;
+    padding: 8px;
+    outline: none;
+    background: #ececec;
+    -webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+    -o-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+}
+.textarea-control:focus {
+    border-color: #6e9ef7;
+    background: #fff;
+}
+
 /*button*/
 
 .tmb {
@@ -642,4 +666,34 @@ input[type="text"].ui-grid-filter-input:focus {
 }
 .select2-container.select2-container-disabled .select2-choice {
     cursor: not-allowed;
+}
+.select2-container-multi .select2-choices {
+    height: auto !important;
+    height: 1%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    border: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d8d8d8;
+    border-radius: 3px;
+    border-radius: 3px;
+    cursor: text;
+    overflow: hidden;
+    background-image: none;
+    box-sizing: border-box;
+    color: #444444;
+    vertical-align: middle;
+    outline: none;
+    background: #ececec;
+    -webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+    -o-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.58), inset 0px 0px 6px rgba(0, 0, 0, 0.07);
+}
+.select2-container-multi .select2-choices .select2-search-field input {
+    padding: 5px;
+    margin: 0;
+}
+.select2-search-choice-close {
+    top: 3px;
 }

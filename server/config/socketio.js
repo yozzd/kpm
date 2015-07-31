@@ -17,6 +17,11 @@ function onConnect(socket) {
     });
 
     // Insert sockets below
+    require('../api/rehabilitasi/rehabilitasi.socket').register(socket);
+    require('../api/terapi/terapi.socket').register(socket);
+    require('../api/pengobatan/pengobatan.socket').register(socket);
+    require('../api/diagnosa/diagnosa.socket').register(socket);
+    require('../api/medisdiagnostik/medisdiagnostik.socket').register(socket);
     require('../api/laboratorium/laboratorium.socket').register(socket);
     require('../api/radiologi/radiologi.socket').register(socket);
     require('../api/fisikdiagnostik/fisikdiagnostik.socket').register(socket);

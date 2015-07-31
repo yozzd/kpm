@@ -8,6 +8,11 @@ var Anamnesa = require('../anamnesa/anamnesa.model');
 var FisikDiagnostik = require('../fisikdiagnostik/fisikdiagnostik.model');
 var Radiologi = require('../radiologi/radiologi.model');
 var Laboratorium = require('../laboratorium/laboratorium.model');
+var MedisDiagnostik = require('../medisdiagnostik/medisdiagnostik.model');
+var Diagnosa = require('../diagnosa/diagnosa.model');
+var Pengobatan = require('../pengobatan/pengobatan.model');
+var Terapi = require('../terapi/terapi.model');
+var Rehabilitasi = require('../rehabilitasi/rehabilitasi.model');
 
 // Get list of pasiens
 exports.index = function (req, res) {
@@ -119,6 +124,56 @@ exports.create = function (req, res) {
         },
         function (callback) {
             Laboratorium.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            MedisDiagnostik.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Diagnosa.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Pengobatan.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Terapi.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Rehabilitasi.create({
                 _pasien: pasienObj._id
             }, function (err, pasien) {
                 if (err) {

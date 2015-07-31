@@ -128,5 +128,75 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Pemeriksaan Laboratorium'
                 }
+            })
+            .state('rekam.daftar.options.medisdiagnostik', {
+                url: '/medisdiagnostik',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/medisdiagnostik/medisdiagnostik.html',
+                        controller: 'RekamMedisDiagnostikCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Pemeriksaan / Tindakan Medis Diagnostik'
+                }
+            })
+            .state('rekam.daftar.options.diagnosa', {
+                url: '/diagnosa',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/diagnosa/diagnosa.html',
+                        controller: 'RekamDiagnosaCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Diagnosa'
+                }
+            })
+            .state('rekam.daftar.options.pengobatan', {
+                url: '/pengobatan',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/pengobatan/pengobatan.html',
+                        controller: 'RekamPengobatanCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Pengobatan'
+                }
+            })
+            .state('rekam.daftar.options.terapi', {
+                url: '/terapi',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/terapi/terapi.html',
+                        controller: 'RekamTerapiCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Tindakan Medik Terapi'
+                }
+            })
+            .state('rekam.daftar.options.rehabilitasi', {
+                url: '/rehabilitasi',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/rehabilitasi/rehabilitasi.html',
+                        controller: 'RekamRehabilitasiCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Rehabilitasi Medik'
+                }
             });
     });

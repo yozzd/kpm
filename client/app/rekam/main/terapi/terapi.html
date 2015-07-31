@@ -1,0 +1,96 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Tindakan Medik Terapi</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>1.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Nebulizer</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="nebulizer" class="input-control" ng-model="data.nebulizer" />
+                                        </td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>2.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Punctie Pleura</label>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <ui-select name="punctie" ng-model="punctie.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="punctie in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="punctie | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="subpunctie" class="input-control" ng-model="data.subpunctie" ng-disabled="!punctie.selected" ng-required="punctie.selected" />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.subpunctie.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>3.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Water Sealed Drainage (WSD)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="wsd" class="input-control" ng-model="data.wsd" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>4.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Pleurodesis</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="pleurodesis" class="input-control" ng-model="data.pleurodesis" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="3">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

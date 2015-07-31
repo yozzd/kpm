@@ -9,6 +9,11 @@ var errors = require('./components/errors');
 module.exports = function (app) {
 
     // Insert routes below
+    app.use('/api/rehabilitasis', require('./api/rehabilitasi'));
+    app.use('/api/terapis', require('./api/terapi'));
+    app.use('/api/pengobatans', require('./api/pengobatan'));
+    app.use('/api/diagnosas', require('./api/diagnosa'));
+    app.use('/api/medisdiagnostiks', require('./api/medisdiagnostik'));
     app.use('/api/laboratoriums', require('./api/laboratorium'));
     app.use('/api/radiologis', require('./api/radiologi'));
     app.use('/api/fisikdiagnostiks', require('./api/fisikdiagnostik'));
