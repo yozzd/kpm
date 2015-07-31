@@ -17,6 +17,8 @@ function onConnect(socket) {
     });
 
     // Insert sockets below
+    require('../api/laboratorium/laboratorium.socket').register(socket);
+    require('../api/radiologi/radiologi.socket').register(socket);
     require('../api/fisikdiagnostik/fisikdiagnostik.socket').register(socket);
     require('../api/anamnesa/anamnesa.socket').register(socket);
     require('../api/pasien/pasien.socket').register(socket);

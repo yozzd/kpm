@@ -5,7 +5,9 @@ var async = require('async');
 
 var Pasien = require('./pasien.model');
 var Anamnesa = require('../anamnesa/anamnesa.model');
-var Fisikdiagnostik = require('../fisikdiagnostik/fisikdiagnostik.model');
+var FisikDiagnostik = require('../fisikdiagnostik/fisikdiagnostik.model');
+var Radiologi = require('../radiologi/radiologi.model');
+var Laboratorium = require('../laboratorium/laboratorium.model');
 
 // Get list of pasiens
 exports.index = function (req, res) {
@@ -96,7 +98,27 @@ exports.create = function (req, res) {
             });
         },
         function (callback) {
-            Fisikdiagnostik.create({
+            FisikDiagnostik.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Radiologi.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Laboratorium.create({
                 _pasien: pasienObj._id
             }, function (err, pasien) {
                 if (err) {

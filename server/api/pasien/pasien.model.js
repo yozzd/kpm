@@ -103,6 +103,18 @@ var PasienSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Anamnesa'
     },
+    _fisikdiagnostik: {
+        type: Schema.Types.ObjectId,
+        ref: 'FisikDiagnostik'
+    },
+    _radiologi: {
+        type: Schema.Types.ObjectId,
+        ref: 'Radiologi'
+    },
+    _laboratorium: {
+        type: Schema.Types.ObjectId,
+        ref: 'Laboratorium'
+    },
     created: {
         type: Date,
         default: '',

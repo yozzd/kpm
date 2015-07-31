@@ -100,5 +100,33 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Fisik Diagnostik'
                 }
+            })
+            .state('rekam.daftar.options.radiologi', {
+                url: '/radiologi',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/radiologi/radiologi.html',
+                        controller: 'RekamRadiologiCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Pemeriksaan Radiologi'
+                }
+            })
+            .state('rekam.daftar.options.laboratorium', {
+                url: '/laboratorium',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/laboratorium/laboratorium.html',
+                        controller: 'RekamLaboratoriumCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Pemeriksaan Laboratorium'
+                }
             });
     });

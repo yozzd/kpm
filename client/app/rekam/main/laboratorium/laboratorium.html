@@ -1,0 +1,912 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Pemeriksaan Laboratorium</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>1.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Darah Rutin / Lengkap</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Hb</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="hb" class="input-control" ng-model="data.hb" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>LED</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="led" class="input-control" ng-model="data.led" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Leukosit</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="leukosit" class="input-control" ng-model="data.leukosit" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Thrombosit</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="thrombosit" class="input-control" ng-model="data.thrombosit" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Erythrosit</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="erythrosit" class="input-control" ng-model="data.erythrosit" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>f.</label>
+                                        </td>
+                                        <td>
+                                            <label>Haematokrit (Ht)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="haematokrit" class="input-control" ng-model="data.haematokrit" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>g.</label>
+                                        </td>
+                                        <td>
+                                            <label>Golongan Darah</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="darah" class="input-control" ng-model="data.darah" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>2.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Urine Rutin / Lengkap</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Ph</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ph" class="input-control" ng-model="data.ph" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Reduksi</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="reduksi" class="input-control" ng-model="data.reduksi" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Protein</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="protein" class="input-control" ng-model="data.protein" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Bilirubin</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="bilirubin" class="input-control" ng-model="data.bilirubin" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Sedimen</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="sedimen" class="input-control" ng-model="data.sedimen" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>3.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Faeces Rutin</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="faeces" class="input-control" ng-model="data.faeces" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>4.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Mikrobiologi</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Direct Smear BTA (SPS)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="dsbta" class="input-control" ng-model="data.dsbta" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>I</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="dsbta1" class="input-control" ng-model="data.dsbta1" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>II</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="dsbta2" class="input-control" ng-model="data.dsbta2" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>III</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="dsbta3" class="input-control" ng-model="data.dsbta3" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Kultur / Resistansi BTA (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="btatgl" class="input-control" ng-model="data.btatgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.btatgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Sensitif</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="btasensitif" class="input-control" ng-model="data.btasensitif" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Resinten</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="btaresinten" class="input-control" ng-model="data.btaresinten" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Direct Smear (Gran) Sputum</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="dssputum" class="input-control" ng-model="data.dssputum" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Kultur / Resistansi Sputum (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="sputumtgl" class="input-control" ng-model="data.sputumtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.sputumtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Sensitif</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="sputumsensitif" class="input-control" ng-model="data.sputumsensitif" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Resinten</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="sputumresinten" class="input-control" ng-model="data.sputumresinten" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Direct (Jamur/Spora)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="jamur" class="input-control" ng-model="data.jamur" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>f.</label>
+                                        </td>
+                                        <td>
+                                            <label>Kultur Jamur (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="jamurtgl" class="input-control" ng-model="data.jamurtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.jamurtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>g.</label>
+                                        </td>
+                                        <td>
+                                            <label>Kultur Cairan Pleura (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="kulturpleuratgl" class="input-control" ng-model="data.kulturpleuratgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.kulturpleuratgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>5.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Kimia Klinik</label>
+                                        </td>
+                                        <td colspan="3"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td>
+                                            <label>Analisa Cairan Pleura (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="analisapleuratgl" class="input-control" ng-model="data.analisapleuratgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.analisapleuratgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Tes Rivalta</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="rivalta" class="input-control" ng-model="data.rivalta" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>LDH</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ldhpleura" class="input-control" ng-model="data.ldhpleura" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Protein</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="proteinpleura" class="input-control" ng-model="data.proteinpleura" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td>
+                                            <label>Transudat / Exudat</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="transudat" class="input-control" ng-model="data.transudat" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td>
+                                            <label>Faal Hati (LFT) (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="faalhatitgl" class="input-control" ng-model="data.faalhatitgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.faalhatitgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>SGOT</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="sgot" class="input-control" ng-model="data.sgot" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>SGPT</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="sgpt" class="input-control" ng-model="data.sgpt" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Bil. Total / Direct</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="biltotal" class="input-control" ng-model="data.biltotal" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Bil. Direct</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="bildirect" class="input-control" ng-model="data.bildirect" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Alkali Fosfatase</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="fosfatase" class="input-control" ng-model="data.fosfatase" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Protein Elektrofores</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="elektrofores" class="input-control" ng-model="data.elektrofores" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Total Protein</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="total" class="input-control" ng-model="data.total" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td>
+                                            <label>Faal Ginjal (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="faalginjaltgl" class="input-control" ng-model="data.faalginjaltgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.faalginjaltgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Ureum</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ureum" class="input-control" ng-model="data.ureum" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Kratinin</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="kratinin" class="input-control" ng-model="data.kratinin" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Asam Urat</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="asamurat" class="input-control" ng-model="data.asamurat" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Kratinin Urine</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="kratininurine" class="input-control" ng-model="data.kratininurine" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Protein Urine 24 Jam</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="proteinurine" class="input-control" ng-model="data.proteinurine" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>e.</label>
+                                        </td>
+                                        <td>
+                                            <label>Elektrolit Darah (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="elektrolittgl" class="input-control" ng-model="data.elektrolittgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.elektrolittgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Natrium</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="natrium" class="input-control" ng-model="data.natrium" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Kalium</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="kalium" class="input-control" ng-model="data.kalium" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Chlorida</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="chlorida" class="input-control" ng-model="data.chlorida" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>AGDA</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="agda" class="input-control" ng-model="data.agda" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>f.</label>
+                                        </td>
+                                        <td>
+                                            <label>Profil Jantung (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="jantungtgl" class="input-control" ng-model="data.jantungtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.jantungtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>EKG</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ekg" class="input-control" ng-model="data.ekg" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Treadmill</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="treadmill" class="input-control" ng-model="data.treadmill" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>CPK / CK - Nac</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="cpk" class="input-control" ng-model="data.cpk" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>LDH</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ldhjantung" class="input-control" ng-model="data.ldhjantung" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Troponin I</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="troponin" class="input-control" ng-model="data.troponin" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>g.</label>
+                                        </td>
+                                        <td>
+                                            <label>Tes Gula Darah (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="glukosatgl" class="input-control" ng-model="data.glukosatgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.glukosatgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Glukosa Puasa</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="glukosapuasa" class="input-control" ng-model="data.glukosapuasa" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Glukosa 2 Jam PP</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="glukosapp" class="input-control" ng-model="data.glukosapp" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>GLukosa Ad Random</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="glukosarandom" class="input-control" ng-model="data.glukosarandom" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 2%;">
+                                            <label>h.</label>
+                                        </td>
+                                        <td>
+                                            <label>Profil Lipid (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lipidtgl" class="input-control" ng-model="data.lipidtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.lipidtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>HDL Cholesterol</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="hdl" class="input-control" ng-model="data.hdl" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>LDL Cholesterol</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="ldl" class="input-control" ng-model="data.ldl" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Cholesterol Total</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="cholesterol" class="input-control" ng-model="data.cholesterol" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Triglecerida</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="triglecerida" class="input-control" ng-model="data.triglecerida" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label>Lipid Total</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="lipidtotal" class="input-control" ng-model="data.lipidtotal" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="3">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>
