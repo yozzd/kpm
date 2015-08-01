@@ -1,0 +1,62 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Usul / Tindakan Lanjut</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed" style="width: 80%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <textarea name="usulan" class="textarea-control" rows="3" ng-model="value.usulan" required></textarea>
+                                        </td>
+                                        <td>
+                                            <button class="tmb" type="submit">Add</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.usulan.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                        <hr/>
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr ng-repeat="value in data.usulans">
+                                    <td colspan="3">
+                                        <label>{{$index+1}}.</label>
+                                    </td>
+                                    <td colspan="3">
+                                        <textarea name="usulan" class="textarea-control" rows="3" ng-model="value.usulan"></textarea>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <button type="button" class="tmb" ng-click="update($index, value.usulan)">Update</button>
+                                        <button type="button" class="tmb tmb-danger" ng-click="rem(value._id)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

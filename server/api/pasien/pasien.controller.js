@@ -13,6 +13,8 @@ var Diagnosa = require('../diagnosa/diagnosa.model');
 var Pengobatan = require('../pengobatan/pengobatan.model');
 var Terapi = require('../terapi/terapi.model');
 var Rehabilitasi = require('../rehabilitasi/rehabilitasi.model');
+var Konsultasi = require('../konsultasi/konsultasi.model');
+var Usul = require('../usul/usul.model');
 
 // Get list of pasiens
 exports.index = function (req, res) {
@@ -174,6 +176,26 @@ exports.create = function (req, res) {
         },
         function (callback) {
             Rehabilitasi.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Konsultasi.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            Usul.create({
                 _pasien: pasienObj._id
             }, function (err, pasien) {
                 if (err) {

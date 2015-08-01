@@ -4,22 +4,22 @@ var _ = require('lodash');
 var async = require('async');
 
 var Pasien = require('../pasien/pasien.model');
-var Rehabilitasi = require('./rehabilitasi.model');
+var Konsultasi = require('./konsultasi.model');
 
-// Get a single rehabilitasi
+// Get a single konsultasi
 exports.show = function (req, res) {
-    var rehabilitasiObj = {};
+    var konsultasiObj = {};
 
     async.series([
 
         function (callback) {
-            Rehabilitasi.findOne({
+            Konsultasi.findOne({
                 _pasien: req.params.id
-            }).populate('_pasien').exec(function (err, rehabilitasi) {
+            }).populate('_pasien').exec(function (err, konsultasi) {
                 if (err) {
                     return callback(err);
                 }
-                rehabilitasiObj = rehabilitasi;
+                konsultasiObj = konsultasi;
                 callback();
             });
         }
@@ -27,22 +27,22 @@ exports.show = function (req, res) {
         if (err) {
             return res.send(err);
         }
-        return res.json(rehabilitasiObj);
+        return res.json(konsultasiObj);
     });
 };
 
-// Updates an existing rehabilitasi in the DB.
+// Updates an existing konsultasi in the DB.
 exports.update = function (req, res) {
-    var rehabilitasiObj = {};
+    var konsultasiObj = {};
 
     async.series([
 
         function (callback) {
-            Rehabilitasi.update({
+            Konsultasi.update({
                 _id: req.params.id
             }, {
                 $set: {
-                    rehab: ''
+                    konsul: ''
                 }
             }, function (err) {
                 if (err) {
@@ -52,33 +52,33 @@ exports.update = function (req, res) {
             });
         },
         function (callback) {
-            Rehabilitasi.findById(req.params.id, function (err, rehabilitasi) {
+            Konsultasi.findById(req.params.id, function (err, konsultasi) {
                 if (err) {
                     return callback(err);
                 }
-                if ((req.body.rehab).length < 1) {
-                    req.body.rehab = null;
-                    var update = _.merge(rehabilitasi, req.body);
+                if ((req.body.konsul).length < 1) {
+                    req.body.konsul = null;
+                    var update = _.merge(konsultasi, req.body);
                     update.save(function (data) {
                         callback();
                     });
                 } else {
-                    var updated = _.merge(rehabilitasi, req.body);
+                    var updated = _.merge(konsultasi, req.body);
                     updated.save(function (data) {
                         callback();
                     });
                 }
-                rehabilitasiObj = rehabilitasi;
+                konsultasiObj = konsultasi;
             });
         },
         function (callback) {
             req.body.updated = Date.now();
             req.body.by = req.user.name;
-            Pasien.findById(rehabilitasiObj._pasien, function (err, rehabilitasi) {
+            Pasien.findById(konsultasiObj._pasien, function (err, konsultasi) {
                 if (err) {
                     return callback(err);
                 }
-                var updated = _.merge(rehabilitasi, req.body);
+                var updated = _.merge(konsultasi, req.body);
                 updated.save(function (data) {
                     callback();
                 });
@@ -88,20 +88,20 @@ exports.update = function (req, res) {
         if (err) {
             return res.send(err);
         }
-        return res.json(rehabilitasiObj);
+        return res.json(konsultasiObj);
     });
 };
 
-// Deletes a rehabilitasi from the DB.
+// Deletes a konsultasi from the DB.
 exports.destroy = function (req, res) {
-    Rehabilitasi.findById(req.params.id, function (err, rehabilitasi) {
+    Konsultasi.findById(req.params.id, function (err, konsultasi) {
         if (err) {
             return handleError(res, err);
         }
-        if (!rehabilitasi) {
+        if (!konsultasi) {
             return res.send(404);
         }
-        rehabilitasi.remove(function (err) {
+        konsultasi.remove(function (err) {
             if (err) {
                 return handleError(res, err);
             }

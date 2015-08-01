@@ -198,5 +198,33 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Rehabilitasi Medik'
                 }
+            })
+            .state('rekam.daftar.options.konsultasi', {
+                url: '/konsultasi',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/konsultasi/konsultasi.html',
+                        controller: 'RekamKonsultasiCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Konsultasi Khusus'
+                }
+            })
+            .state('rekam.daftar.options.usul', {
+                url: '/usul',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/usul/usul.html',
+                        controller: 'RekamUsulCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Usul / Tindakan Lanjut'
+                }
             });
     });

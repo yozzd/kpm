@@ -135,6 +135,14 @@ var PasienSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Rehabilitasi'
     },
+    _konsultasi: {
+        type: Schema.Types.ObjectId,
+        ref: 'Konsultasi'
+    },
+    _usul: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usul'
+    },
     created: {
         type: Date,
         default: '',

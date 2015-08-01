@@ -36,7 +36,7 @@ angular.module('kpmApp')
                 enableFiltering: false,
                 pinnedLeft: true,
                 cellTemplate: 'app/rekam/daftar/template/tanggal.html',
-                width: 100
+                width: 150
             },
             {
                 name: 'nama',

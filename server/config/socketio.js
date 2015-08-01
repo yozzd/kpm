@@ -17,6 +17,8 @@ function onConnect(socket) {
     });
 
     // Insert sockets below
+    require('../api/usul/usul.socket').register(socket);
+    require('../api/konsultasi/konsultasi.socket').register(socket);
     require('../api/rehabilitasi/rehabilitasi.socket').register(socket);
     require('../api/terapi/terapi.socket').register(socket);
     require('../api/pengobatan/pengobatan.socket').register(socket);
