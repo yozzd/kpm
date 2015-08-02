@@ -697,3 +697,44 @@ input[type="text"].ui-grid-filter-input:focus {
 .select2-search-choice-close {
     top: 3px;
 }
+
+/*thumbnail*/
+
+.thumb {
+    display: inline-block;
+    height: auto;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+/*modal*/
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.modal-dialog {
+    width: 800px;
+    margin: 30px auto;
+}
+.modal-header {
+    border-bottom: 0;
+}
+.modal-body {
+    position: relative;
+    padding: 0 20px 20px 20px;
+}
+.img-modal {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}

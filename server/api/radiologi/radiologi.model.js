@@ -5,6 +5,16 @@ var Schema = mongoose.Schema;
 var relationship = require("mongoose-relationship");
 
 var RadiologiSchema = new Schema({
+    imagename: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    image: {
+        type: String,
+        default: '',
+        trim: true
+    },
     _pasien: {
         type: Schema.Types.ObjectId,
         ref: 'Pasien',

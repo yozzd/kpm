@@ -14,9 +14,32 @@
                             <table class="table table-condensed">
                                 <tbody>
                                     <tr>
+                                        <td style="width: 2%;">
+                                            <label>a.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Gambar <sup class="req">*</sup><i class="req">Ukuran file maksimum 2MB</i></label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='2000000' ng-model-rejected="reject" style="margin-top: 5px;">
+                                            <div ng-repeat="f in reject">
+                                                <i class="req">Ukuran file melebihi batas maksimum : {{f.name}} - size: {{f.size/1000000}}MB</i>
+                                            </div>
+                                            <div class="progress" style="margin-top: 10px;">
+                                                <div class="progress-bar" role="progressbar" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 30%;">
+                                            <a href="" ng-click="imgmodal()" ng-show="data.image">
+                                                <img ng-src="{{image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                                <a href="" ng-click="delimg()" ng-show="data.image">Delete</a>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="3"></td>
                                         <td colspan="3">
-                                            <button class="tmb" type="submit">Update</button>
+                                            <button type="button" class="tmb" ng-click="upload(file)">Update</button>
                                         </td>
                                         <td></td>
                                     </tr>

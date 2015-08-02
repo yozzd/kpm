@@ -14,9 +14,10 @@ angular.module('kpmApp', [
     'ui.select',
     'ui.grid',
     'ui.grid.pinning',
-    'ui.grid.resizeColumns'
+    'ui.grid.resizeColumns',
+    'ngFileUpload'
 ])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider, $compileProvider) {
         $urlRouterProvider
             .otherwise('/login');
 
@@ -34,7 +35,7 @@ angular.module('kpmApp', [
             }
             return elem;
         });
-
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|data):/);
     })
 
 .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
