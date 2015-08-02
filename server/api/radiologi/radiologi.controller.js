@@ -49,8 +49,13 @@ exports.update = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                var updated = _.merge(radiologi, req.body);
-                updated.save(function (data) {
+                radiologi.thorakpatgl = req.body.thorakpatgl;
+                radiologi.thorakpahasil = req.body.thorakpahasil;
+                radiologi.thorakcttgl = req.body.thorakcttgl;
+                radiologi.thorakcthasil = req.body.thorakcthasil;
+                radiologi.thorakusgtgl = req.body.thorakusgtgl;
+                radiologi.thorakusghasil = req.body.thorakusghasil;
+                radiologi.save(function (data) {
                     callback();
                 });
                 radiologiObj = radiologi;
@@ -88,20 +93,34 @@ exports.files = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                radiologi.imagename = file.name;
                 radiologi.image = base64_encode(file.path);
+                radiologi.imagename = file.name;
+                radiologi.imagetype = file.type;
+                radiologi.thorakpatgl = req.body.thorakpatgl;
+                radiologi.thorakpahasil = req.body.thorakpahasil;
+                radiologi.thorakcttgl = req.body.thorakcttgl;
+                radiologi.thorakcthasil = req.body.thorakcthasil;
+                radiologi.thorakusgtgl = req.body.thorakusgtgl;
+                radiologi.thorakusghasil = req.body.thorakusghasil;
                 radiologi.save(function (data) {
                     callback();
                 });
                 radiologiObj = radiologi;
             });
-        }
-        /*function (callback) {
-            easyimage.exec('convert ' + tmp + ' -resize 100% ' + target, function (err) {
-                if (err) throw err;
+        },
+        function (callback) {
+            req.body.updated = Date.now();
+            req.body.by = req.user.name;
+            Pasien.findById(radiologiObj._pasien, function (err, radiologi) {
+                if (err) {
+                    return callback(err);
+                }
+                var updated = _.merge(radiologi, req.body);
+                updated.save(function (data) {
+                    callback();
+                });
             });
-            callback();
-        }*/
+        }
     ], function (err) {
         if (err) {
             return res.send(err);

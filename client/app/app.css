@@ -372,6 +372,10 @@ form,
 
 /*navbar*/
 
+.navbar-inverse {
+    background: rgba(47, 47, 47, 0.98);
+    border: 0;
+}
 .navbar-inverse .navbar-nav > li > a:hover {
     color: #ddd;
 }
@@ -459,17 +463,18 @@ form,
 /*hero*/
 
 .hero {
-    background: #9ba5a8;
+    background: #444;
     margin-top: -20px;
     margin-bottom: 20px;
 }
 .hero-inner {
     position: relative;
-    padding: 18px 0 60px 0;
+    padding: 10px 0 18px 0;
+    text-align: center;
     color: #fff;
 }
 .hero-title h1 {
-    font-size: 64px;
+    font-size: 18px;
     color: #fff;
 }
 
@@ -584,6 +589,11 @@ input[type="text"].ui-grid-filter-input:focus {
 .req {
     color: #b94a48;
     font-size: 11px;
+    font-style: italic;
+}
+.req2 {
+    font-size: 11px;
+    font-style: italic;
 }
 
 /*select2*/
@@ -705,7 +715,7 @@ input[type="text"].ui-grid-filter-input:focus {
     height: auto;
     line-height: 1.42857143;
     background-color: #fff;
-    border-radius: 3px;
+    border-radius: 4px;
     border: 1px solid #ccc;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -718,7 +728,6 @@ input[type="text"].ui-grid-filter-input:focus {
     overflow-y: auto;
 }
 .modal-dialog {
-    width: 800px;
     margin: 30px auto;
 }
 .modal-header {

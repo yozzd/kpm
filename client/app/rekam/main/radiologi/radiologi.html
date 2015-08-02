@@ -18,28 +18,131 @@
                                             <label>a.</label>
                                         </td>
                                         <td colspan="2" style="width: 28%;">
-                                            <label>Gambar <sup class="req">*</sup><i class="req">Ukuran file maksimum 2MB</i></label>
+                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 2MB</span></label>
                                         </td>
                                         <td colspan="3">
-                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='2000000' ng-model-rejected="reject" style="margin-top: 5px;">
-                                            <div ng-repeat="f in reject">
-                                                <i class="req">Ukuran file melebihi batas maksimum : {{f.name}} - size: {{f.size/1000000}}MB</i>
+                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='2000000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
+                                            <table style="width: 100%;" ng-show="file" class="req2">
+                                                <tr>
+                                                    <td style="width: 20%;">Nama file</td>
+                                                    <td style="width: 2%;">:</td>
+                                                    <td>{{file.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 20%;">Ukuran file</td>
+                                                    <td style="width: 2%;">:</td>
+                                                    <td>{{file.size/1000000|number:'2'}}MB</td>
+                                                </tr>
+                                            </table>
+                                            <div ng-repeat="f in reject" class="req">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td style="width: 20%;">Nama file</td>
+                                                        <td style="width: 2%;">:</td>
+                                                        <td>{{f.name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 20%;">Ukuran file</td>
+                                                        <td style="width: 2%;">:</td>
+                                                        <td>{{f.size/1000000|number:'2'}}MB</td>
+                                                    </tr>
+                                                </table>
+                                                <span>Ukuran file melebihi batas maksimum</span>
                                             </div>
                                             <div class="progress" style="margin-top: 10px;">
                                                 <div class="progress-bar" role="progressbar" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
                                             </div>
                                         </td>
-                                        <td style="width: 30%;">
+                                        <td style="width: 30%;" class="text-center">
                                             <a href="" ng-click="imgmodal()" ng-show="data.image">
                                                 <img ng-src="{{image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
-                                                <a href="" ng-click="delimg()" ng-show="data.image">Delete</a>
                                             </a>
+                                            <br/>
+                                            <a href="" ng-click="delimg()" ng-show="data.image">Delete</a>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>b.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>Foto Thorak PA / Bilateral (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="thorakpatgl" class="input-control" ng-model="data.thorakpatgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.thorakpatgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.thorakpahasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>c.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>CT Scan Thorak (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="thorakpatgl" class="input-control" ng-model="data.thorakcttgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.thorakcttgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.thorakcthasil"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 2%;">
+                                            <label>d.</label>
+                                        </td>
+                                        <td colspan="2" style="width: 28%;">
+                                            <label>USG Thorak (Tgl.)</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <input type="text" name="thorakpatgl" class="input-control" ng-model="data.thorakusgtgl" data-date-format="dd MMMM yyyy" bs-datepicker />
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.thorakusgtgl.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="2">
+                                            <label>Hasil</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea class="textarea-control" rows="3" ng-model="data.thorakusghasil"></textarea>
+                                        </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
                                         <td colspan="3">
-                                            <button type="button" class="tmb" ng-click="upload(file)">Update</button>
+                                            <button type="button" class="tmb" ng-click="upload(file, data)">Update</button>
                                         </td>
                                         <td></td>
                                     </tr>
