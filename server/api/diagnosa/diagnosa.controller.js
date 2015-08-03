@@ -35,39 +35,122 @@ exports.show = function (req, res) {
 exports.update = function (req, res) {
     var diagnosaObj = {};
 
-    async.series([
+    if (req.body.sekunder.length < 1) {
+        async.series([
 
-        function (callback) {
-            Diagnosa.findById(req.params.id, function (err, diagnosa) {
-                if (err) {
-                    return callback(err);
-                }
-                var updated = _.merge(diagnosa, req.body);
-                updated.save(function (data) {
+            function (callback) {
+                Diagnosa.update({
+                    _id: req.params.id
+                }, {
+                    $set: {
+                        sekunder: []
+                    }
+                }, function (err) {
+                    if (err) {
+                        return callback(err);
+                    }
                     callback();
                 });
-                diagnosaObj = diagnosa;
-            });
-        },
-        function (callback) {
-            req.body.updated = Date.now();
-            req.body.by = req.user.name;
-            Pasien.findById(diagnosaObj._pasien, function (err, diagnosa) {
-                if (err) {
-                    return callback(err);
-                }
-                var updated = _.merge(diagnosa, req.body);
-                updated.save(function (data) {
+            },
+            function (callback) {
+                Diagnosa.findById(req.params.id, function (err, diagnosa) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    var updated = _.merge(diagnosa, req.body);
+                    updated.save(function (data) {
+                        callback();
+                    });
+                    diagnosaObj = diagnosa;
+                });
+            },
+            function (callback) {
+                req.body.updated = Date.now();
+                req.body.by = req.user.name;
+                Pasien.findById(diagnosaObj._pasien, function (err, diagnosa) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    var updated = _.merge(diagnosa, req.body);
+                    updated.save(function (data) {
+                        callback();
+                    });
+                });
+            }
+        ], function (err) {
+            if (err) {
+                return res.send(err);
+            }
+            return res.json(diagnosaObj);
+        });
+    } else {
+        async.series([
+
+            function (callback) {
+                Diagnosa.update({
+                    _id: req.params.id
+                }, {
+                    $set: {
+                        sekunder: []
+                    }
+                }, function (err) {
+                    if (err) {
+                        return callback(err);
+                    }
                     callback();
                 });
-            });
-        }
-    ], function (err) {
-        if (err) {
-            return res.send(err);
-        }
-        return res.json(diagnosaObj);
-    });
+            },
+            function (callback) {
+                Diagnosa.findById(req.params.id, function (err, diagnosa) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    for (var i = 0; i < req.body.sekunder.length; i++) {
+                        diagnosa.sekunder.push({
+                            opsi: req.body.sekunder[i].opsi
+                        });
+                        diagnosa.save();
+                    }
+                    diagnosa.primer = req.body.primer;
+                    diagnosa.keterangan = req.body.keterangan;
+                    diagnosa.save(function (data) {
+                        callback();
+                    });
+                    diagnosaObj = diagnosa;
+                });
+            },
+            /*function (callback) {
+                Diagnosa.findById(req.params.id, function (err, diagnosa) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    var updated = _.merge(diagnosa, req.body);
+                    updated.save(function (data) {
+                        callback();
+                    });
+                    diagnosaObj = diagnosa;
+                });
+            },*/
+            function (callback) {
+                req.body.updated = Date.now();
+                req.body.by = req.user.name;
+                Pasien.findById(diagnosaObj._pasien, function (err, diagnosa) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    var updated = _.merge(diagnosa, req.body);
+                    updated.save(function (data) {
+                        callback();
+                    });
+                });
+            }
+        ], function (err) {
+            if (err) {
+                return res.send(err);
+            }
+            return res.json(diagnosaObj);
+        });
+    }
 };
 
 // Deletes a diagnosa from the DB.

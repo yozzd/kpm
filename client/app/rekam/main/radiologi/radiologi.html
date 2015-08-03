@@ -18,10 +18,10 @@
                                             <label>a.</label>
                                         </td>
                                         <td colspan="2" style="width: 28%;">
-                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 2MB</span></label>
+                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 1,5MB</span></label>
                                         </td>
                                         <td colspan="3">
-                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='2000000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
+                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='1500000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
                                             <table style="width: 100%;" ng-show="file" class="req2">
                                                 <tr>
                                                     <td style="width: 20%;">Nama file</td>
@@ -55,7 +55,7 @@
                                         </td>
                                         <td style="width: 30%;" class="text-center">
                                             <a href="" ng-click="imgmodal()" ng-show="data.image">
-                                                <img ng-src="{{image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                                <img ng-src="{{data.image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
                                             </a>
                                             <br/>
                                             <a href="" ng-click="delimg()" ng-show="data.image">Delete</a>

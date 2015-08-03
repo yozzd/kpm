@@ -5,6 +5,23 @@ var Schema = mongoose.Schema;
 var relationship = require("mongoose-relationship");
 
 var DiagnosaSchema = new Schema({
+    primer: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    keterangan: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    sekunder: [{
+        opsi: {
+            type: String,
+            default: '',
+            trim: true
+        }
+    }],
     _pasien: {
         type: Schema.Types.ObjectId,
         ref: 'Pasien',

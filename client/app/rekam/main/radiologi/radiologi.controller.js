@@ -1,20 +1,14 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamRadiologiCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $modal, $sce, $window) {
+    .controller('RekamRadiologiCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $modal, $sce) {
 
         $scope.getData = function () {
             Restangular.one('radiologis').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
 
-                if ($scope.data.imagetype === 'image/svg+xml') {
-                    $scope.image = 'data:image/svg+xml;base64,' + $scope.data.image + '';
-                    $scope.imagesrc = $sce.trustAsUrl('data:image/svg+xml;base64,' + $scope.data.image + '');
-                } else {
-                    $scope.image = 'data:image/png;base64,' + $scope.data.image + '';
-                    $scope.imagesrc = $sce.trustAsUrl('data:image/png;base64,' + $scope.data.image + '');
-                }
+                $scope.imagesrc = $sce.trustAsUrl($scope.data.image);
 
                 socket.syncUpdates('radiologi', [$scope.data], function (event, item, array) {
                     $scope.data = item;
@@ -55,7 +49,6 @@ angular.module('kpmApp')
                     }).progress(function (evt) {
                         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
                     }).success(function (data, status, headers, config) {
-                        //$window.location.reload();
                         $scope.getData();
                         $alert({
                             content: 'Data sukses diupdate',
@@ -84,8 +77,7 @@ angular.module('kpmApp')
         $scope.delimg = function () {
             Restangular.one('radiologis/delimg/').customPUT({
                 image: '',
-                imagename: '',
-                imagetype: '',
+                imagename: ''
             }, $scope.data._id).then(function () {
                 $scope.progress = 0;
                 $alert({

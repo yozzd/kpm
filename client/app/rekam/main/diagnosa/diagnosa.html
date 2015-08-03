@@ -14,6 +14,43 @@
                             <table class="table table-condensed">
                                 <tbody>
                                     <tr>
+                                        <td colspan="3" style="width: 30%;">
+                                            <label>Diagnosa Primer</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="primer" ng-model="primer.selected" theme="select2">
+                                                <ui-select-match>{{$select.selected.opsi}}</ui-select-match>
+                                                <ui-select-choices repeat="primer in datas | filter: {opsi: $select.search}">
+                                                    <div ng-bind-html="primer.opsi | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <label>Keterangan</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <textarea name="keterangan" class="textarea-control" rows="3" ng-model="data.keterangan"></textarea>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <label>Diagnosa Sekunder</label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select multiple ng-model="sekunder.selected" theme="select2">
+                                                <ui-select-match>{{$item.opsi}}</ui-select-match>
+                                                <ui-select-choices repeat="sekunder in datas | filter: {opsi: $select.search}">
+                                                    <div ng-bind-html="sekunder.opsi | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td style="width: 30%;"></td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="3"></td>
                                         <td colspan="3">
                                             <button class="tmb" type="submit">Update</button>

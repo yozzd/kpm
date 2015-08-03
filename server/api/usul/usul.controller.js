@@ -83,7 +83,7 @@ exports.update = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                usul.usulans[req.body.index].usulan = req.body.usulan
+                usul.usulans[req.body.index].usulan = req.body.usulan;
                 usul.markModified('usulans');
                 usul.save(function (data) {
                     callback();

@@ -2,7 +2,6 @@
 
 var _ = require('lodash');
 var async = require('async');
-var easyimage = require('easyimage');
 var fse = require('fs-extra')
 
 var Pasien = require('../pasien/pasien.model');
@@ -11,6 +10,11 @@ var Radiologi = require('./radiologi.model');
 function base64_encode(file) {
     var bitmap = fse.readFileSync(file);
     return new Buffer(bitmap).toString('base64');
+}
+
+function base64_decode(base64str, file) {
+    var bitmap = new Buffer(base64str, 'base64');
+    fse.writeFileSync(file, bitmap);
 }
 
 // Get a single radiologi
@@ -93,9 +97,8 @@ exports.files = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                radiologi.image = base64_encode(file.path);
+                radiologi.image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
                 radiologi.imagename = file.name;
-                radiologi.imagetype = file.type;
                 radiologi.thorakpatgl = req.body.thorakpatgl;
                 radiologi.thorakpahasil = req.body.thorakpahasil;
                 radiologi.thorakcttgl = req.body.thorakcttgl;
