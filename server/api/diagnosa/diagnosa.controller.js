@@ -107,6 +107,7 @@ exports.update = function (req, res) {
                     }
                     for (var i = 0; i < req.body.sekunder.length; i++) {
                         diagnosa.sekunder.push({
+                            _id: req.body.sekunder[i]._id,
                             opsi: req.body.sekunder[i].opsi
                         });
                         diagnosa.save();
@@ -119,18 +120,6 @@ exports.update = function (req, res) {
                     diagnosaObj = diagnosa;
                 });
             },
-            /*function (callback) {
-                Diagnosa.findById(req.params.id, function (err, diagnosa) {
-                    if (err) {
-                        return callback(err);
-                    }
-                    var updated = _.merge(diagnosa, req.body);
-                    updated.save(function (data) {
-                        callback();
-                    });
-                    diagnosaObj = diagnosa;
-                });
-            },*/
             function (callback) {
                 req.body.updated = Date.now();
                 req.body.by = req.user.name;

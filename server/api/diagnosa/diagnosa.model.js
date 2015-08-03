@@ -16,6 +16,9 @@ var DiagnosaSchema = new Schema({
         trim: true
     },
     sekunder: [{
+        _id: {
+            type: Schema.Types.ObjectId
+        },
         opsi: {
             type: String,
             default: '',

@@ -24,23 +24,29 @@ angular.module('kpmApp')
                 'title': 'TB Paru BTA Negatif',
                 'link': 'rekam.parunegatif',
             }, {
-                'title': 'TB (Paru Anak) Kelenjar',
+                'title': 'TB Paru Anak (Tersangka) Kelenjar',
                 'link': 'rekam.kelenjar',
             }, {
-                'title': 'TB (Paru Anak) Gizi Buruk',
+                'title': 'TB Paru Anak (Tersangka) Gizi Buruk',
                 'link': 'rekam.giziburuk',
             }, {
-                'title': 'TB (Paru Anak) Kontak',
+                'title': 'TB Paru Anak (Tersangka) Kontak',
                 'link': 'rekam.kontak',
             }, {
                 'title': 'TB Ekstra Paru',
                 'link': 'rekam.paruekstra',
             }, {
-                'title': 'ISPA Non Pneumonia',
-                'link': 'rekam.nonpneumonia',
+                'title': 'ISPA Non Pneumonia Non Bronkhitis',
+                'link': 'rekam.nonbronkhitis',
             }, {
-                'title': 'ISPA Pneumonia',
-                'link': 'rekam.pneumonia',
+                'title': 'ISPA Non Pneumonia Bronkhitis',
+                'link': 'rekam.bronkhitis',
+            }, {
+                'title': 'ISPA Pneumonia < 5 Tahun',
+                'link': 'rekam.pneumonia5k',
+            }, {
+                'title': 'ISPA Pneumonia > 5 Tahun',
+                'link': 'rekam.pneumonia5b',
             }, {
                 'title': 'Abces Paru',
                 'link': 'rekam.abcesparu',

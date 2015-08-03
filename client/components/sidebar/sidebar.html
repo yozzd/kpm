@@ -8,10 +8,16 @@
             <li ui-sref-active="sidebar-active"><a ui-sref="{{pasien.link}}" title="{{pasien.title}}"> {{pasien.title}}</a>
             </li>
         </ul>
-        <ul ng-repeat="laporan in rekam.laporan">
+        <!--<ul ng-repeat="laporan in rekam.laporan">
             <li ui-sref-active="sidebar-active"><a ui-sref="{{laporan.link}}" title="{{laporan.title}}"> {{laporan.title}}</a>
             </li>
-        </ul>
+        </ul>-->
+        <table style="width: 100%;">
+            <tr ng-repeat="laporan in rekam.laporan">
+                <td style="vertical-align: top; width: 15%;">{{$index+1}}.</td>
+                <td ui-sref-active="sidebar-active"><a ui-sref="{{laporan.link}}" title="{{laporan.title}}"> {{laporan.title}}</a></td>
+            </tr>
+        </table>
         <ul ng-repeat="setting in rekam.setting">
             <li ui-sref-active="sidebar-active"><a ui-sref="{{setting.link}}" title="{{setting.title}}"> {{setting.title}}</a>
             </li>

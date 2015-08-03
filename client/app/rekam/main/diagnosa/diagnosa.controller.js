@@ -3,6 +3,12 @@
 angular.module('kpmApp')
     .controller('RekamDiagnosaCtrl', function ($scope, Restangular, $stateParams, socket, $alert) {
 
+        $scope.getOpsi = function () {
+            Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
+                $scope.datas = datas;
+            });
+        };
+
         $scope.getData = function () {
             Restangular.one('diagnosas').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
@@ -13,6 +19,7 @@ angular.module('kpmApp')
                 };
                 for (var i = 0; i < $scope.data.sekunder.length; i++) {
                     $scope.sekunder.selected.push({
+                        _id: $scope.data.sekunder[i]._id,
                         opsi: $scope.data.sekunder[i].opsi
                     });
                 }
@@ -20,12 +27,6 @@ angular.module('kpmApp')
                 socket.syncUpdates('diagnosa', [$scope.data], function (event, item, array) {
                     $scope.data = item;
                 });
-            });
-        };
-
-        $scope.getOpsi = function () {
-            Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
-                $scope.datas = datas;
             });
         };
 
