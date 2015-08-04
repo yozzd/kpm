@@ -143,6 +143,10 @@ var PasienSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Usul'
     },
+    _kartukontrol: {
+        type: Schema.Types.ObjectId,
+        ref: 'KartuKontrol'
+    },
     created: {
         type: Date,
         default: '',

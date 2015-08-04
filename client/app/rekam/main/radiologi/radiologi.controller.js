@@ -1,14 +1,12 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamRadiologiCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $modal, $sce) {
+    .controller('RekamRadiologiCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $modal) {
 
         $scope.getData = function () {
             Restangular.one('radiologis').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
-
-                $scope.imagesrc = $sce.trustAsUrl($scope.data.image);
 
                 socket.syncUpdates('radiologi', [$scope.data], function (event, item, array) {
                     $scope.data = item;
@@ -22,49 +20,42 @@ angular.module('kpmApp')
             $scope.progress = 0;
         };
 
-        $scope.upload = function (files, data) {
-            if (files === undefined) {
-                Restangular.one('radiologis').customPUT(data, $scope.data._id).then(function () {
+        $scope.submit = function (form) {
+            $scope.submitted = true;
+            if ($scope.file !== null) {
+                Upload.upload({
+                    url: '/api/radiologis/files/' + $scope.data._id,
+                    file: $scope.file,
+                    method: 'PUT',
+                    fields: {
+                        thorakpatgl: $scope.data.thorakpatgl,
+                        thorakpahasil: $scope.data.thorakpahasil,
+                        thorakcttgl: $scope.data.thorakcttgl,
+                        thorakcthasil: $scope.data.thorakcthasil,
+                        thorakusgtgl: $scope.data.thorakusgtgl,
+                        thorakusghasil: $scope.data.thorakusghasil
+                    },
+                }).progress(function (evt) {
+                    $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                }).success(function (data, status, headers, config) {
+                    $scope.getData();
                     $alert({
                         content: 'Data sukses diupdate',
                         placement: 'top-right',
                         type: 'info',
                         duration: 5
                     });
+                }).error(function (data, status, headers, config) {
+                    console.log('error status: ' + status);
                 });
-            } else {
-                if (files !== null) {
-                    Upload.upload({
-                        url: '/api/radiologis/files/' + $scope.data._id,
-                        file: files,
-                        method: 'PUT',
-                        fields: {
-                            thorakpatgl: data.thorakpatgl,
-                            thorakpahasil: data.thorakpahasil,
-                            thorakcttgl: data.thorakcttgl,
-                            thorakcthasil: data.thorakcthasil,
-                            thorakusgtgl: data.thorakusgtgl,
-                            thorakusghasil: data.thorakusghasil
-                        },
-                    }).progress(function (evt) {
-                        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-                    }).success(function (data, status, headers, config) {
-                        $scope.getData();
-                        $alert({
-                            content: 'Data sukses diupdate',
-                            placement: 'top-right',
-                            type: 'info',
-                            duration: 5
-                        });
-                    }).error(function (data, status, headers, config) {
-                        console.log('error status: ' + status);
-                    });
-                }
             }
         };
 
-        $scope.imgmodal = function () {
+        $scope.imgmodal = function (image) {
             var scope = $scope.$new();
+            scope.data = {
+                image: image
+            };
             var imgmodal = $modal({
                 scope: scope,
                 template: 'app/rekam/main/radiologi/template.html',

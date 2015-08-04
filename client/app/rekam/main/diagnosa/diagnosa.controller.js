@@ -20,6 +20,7 @@ angular.module('kpmApp')
                 for (var i = 0; i < $scope.data.sekunder.length; i++) {
                     $scope.sekunder.selected.push({
                         _id: $scope.data.sekunder[i]._id,
+                        oid: $scope.data.sekunder[i].oid,
                         opsi: $scope.data.sekunder[i].opsi
                     });
                 }

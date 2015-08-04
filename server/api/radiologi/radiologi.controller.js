@@ -97,17 +97,31 @@ exports.files = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                radiologi.image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
-                radiologi.imagename = file.name;
-                radiologi.thorakpatgl = req.body.thorakpatgl;
-                radiologi.thorakpahasil = req.body.thorakpahasil;
-                radiologi.thorakcttgl = req.body.thorakcttgl;
-                radiologi.thorakcthasil = req.body.thorakcthasil;
-                radiologi.thorakusgtgl = req.body.thorakusgtgl;
-                radiologi.thorakusghasil = req.body.thorakusghasil;
-                radiologi.save(function (data) {
-                    callback();
-                });
+                if (file === undefined) {
+                    radiologi.image = radiologi.image === '' ? '' : radiologi.image;
+                    radiologi.imagename = radiologi.imagename === '' ? '' : radiologi.imagename;
+                    radiologi.thorakpatgl = req.body.thorakpatgl;
+                    radiologi.thorakpahasil = req.body.thorakpahasil;
+                    radiologi.thorakcttgl = req.body.thorakcttgl;
+                    radiologi.thorakcthasil = req.body.thorakcthasil;
+                    radiologi.thorakusgtgl = req.body.thorakusgtgl;
+                    radiologi.thorakusghasil = req.body.thorakusghasil;
+                    radiologi.save(function (data) {
+                        callback();
+                    });
+                } else {
+                    radiologi.image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
+                    radiologi.imagename = file.name;
+                    radiologi.thorakpatgl = req.body.thorakpatgl;
+                    radiologi.thorakpahasil = req.body.thorakpahasil;
+                    radiologi.thorakcttgl = req.body.thorakcttgl;
+                    radiologi.thorakcthasil = req.body.thorakcthasil;
+                    radiologi.thorakusgtgl = req.body.thorakusgtgl;
+                    radiologi.thorakusghasil = req.body.thorakusghasil;
+                    radiologi.save(function (data) {
+                        callback();
+                    });
+                }
                 radiologiObj = radiologi;
             });
         },

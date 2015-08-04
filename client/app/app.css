@@ -747,3 +747,93 @@ input[type="text"].ui-grid-filter-input:focus {
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
+
+/*tablez*/
+
+.tablez {
+    width: 100%;
+    line-height: 31px;
+    text-align: left;
+    background: white;
+    border-collapse: separate;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+}
+.tablez-head > tr >th {
+    padding: 0 10px;
+    font-weight: normal;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+    background: #ecf0f0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #c8c8c8;
+    border-right: 1px solid #ddd;
+    border-right-color: rgba(0, 0, 0, 0.12);
+    background-image: -webkit-linear-gradient(top, #f5fafa, #e7eaea);
+    background-image: -moz-linear-gradient(top, #f5fafa, #e7eaea);
+    background-image: -o-linear-gradient(top, #f5fafa, #e7eaea);
+    background-image: linear-gradient(to bottom, #f5fafa, #e7eaea);
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px rgba(0, 0, 0, 0.04);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px rgba(0, 0, 0, 0.04);
+}
+.tablez-head > tr > th:first-child {
+    border-left: 1px solid #ccc;
+    border-top-left-radius: 3px;
+}
+.tablez-head > tr > th:last-child {
+    border-right-color: #ccc;
+    border-top-right-radius: 3px;
+}
+.tablez-body > tr:nth-child(2n) {
+    background: #f8f8f8;
+}
+.tablez-body > tr:hover {
+    background: #f3f3f3;
+}
+.tablez-body > tr > td {
+    padding: 0 10px;
+    text-shadow: 0 1px white;
+    border-right: 1px solid #eee;
+    border-right-color: rgba(0, 0, 0, 0.08);
+    vertical-align: top;
+}
+.tablez-body > tr > td:first-child {
+    border-left: 1px solid #ccc;
+}
+.tablez-body > tr > td:last-child {
+    border-right-color: #ccc;
+}
+.tablez-body > tr > td.ago {
+    font-family: monospace;
+    font-size: 11px;
+}
+.tablez-body > tr > td input.input-control {
+    margin: 4px 0;
+}
+.tablez-foot > tr > td {
+    padding: 0 10px;
+    text-shadow: 0 1px white;
+    border-right: 1px solid #eee;
+    border-right-color: rgba(0, 0, 0, 0.08);
+    font-size: 11px;
+    background: #f6f6f6;
+    border-top: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px rgba(255, 255, 255, 0.6);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px rgba(255, 255, 255, 0.6);
+}
+.tablez-foot > tr > td:first-child {
+    border-left: 1px solid #ccc;
+}
+.tablez-foot > tr > td:last-child {
+    border-right-color: #ccc;
+}
+.tablez-foot > tr:last-child > td {
+    border-bottom: 1px solid #ccc;
+}
+.tablez-foot > tr:last-child > td:first-child {
+    border-bottom-left-radius: 3px;
+}
+.tablez-foot > tr:last-child > td:last-child {
+    border-bottom-right-radius: 3px;
+}

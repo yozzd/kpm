@@ -19,6 +19,11 @@ var DiagnosaSchema = new Schema({
         _id: {
             type: Schema.Types.ObjectId
         },
+        oid: {
+            type: String,
+            default: '',
+            trim: true
+        },
         opsi: {
             type: String,
             default: '',

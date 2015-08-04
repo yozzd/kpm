@@ -15,6 +15,7 @@ var Terapi = require('../terapi/terapi.model');
 var Rehabilitasi = require('../rehabilitasi/rehabilitasi.model');
 var Konsultasi = require('../konsultasi/konsultasi.model');
 var Usul = require('../usul/usul.model');
+var KartuKontrol = require('../kartukontrol/kartukontrol.model');
 
 // Get list of pasiens
 exports.index = function (req, res) {
@@ -23,7 +24,7 @@ exports.index = function (req, res) {
     async.series([
 
         function (callback) {
-            Pasien.find({}).populate('_anamnesa').exec(function (err, pasien) {
+            Pasien.find({}).populate('_anamnesa _fisikdiagnostik _radiologi _laboratorium _medisdiagnostik _diagnosa _pengobatan _terapi _rehabilitasi _konsultasi _usul _kartukontrol').exec(function (err, pasien) {
                 if (err) {
                     return callback(err);
                 }
@@ -196,6 +197,16 @@ exports.create = function (req, res) {
         },
         function (callback) {
             Usul.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            KartuKontrol.create({
                 _pasien: pasienObj._id
             }, function (err, pasien) {
                 if (err) {

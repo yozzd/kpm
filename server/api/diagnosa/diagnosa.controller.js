@@ -34,6 +34,7 @@ exports.show = function (req, res) {
 // Updates an existing diagnosa in the DB.
 exports.update = function (req, res) {
     var diagnosaObj = {};
+    console.log(req.body);
 
     if (req.body.sekunder.length < 1) {
         async.series([
@@ -108,6 +109,7 @@ exports.update = function (req, res) {
                     for (var i = 0; i < req.body.sekunder.length; i++) {
                         diagnosa.sekunder.push({
                             _id: req.body.sekunder[i]._id,
+                            oid: req.body.sekunder[i].oid,
                             opsi: req.body.sekunder[i].opsi
                         });
                         diagnosa.save();

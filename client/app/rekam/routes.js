@@ -226,5 +226,33 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Usul / Tindakan Lanjut'
                 }
+            })
+            .state('rekam.daftar.options.kartukontrol', {
+                url: '/kartukontrol',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/kartukontrol/kartukontrol.html',
+                        controller: 'RekamKartuKontrolCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Kartu Kontrol'
+                }
+            })
+            .state('rekam.daftar.options.kartukontrol.add', {
+                url: '/add',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/kartukontrol/addkartukontrol.html',
+                        controller: 'RekamAddKartuKontrolCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Add'
+                }
             });
     });
