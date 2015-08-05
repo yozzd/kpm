@@ -12,46 +12,6 @@
                     <div class="col-xs-12">
                         <div class="alert alert-info" ng-if="!gridOptions.data.length">Tidak ada data</div>
                         <div ui-grid="gridOptions" class="grid" ui-grid-pinning ui-grid-resize-columns ng-if="gridOptions.data.length>0"></div>
-                        <!--<div class="alert alert-info" ng-if="!data.kontrol.length">Tidak ada data</div>
-                        <div ng-if="data.kontrol.length>0">
-                            <table class="tablez">
-                                <thead class="tablez-head">
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Tanggal</th>
-                                        <th class="text-center">Pemeriksaan</th>
-                                        <th class="text-center">Keluhan</th>
-                                        <th class="text-center">Lab</th>
-                                        <th class="text-center">Sputum</th>
-                                        <th class="text-center">MT Tes</th>
-                                        <th class="text-center">Berat Badan</th>
-                                        <th class="text-center">Tinggi Badan</th>
-                                        <th class="text-center">Diagnosa</th>
-                                        <th class="text-center">Terapi</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tablez-body">
-                                    <tr ng-repeat="data in data.kontrol">
-                                        <td class="text-center">{{$index+1}}</td>
-                                        <td>{{data.tanggal|amDateFormat:'DD MMMM YYYY'}}</td>
-                                        <td class="text-center">
-                                            <a href="" ng-click="imgmodal(data.image)" ng-show="data.image">
-                                                <img ng-src="{{data.image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
-                                            </a>
-                                            <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="data.image" style="max-width: 150px;">
-                                        </td>
-                                        <td>{{data.keluhan}}</td>
-                                        <td>{{data.lab}}</td>
-                                        <td>{{data.sputum}}</td>
-                                        <td>{{data.mt}}</td>
-                                        <td>{{data.berat}}</td>
-                                        <td>{{data.tinggi}}</td>
-                                        <td>{{data.diagnosa}}</td>
-                                        <td>{{data.terapi}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>-->
                     </div>
                 </div>
             </div>
