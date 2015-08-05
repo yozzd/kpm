@@ -83,7 +83,10 @@ exports.update = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                usul.usulans[req.body.index].usulan = req.body.usulan;
+                var index = _.findIndex(usul.usulans, function (chr) {
+                    return chr._id.toString() === req.body.id;
+                });
+                usul.usulans[index].usulan = req.body.usulan;
                 usul.markModified('usulans');
                 usul.save(function (data) {
                     callback();
@@ -113,7 +116,6 @@ exports.update = function (req, res) {
 };
 
 exports.rem = function (req, res) {
-    console.log(req.body);
     var usulObj = {};
 
     async.series([

@@ -1,12 +1,19 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamAddKartuKontrolCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $state) {
+    .controller('RekamEditKartuKontrolCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $state, $modal) {
 
         $scope.getData = function () {
             Restangular.one('kartukontrols').customGET($stateParams.id).then(function (data) {
-                $scope.data = data;
+                $scope.id = data._id;
                 $scope.nama = data._pasien.nama;
+                var find = _.find(data.kontrol, function (chr) {
+                    return chr._id === $stateParams.kid;
+                });
+                $scope.data = find;
+                $scope.diagnosa.selected = {
+                    opsi: find.diagnosa
+                };
             });
         };
 
@@ -30,10 +37,11 @@ angular.module('kpmApp')
             if (form.$valid) {
                 if ($scope.file !== null) {
                     Upload.upload({
-                        url: '/api/kartukontrols/files/' + $scope.data._id,
+                        url: '/api/kartukontrols/' + $scope.id,
                         file: $scope.file,
-                        method: 'POST',
+                        method: 'PUT',
                         fields: {
+                            id: $stateParams.kid,
                             tanggal: $scope.data.tanggal,
                             keluhan: $scope.data.keluhan,
                             lab: $scope.data.lab,
@@ -48,7 +56,7 @@ angular.module('kpmApp')
                         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
                     }).success(function (data, status, headers, config) {
                         $alert({
-                            content: 'Data sukses ditambah',
+                            content: 'Data sukses diupdate',
                             placement: 'top-right',
                             type: 'info',
                             duration: 5
@@ -59,6 +67,20 @@ angular.module('kpmApp')
                     });
                 }
             }
+        };
+
+        $scope.imgmodal = function (image) {
+            var scope = $scope.$new();
+            scope.data = {
+                image: image
+            };
+            var imgmodal = $modal({
+                scope: scope,
+                template: 'app/rekam/main/kartukontrol/template.html',
+                show: false,
+                animation: 'am-fade-and-slide-top'
+            });
+            imgmodal.$promise.then(imgmodal.show);
         };
 
     });

@@ -10,7 +10,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="alert alert-info" ng-if="!data.kontrol.length">Tidak ada data</div>
+                        <div class="alert alert-info" ng-if="!gridOptions.data.length">Tidak ada data</div>
+                        <div ui-grid="gridOptions" class="grid" ui-grid-pinning ui-grid-resize-columns ng-if="gridOptions.data.length>0"></div>
+                        <!--<div class="alert alert-info" ng-if="!data.kontrol.length">Tidak ada data</div>
                         <div ng-if="data.kontrol.length>0">
                             <table class="tablez">
                                 <thead class="tablez-head">
@@ -49,7 +51,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>

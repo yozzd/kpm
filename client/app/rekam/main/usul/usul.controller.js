@@ -8,8 +8,6 @@ angular.module('kpmApp')
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
 
-                console.log($scope.data);
-
                 socket.syncUpdates('usul', [$scope.data], function (event, item, array) {
                     $scope.data = item;
                 });
@@ -32,9 +30,9 @@ angular.module('kpmApp')
             }
         };
 
-        $scope.update = function (index, usulan) {
+        $scope.update = function (id, usulan) {
             Restangular.one('usuls').customPUT({
-                index: index,
+                id: id,
                 usulan: usulan
             }, $scope.data._id).then(function () {
                 $alert({

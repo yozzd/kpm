@@ -254,5 +254,19 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Add'
                 }
+            })
+            .state('rekam.daftar.options.kartukontrol.edit', {
+                url: '/{kid}/edit',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/main/kartukontrol/editkartukontrol.html',
+                        controller: 'RekamEditKartuKontrolCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Edit'
+                }
             });
     });

@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var async = require('async');
-var fse = require('fs-extra')
+var fse = require('fs-extra');
 
 var Pasien = require('../pasien/pasien.model');
 var KartuKontrol = require('./kartukontrol.model');
@@ -50,11 +50,6 @@ exports.show = function (req, res) {
         }
         return res.json(kartukontrolObj);
     });
-};
-
-// Creates a new kartukontrol in the DB.
-exports.create = function (req, res) {
-    console.log(req.files.length);
 };
 
 exports.files = function (req, res) {
@@ -129,23 +124,96 @@ exports.files = function (req, res) {
 
 // Updates an existing kartukontrol in the DB.
 exports.update = function (req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
-    KartuKontrol.findById(req.params.id, function (err, kartukontrol) {
+    var kartukontrolObj = {};
+    var file = req.files.file;
+
+    async.series([
+
+        function (callback) {
+            KartuKontrol.findById(req.params.id, function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                var index = _.findIndex(kartukontrol.kontrol, function (chr) {
+                    return chr._id.toString() === req.body.id;
+                });
+                if (file === undefined) {
+                    kartukontrol.kontrol[index].tanggal = req.body.tanggal;
+                    kartukontrol.kontrol[index].image = kartukontrol.image === '' ? '' : kartukontrol.image;
+                    kartukontrol.kontrol[index].imagename = kartukontrol.imagename === '' ? '' : kartukontrol.imagename;
+                    kartukontrol.kontrol[index].keluhan = req.body.keluhan;
+                    kartukontrol.kontrol[index].lab = req.body.lab;
+                    kartukontrol.kontrol[index].sputum = req.body.sputum;
+                    kartukontrol.kontrol[index].mt = req.body.mt;
+                    kartukontrol.kontrol[index].berat = req.body.berat;
+                    kartukontrol.kontrol[index].tinggi = req.body.tinggi;
+                    kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
+                    kartukontrol.kontrol[index].terapi = req.body.terapi;
+                    kartukontrol.save(function (data) {
+                        callback();
+                    });
+                } else {
+                    kartukontrol.kontrol[index].tanggal = req.body.tanggal;
+                    kartukontrol.kontrol[index].image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
+                    kartukontrol.kontrol[index].imagename = file.name;
+                    kartukontrol.kontrol[index].keluhan = req.body.keluhan;
+                    kartukontrol.kontrol[index].lab = req.body.lab;
+                    kartukontrol.kontrol[index].sputum = req.body.sputum;
+                    kartukontrol.kontrol[index].mt = req.body.mt;
+                    kartukontrol.kontrol[index].berat = req.body.berat;
+                    kartukontrol.kontrol[index].tinggi = req.body.tinggi;
+                    kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
+                    kartukontrol.kontrol[index].terapi = req.body.terapi;
+                    kartukontrol.save(function (data) {
+                        callback();
+                    });
+                }
+                kartukontrolObj = kartukontrol;
+            });
+        },
+        function (callback) {
+            req.body.updated = Date.now();
+            req.body.by = req.user.name;
+            Pasien.findById(kartukontrolObj._pasien, function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                var updated = _.merge(kartukontrol, req.body);
+                updated.save(function (data) {
+                    callback();
+                });
+            });
+        }
+    ], function (err) {
         if (err) {
-            return handleError(res, err);
+            return res.send(err);
         }
-        if (!kartukontrol) {
-            return res.send(404);
+        return res.json(kartukontrolObj);
+    });
+};
+
+exports.rem = function (req, res) {
+    var kartukontrolObj = {};
+
+    async.series([
+
+        function (callback) {
+            KartuKontrol.findById(req.params.id, function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrol.kontrol.pull(req.body.id)
+                kartukontrol.save(function (data) {
+                    callback();
+                });
+                kartukontrolObj = kartukontrol;
+            });
         }
-        var updated = _.merge(kartukontrol, req.body);
-        updated.save(function (err) {
-            if (err) {
-                return handleError(res, err);
-            }
-            return res.json(200, kartukontrol);
-        });
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(kartukontrolObj);
     });
 };
 

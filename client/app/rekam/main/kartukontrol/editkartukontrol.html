@@ -6,7 +6,7 @@
             <div ncy-breadcrumb></div>
             <div class="well-content">
                 <div class="page-header">
-                    <h3>Add Kartu Kontrol</h3>
+                    <h3>Edit Kartu Kontrol</h3>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -66,7 +66,11 @@
                                                 <div class="progress-bar" role="progressbar" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
                                             </div>
                                         </td>
-                                        <td class="text-center"></td>
+                                        <td class="text-center">
+                                            <a href="" ng-click="imgmodal(data.image)" ng-show="data.image">
+                                                <img ng-src="{{data.image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                            </a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -160,7 +164,7 @@
                                     <tr>
                                         <td colspan="3"></td>
                                         <td colspan="3">
-                                            <button type="submit" class="tmb">Create</button>
+                                            <button type="submit" class="tmb">Update</button>
                                         </td>
                                         <td></td>
                                     </tr>
