@@ -7,6 +7,7 @@ var multipart = require('connect-multiparty');
 
 var router = express.Router();
 
+router.get('/', auth.hasRole('oprrekam'), controller.index);
 router.get('/:id', auth.hasRole('oprrekam'), controller.show);
 router.post('/files/:id', auth.hasRole('oprrekam'), multipart(), controller.files);
 router.put('/:id', auth.hasRole('oprrekam'), multipart(), controller.update);

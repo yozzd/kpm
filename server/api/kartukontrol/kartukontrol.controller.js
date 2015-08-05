@@ -17,13 +17,26 @@ function base64_decode(base64str, file) {
     fse.writeFileSync(file, bitmap);
 }
 
-// Get list of kartukontrols
+// Get list of pasiens
 exports.index = function (req, res) {
-    KartuKontrol.find(function (err, kartukontrols) {
-        if (err) {
-            return handleError(res, err);
+    var kartukontrolObj = {};
+
+    async.series([
+
+        function (callback) {
+            KartuKontrol.find({}).populate('_pasien').exec(function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrolObj = kartukontrol;
+                callback();
+            });
         }
-        return res.json(200, kartukontrols);
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(kartukontrolObj);
     });
 };
 
@@ -74,6 +87,7 @@ exports.files = function (req, res) {
                         mt: req.body.mt,
                         berat: req.body.berat,
                         tinggi: req.body.tinggi,
+                        did: req.body.did,
                         diagnosa: req.body.diagnosa,
                         terapi: req.body.terapi
                     });
@@ -91,6 +105,7 @@ exports.files = function (req, res) {
                         mt: req.body.mt,
                         berat: req.body.berat,
                         tinggi: req.body.tinggi,
+                        did: req.body.did,
                         diagnosa: req.body.diagnosa,
                         terapi: req.body.terapi
                     });
@@ -147,6 +162,7 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].mt = req.body.mt;
                     kartukontrol.kontrol[index].berat = req.body.berat;
                     kartukontrol.kontrol[index].tinggi = req.body.tinggi;
+                    kartukontrol.kontrol[index].did = req.body.did;
                     kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
                     kartukontrol.kontrol[index].terapi = req.body.terapi;
                     kartukontrol.save(function (data) {
@@ -162,6 +178,7 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].mt = req.body.mt;
                     kartukontrol.kontrol[index].berat = req.body.berat;
                     kartukontrol.kontrol[index].tinggi = req.body.tinggi;
+                    kartukontrol.kontrol[index].did = req.body.did;
                     kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
                     kartukontrol.kontrol[index].terapi = req.body.terapi;
                     kartukontrol.save(function (data) {

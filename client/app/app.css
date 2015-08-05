@@ -837,3 +837,31 @@ input[type="text"].ui-grid-filter-input:focus {
 .tablez-foot > tr:last-child > td:last-child {
     border-bottom-right-radius: 3px;
 }
+
+/*list*/
+
+.lists {
+    margin-left: 30px;
+}
+.lists:before {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    border: 1px solid #ddd;
+    top: 0;
+    left: 20px;
+}
+.datelist {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.iconlist {
+    display: inline-block;
+    margin-left: -36px;
+    margin-right: 6px;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

@@ -268,5 +268,19 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Edit'
                 }
+            })
+            .state('rekam.parupositif', {
+                url: '/parupositif',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/laporan/parupositif/parupositif.html',
+                        controller: 'RekamParuPositifCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'TB Paru BTA Positif'
+                }
             });
     });

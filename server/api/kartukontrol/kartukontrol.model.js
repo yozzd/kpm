@@ -51,6 +51,11 @@ var KartuKontrolSchema = new Schema({
             default: '',
             trim: true
         },
+        did: {
+            type: String,
+            default: '',
+            trim: true
+        },
         diagnosa: {
             type: String,
             default: '',

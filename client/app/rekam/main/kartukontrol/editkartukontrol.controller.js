@@ -49,6 +49,7 @@ angular.module('kpmApp')
                             mt: $scope.data.mt,
                             berat: $scope.data.berat,
                             tinggi: $scope.data.tinggi,
+                            did: $scope.diagnosa.selected.oid,
                             diagnosa: $scope.diagnosa.selected.opsi,
                             terapi: $scope.data.terapi
                         },
