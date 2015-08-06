@@ -32,7 +32,7 @@ angular.module('kpmApp')
                     bulan: b.toString(),
                     tahun: t.toString()
                 });
-                $scope.bydate = _.sortBy(_.pluck(_.uniq($scope.match, 'tanggal'), 'tanggal'));
+                $scope.bydate = _.chain($scope.match).uniq('tanggal').pluck('tanggal').sortBy().value();
 
                 socket.syncUpdates('kartukontrol', $scope.datas);
             });
