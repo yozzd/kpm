@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamTbPositifCtrl', function ($scope, Restangular, socket) {
+    .controller('RekamPenyakitNonParuCtrl', function ($scope, Restangular, socket) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
@@ -28,7 +28,7 @@ angular.module('kpmApp')
                     }
                 });
                 $scope.match = _.where($scope.temp, {
-                    did: '1',
+                    did: '26',
                     bulan: b.toString(),
                     tahun: t.toString()
                 });

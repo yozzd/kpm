@@ -88,7 +88,7 @@ angular.module('kpmApp')
                 'link': 'rekam.vascularparu',
             }, {
                 'title': 'Post TB Paru',
-                'link': 'rekam.postparu',
+                'link': 'rekam.posttbparu',
             }, {
                 'title': 'Penyakit Paru / Saluran Napas Lainnya',
                 'link': 'rekam.penyakitparu',
