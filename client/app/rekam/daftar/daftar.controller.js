@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamDaftarCtrl', function ($scope, Restangular, socket, uiGridConstants) {
+    .controller('RekamDaftarCtrl', function ($scope, Restangular, socket, uiGridConstants, $alert, $modal) {
 
         $scope.getData = function () {
             Restangular.all('pasiens').customGETLIST().then(function (datas) {
@@ -131,11 +131,29 @@ angular.module('kpmApp')
                 enableFiltering: false,
                 cellTemplate: 'app/rekam/daftar/template/timestamp.html',
                 width: 350,
+            }, {
+                name: 'delete',
+                displayName: '',
+                enableColumnMenu: false,
+                enableFiltering: false,
+                cellTemplate: 'app/rekam/daftar/template/delete.html',
+                width: 150,
             }
         ];
 
-        $scope.edit = function (x) {
-            console.log(x);
+        $scope.deletemodal = function (data) {
+            var scope = $scope.$new();
+            scope.data = {
+                id: data._id,
+                nama: data.nama
+            };
+            var deletemodal = $modal({
+                scope: scope,
+                template: 'app/rekam/daftar/template/deletemodal.html',
+                show: false,
+                animation: 'am-fade-and-slide-top'
+            });
+            deletemodal.$promise.then(deletemodal.show);
         };
 
         $scope.$on('$destroy', function () {

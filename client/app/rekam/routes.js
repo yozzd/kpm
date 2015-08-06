@@ -269,12 +269,12 @@ angular.module('kpmApp')
                     label: 'Edit'
                 }
             })
-            .state('rekam.parupositif', {
-                url: '/parupositif',
+            .state('rekam.tbpositif', {
+                url: '/tbpositif',
                 views: {
                     '@': {
-                        templateUrl: 'app/rekam/laporan/parupositif/parupositif.html',
-                        controller: 'RekamParuPositifCtrl'
+                        templateUrl: 'app/rekam/laporan/tbpositif/tbpositif.html',
+                        controller: 'RekamTbPositifCtrl'
                     }
                 },
                 authenticate: true,

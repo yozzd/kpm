@@ -281,19 +281,181 @@ exports.update = function (req, res) {
 
 // Deletes a pasien from the DB.
 exports.destroy = function (req, res) {
-    Pasien.findById(req.params.id, function (err, pasien) {
+    var pasienObj = {};
+
+    async.series([
+
+        function (callback) {
+            Pasien.findById(req.params.id, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                var updated = _.merge(pasien, req.body);
+                updated.save(function (data) {
+                    callback();
+                });
+                pasienObj = pasien;
+            });
+        },
+        function (callback) {
+            Anamnesa.findOne({
+                _pasien: pasienObj._id
+            }, function (err, anamnesa) {
+                if (err) {
+                    return callback(err);
+                }
+                anamnesa.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            FisikDiagnostik.findOne({
+                _pasien: pasienObj._id
+            }, function (err, fisikdiagnostik) {
+                if (err) {
+                    return callback(err);
+                }
+                fisikdiagnostik.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Radiologi.findOne({
+                _pasien: pasienObj._id
+            }, function (err, radiologi) {
+                if (err) {
+                    return callback(err);
+                }
+                radiologi.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Laboratorium.findOne({
+                _pasien: pasienObj._id
+            }, function (err, laboratorium) {
+                if (err) {
+                    return callback(err);
+                }
+                laboratorium.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            MedisDiagnostik.findOne({
+                _pasien: pasienObj._id
+            }, function (err, medisdiagnostik) {
+                if (err) {
+                    return callback(err);
+                }
+                medisdiagnostik.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Diagnosa.findOne({
+                _pasien: pasienObj._id
+            }, function (err, diagnosa) {
+                if (err) {
+                    return callback(err);
+                }
+                diagnosa.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Pengobatan.findOne({
+                _pasien: pasienObj._id
+            }, function (err, pengobatan) {
+                if (err) {
+                    return callback(err);
+                }
+                pengobatan.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Terapi.findOne({
+                _pasien: pasienObj._id
+            }, function (err, terapi) {
+                if (err) {
+                    return callback(err);
+                }
+                terapi.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Rehabilitasi.findOne({
+                _pasien: pasienObj._id
+            }, function (err, rehabilitasi) {
+                if (err) {
+                    return callback(err);
+                }
+                rehabilitasi.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Konsultasi.findOne({
+                _pasien: pasienObj._id
+            }, function (err, konsultasi) {
+                if (err) {
+                    return callback(err);
+                }
+                konsultasi.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Usul.findOne({
+                _pasien: pasienObj._id
+            }, function (err, usul) {
+                if (err) {
+                    return callback(err);
+                }
+                usul.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            KartuKontrol.findOne({
+                _pasien: pasienObj._id
+            }, function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrol.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Pasien.findById(req.params.id, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                pasien.remove(function (data) {
+                    callback();
+                });
+            });
+        }
+    ], function (err) {
         if (err) {
-            return handleError(res, err);
+            return res.send(err);
         }
-        if (!pasien) {
-            return res.send(404);
-        }
-        pasien.remove(function (err) {
-            if (err) {
-                return handleError(res, err);
-            }
-            return res.send(204);
-        });
+        return res.json(pasienObj);
     });
 };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamParuPositifCtrl', function ($scope, Restangular, $stateParams, socket) {
+    .controller('RekamTbPositifCtrl', function ($scope, Restangular, $stateParams, socket) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
