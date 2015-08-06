@@ -68,6 +68,8 @@ exports.show = function (req, res) {
 exports.files = function (req, res) {
     var kartukontrolObj = {};
     var file = req.files.file;
+    var dt = req.body.tanggal;
+    var date = new Date(dt);
 
     async.series([
 
@@ -79,6 +81,8 @@ exports.files = function (req, res) {
                 if (file === undefined) {
                     kartukontrol.kontrol.push({
                         tanggal: req.body.tanggal,
+                        bulan: date.getMonth(),
+                        tahun: date.getFullYear(),
                         image: kartukontrol.image === '' ? '' : kartukontrol.image,
                         imagename: kartukontrol.imagename === '' ? '' : kartukontrol.imagename,
                         keluhan: req.body.keluhan,
@@ -89,7 +93,8 @@ exports.files = function (req, res) {
                         tinggi: req.body.tinggi,
                         did: req.body.did,
                         diagnosa: req.body.diagnosa,
-                        terapi: req.body.terapi
+                        terapi: req.body.terapi,
+                        status: 'L'
                     });
                     kartukontrol.save(function (data) {
                         callback();
@@ -97,6 +102,8 @@ exports.files = function (req, res) {
                 } else {
                     kartukontrol.kontrol.push({
                         tanggal: req.body.tanggal,
+                        bulan: date.getMonth(),
+                        tahun: date.getFullYear(),
                         image: 'data:' + file.type + ';base64,' + base64_encode(file.path),
                         imagename: file.name,
                         keluhan: req.body.keluhan,
@@ -107,7 +114,8 @@ exports.files = function (req, res) {
                         tinggi: req.body.tinggi,
                         did: req.body.did,
                         diagnosa: req.body.diagnosa,
-                        terapi: req.body.terapi
+                        terapi: req.body.terapi,
+                        status: 'L'
                     });
                     kartukontrol.save(function (data) {
                         callback();
@@ -141,6 +149,8 @@ exports.files = function (req, res) {
 exports.update = function (req, res) {
     var kartukontrolObj = {};
     var file = req.files.file;
+    var dt = req.body.tanggal;
+    var date = new Date(dt);
 
     async.series([
 
@@ -154,6 +164,8 @@ exports.update = function (req, res) {
                 });
                 if (file === undefined) {
                     kartukontrol.kontrol[index].tanggal = req.body.tanggal;
+                    kartukontrol.kontrol[index].bulan = date.getMonth();
+                    kartukontrol.kontrol[index].tahun = date.getFullYear();
                     kartukontrol.kontrol[index].image = kartukontrol.image === '' ? '' : kartukontrol.image;
                     kartukontrol.kontrol[index].imagename = kartukontrol.imagename === '' ? '' : kartukontrol.imagename;
                     kartukontrol.kontrol[index].keluhan = req.body.keluhan;
@@ -165,11 +177,14 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].did = req.body.did;
                     kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
                     kartukontrol.kontrol[index].terapi = req.body.terapi;
+                    kartukontrol.kontrol[index].status = 'L';
                     kartukontrol.save(function (data) {
                         callback();
                     });
                 } else {
                     kartukontrol.kontrol[index].tanggal = req.body.tanggal;
+                    kartukontrol.kontrol[index].bulan = date.getMonth();
+                    kartukontrol.kontrol[index].tahun = date.getFullYear();
                     kartukontrol.kontrol[index].image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
                     kartukontrol.kontrol[index].imagename = file.name;
                     kartukontrol.kontrol[index].keluhan = req.body.keluhan;
@@ -181,6 +196,7 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].did = req.body.did;
                     kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
                     kartukontrol.kontrol[index].terapi = req.body.terapi;
+                    kartukontrol.kontrol[index].status = 'L';
                     kartukontrol.save(function (data) {
                         callback();
                     });

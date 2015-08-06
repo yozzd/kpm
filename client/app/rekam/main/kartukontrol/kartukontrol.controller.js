@@ -99,6 +99,12 @@ angular.module('kpmApp')
                 enableColumnMenu: false,
                 width: 150
             }, {
+                name: 'status',
+                displayName: 'Status Pasien',
+                enableFiltering: false,
+                enableColumnMenu: false,
+                width: 150
+            }, {
                 name: 'edit',
                 displayName: '',
                 enableColumnMenu: false,

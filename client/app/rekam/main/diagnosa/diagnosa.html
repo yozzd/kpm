@@ -10,22 +10,46 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
+                        <div><sup class="req">*</sup><span class="req"> Tidak boleh kosong</span>
+                        </div>
                         <form class="form" name="form" ng-submit="submit(form)" novalidate>
                             <table class="table table-condensed">
                                 <tbody>
-                                    <tr>
+                                    <!--<tr>
                                         <td colspan="3" style="width: 30%;">
-                                            <label>Diagnosa Primer</label>
+                                            <label>Diagnosa Primer <sup class="req">*</sup></label>
                                         </td>
                                         <td colspan="3">
-                                            <ui-select name="primer" ng-model="primer.selected" theme="select2">
+                                            <ui-select name="primer" ng-model="primer.selected" theme="select2" required>
                                                 <ui-select-match>{{$select.selected.opsi}}</ui-select-match>
                                                 <ui-select-choices repeat="primer in datas | filter: {opsi: $select.search}">
                                                     <div ng-bind-html="primer.opsi | highlight: $select.search"></div>
                                                 </ui-select-choices>
                                             </ui-select>
                                         </td>
-                                        <td style="width: 30%;"></td>
+                                        <td style="width: 30%;" class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.primer.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>-->
+                                    <tr>
+                                        <td colspan="3">
+                                            <label>Diagnosa Primer <sup class="req">*</sup></label>
+                                        </td>
+                                        <td colspan="3">
+                                            <ui-select name="primer" ng-model="primer.selected" theme="select2" required>
+                                                <ui-select-match>{{$select.selected.opsi}}</ui-select-match>
+                                                <ui-select-choices repeat="primer in datas | filter: {opsi: $select.search}">
+                                                    <div ng-bind-html="primer.opsi | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.primer.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">

@@ -11,6 +11,16 @@ var KartuKontrolSchema = new Schema({
             default: '',
             trim: true
         },
+        bulan: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        tahun: {
+            type: String,
+            default: '',
+            trim: true
+        },
         image: {
             type: String,
             default: '',
@@ -62,6 +72,11 @@ var KartuKontrolSchema = new Schema({
             trim: true
         },
         terapi: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        status: {
             type: String,
             default: '',
             trim: true

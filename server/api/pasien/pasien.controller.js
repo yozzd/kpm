@@ -208,11 +208,21 @@ exports.create = function (req, res) {
         function (callback) {
             KartuKontrol.create({
                 _pasien: pasienObj._id
-            }, function (err, pasien) {
+            }, function (err, kartukontrol) {
                 if (err) {
                     return callback(err);
                 }
-                callback();
+                var dt = req.body.tanggal;
+                var date = new Date(dt);
+                kartukontrol.kontrol.push({
+                    tanggal: req.body.tanggal,
+                    bulan: date.getMonth(),
+                    tahun: date.getFullYear(),
+                    status: 'B'
+                });
+                kartukontrol.save(function () {
+                    callback();
+                })
             });
         }
     ], function (err) {
@@ -242,6 +252,23 @@ exports.update = function (req, res) {
                     callback();
                 });
                 pasienObj = pasien;
+            });
+        },
+        function (callback) {
+            KartuKontrol.findOne({
+                _pasien: pasienObj._id
+            }, function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                var dt = req.body.tanggal;
+                var date = new Date(dt);
+                kartukontrol.kontrol[0].tanggal = req.body.tanggal;
+                kartukontrol.kontrol[0].bulan = date.getMonth();
+                kartukontrol.kontrol[0].tahun = date.getFullYear();
+                kartukontrol.save(function () {
+                    callback();
+                })
             });
         }
     ], function (err) {

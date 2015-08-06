@@ -3,7 +3,11 @@
 angular.module('kpmApp')
     .controller('RekamParuPositifCtrl', function ($scope, Restangular, $stateParams, socket) {
 
-        $scope.getData = function () {
+        var date = new Date();
+        $scope.bulan = date.getMonth();
+        $scope.tahun = date.getFullYear();
+
+        $scope.getData = function (b, t) {
             Restangular.all('kartukontrols').customGETLIST().then(function (datas) {
                 $scope.datas = datas;
 
@@ -11,23 +15,45 @@ angular.module('kpmApp')
                 _.map($scope.datas, function (chr) {
                     for (var i = 0; i < chr.kontrol.length; i++) {
                         $scope.temp.push({
+                            id: chr._pasien._id,
                             tanggal: chr.kontrol[i].tanggal,
+                            bulan: chr.kontrol[i].bulan,
+                            tahun: chr.kontrol[i].tahun,
                             nama: chr._pasien.nama,
                             umur: chr._pasien.umur,
-                            did: chr.kontrol[i].did
+                            jeniskelamin: chr._pasien.jeniskelamin,
+                            did: chr.kontrol[i].did,
+                            status: chr.kontrol[i].status
                         });
                     }
                 });
                 $scope.match = _.where($scope.temp, {
-                    did: '1'
+                    did: '1',
+                    bulan: b.toString(),
+                    tahun: t.toString()
                 });
-                $scope.bydate = _.pluck(_.uniq($scope.match, 'tanggal'), 'tanggal');
+                $scope.bydate = _.sortBy(_.pluck(_.uniq($scope.match, 'tanggal'), 'tanggal'));
 
                 socket.syncUpdates('kartukontrol', $scope.datas);
             });
         };
 
-        $scope.getData();
+        $scope.getData($scope.bulan, $scope.tahun);
+
+        $scope.bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $scope.tahuns = _.range(2010, $scope.tahun + 1, 1);
+        $scope.b = {
+            selected: $scope.bulans[$scope.bulan]
+        };
+        $scope.t = {
+            selected: $scope.tahun
+        };
+
+        $scope.get = function (b, t) {
+            $scope.bulan = _.indexOf($scope.bulans, b);
+            $scope.tahun = t;
+            $scope.getData($scope.bulan, $scope.tahun);
+        };
 
         $scope.$on('$destroy', function () {
             socket.unsyncUpdates('kartukontrol');

@@ -865,3 +865,21 @@ input[type="text"].ui-grid-filter-input:focus {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+.list-group-item-blue {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #d9edf7;
+    border: 1px solid #ddd;
+    color: #444;
+}
+.list-group-item-red {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #f2dede;
+    border: 1px solid #ddd;
+    color: #444;
+}

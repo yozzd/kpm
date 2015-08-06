@@ -14,9 +14,13 @@ angular.module('kpmApp')
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
 
-                $scope.primer.selected = {
-                    opsi: $scope.data.primer
-                };
+                if ($scope.data.primer === null) {
+                    $scope.primer.selected = undefined;
+                } else {
+                    $scope.primer.selected = {
+                        opsi: $scope.data.primer
+                    };
+                }
                 for (var i = 0; i < $scope.data.sekunder.length; i++) {
                     $scope.sekunder.selected.push({
                         _id: $scope.data.sekunder[i]._id,
@@ -43,6 +47,7 @@ angular.module('kpmApp')
             if (form.$valid) {
                 Restangular.one('diagnosas').customPUT({
                     primer: $scope.primer.selected.opsi,
+                    did: $scope.primer.selected.oid,
                     keterangan: $scope.data.keterangan,
                     sekunder: $scope.sekunder.selected
                 }, $scope.data._id).then(function () {

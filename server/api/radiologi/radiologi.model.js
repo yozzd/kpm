@@ -16,7 +16,7 @@ var RadiologiSchema = new Schema({
         trim: true
     },
     thorakpatgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -26,7 +26,7 @@ var RadiologiSchema = new Schema({
         trim: true
     },
     thorakcttgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -36,7 +36,7 @@ var RadiologiSchema = new Schema({
         trim: true
     },
     thorakusgtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },

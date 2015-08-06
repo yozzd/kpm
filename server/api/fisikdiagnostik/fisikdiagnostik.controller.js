@@ -5,6 +5,7 @@ var async = require('async');
 
 var Pasien = require('../pasien/pasien.model');
 var FisikDiagnostik = require('./fisikdiagnostik.model');
+var KartuKontrol = require('../kartukontrol/kartukontrol.model');
 
 // Get a single fisikdiagnostik
 exports.show = function (req, res) {
@@ -34,6 +35,7 @@ exports.show = function (req, res) {
 // Updates an existing fisikdiagnostik in the DB.
 exports.update = function (req, res) {
     var fisikdiagnostikObj = {};
+    var pasienObj = {};
 
     async.series([
 
@@ -52,14 +54,29 @@ exports.update = function (req, res) {
         function (callback) {
             req.body.updated = Date.now();
             req.body.by = req.user.name;
-            Pasien.findById(fisikdiagnostikObj._pasien, function (err, fisikdiagnostik) {
+            Pasien.findById(fisikdiagnostikObj._pasien, function (err, pasien) {
                 if (err) {
                     return callback(err);
                 }
-                var updated = _.merge(fisikdiagnostik, req.body);
+                var updated = _.merge(pasien, req.body);
                 updated.save(function (data) {
                     callback();
                 });
+                pasienObj = pasien;
+            });
+        },
+        function (callback) {
+            KartuKontrol.findOne({
+                _pasien: pasienObj._id
+            }, function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrol.kontrol[0].tinggi = req.body.tinggi;
+                kartukontrol.kontrol[0].berat = req.body.berat;
+                kartukontrol.save(function () {
+                    callback();
+                })
             });
         }
     ], function (err) {

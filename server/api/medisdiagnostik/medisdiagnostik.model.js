@@ -6,7 +6,7 @@ var relationship = require("mongoose-relationship");
 
 var MedisDiagnostikSchema = new Schema({
     bronkhoskopitgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -16,7 +16,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     spirometertgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -56,7 +56,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     pefrtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -66,7 +66,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     bronkhodilatortgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -76,7 +76,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     bronkhustgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -91,7 +91,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     ekgtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -101,7 +101,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     treadmilltgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -131,7 +131,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     pleuratgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -141,7 +141,7 @@ var MedisDiagnostikSchema = new Schema({
         trim: true
     },
     histolitgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },

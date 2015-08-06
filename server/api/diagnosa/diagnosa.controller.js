@@ -5,6 +5,7 @@ var async = require('async');
 
 var Pasien = require('../pasien/pasien.model');
 var Diagnosa = require('./diagnosa.model');
+var KartuKontrol = require('../kartukontrol/kartukontrol.model');
 
 // Get a single diagnosa
 exports.show = function (req, res) {
@@ -34,7 +35,7 @@ exports.show = function (req, res) {
 // Updates an existing diagnosa in the DB.
 exports.update = function (req, res) {
     var diagnosaObj = {};
-    console.log(req.body);
+    var pasienObj = {};
 
     if (req.body.sekunder.length < 1) {
         async.series([
@@ -68,14 +69,29 @@ exports.update = function (req, res) {
             function (callback) {
                 req.body.updated = Date.now();
                 req.body.by = req.user.name;
-                Pasien.findById(diagnosaObj._pasien, function (err, diagnosa) {
+                Pasien.findById(diagnosaObj._pasien, function (err, pasien) {
                     if (err) {
                         return callback(err);
                     }
-                    var updated = _.merge(diagnosa, req.body);
+                    var updated = _.merge(pasien, req.body);
                     updated.save(function (data) {
                         callback();
                     });
+                    pasienObj = pasien;
+                });
+            },
+            function (callback) {
+                KartuKontrol.findOne({
+                    _pasien: pasienObj._id
+                }, function (err, kartukontrol) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    kartukontrol.kontrol[0].did = req.body.did;
+                    kartukontrol.kontrol[0].diagnosa = req.body.primer;
+                    kartukontrol.save(function () {
+                        callback();
+                    })
                 });
             }
         ], function (err) {
@@ -125,14 +141,29 @@ exports.update = function (req, res) {
             function (callback) {
                 req.body.updated = Date.now();
                 req.body.by = req.user.name;
-                Pasien.findById(diagnosaObj._pasien, function (err, diagnosa) {
+                Pasien.findById(diagnosaObj._pasien, function (err, pasien) {
                     if (err) {
                         return callback(err);
                     }
-                    var updated = _.merge(diagnosa, req.body);
+                    var updated = _.merge(pasien, req.body);
                     updated.save(function (data) {
                         callback();
                     });
+                    pasienObj = pasien;
+                });
+            },
+            function (callback) {
+                KartuKontrol.findOne({
+                    _pasien: pasienObj._id
+                }, function (err, kartukontrol) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    kartukontrol.kontrol[0].did = req.body.did;
+                    kartukontrol.kontrol[0].diagnosa = req.body.primer;
+                    kartukontrol.save(function () {
+                        callback();
+                    })
                 });
             }
         ], function (err) {

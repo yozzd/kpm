@@ -91,7 +91,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     btatgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -111,7 +111,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     sputumtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -131,17 +131,17 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     jamurtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
     kulturpleuratgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
     analisapleuratgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -166,7 +166,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     faalhatitgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -206,7 +206,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     faalginjaltgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -236,7 +236,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     elektrolittgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -261,7 +261,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     jantungtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -291,7 +291,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     glukosatgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
@@ -311,7 +311,7 @@ var LaboratoriumSchema = new Schema({
         trim: true
     },
     lipidtgl: {
-        type: String,
+        type: Date,
         default: '',
         trim: true
     },
