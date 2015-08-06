@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('RekamPostTbParuCtrl', function ($scope, Restangular, socket) {
+    .controller('RekamLaporanCtrl', function ($scope, Restangular, socket, $stateParams) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
         $scope.tahun = date.getFullYear();
 
-        $scope.getData = function (b, t) {
+        $scope.getData = function (b, t, lid) {
             Restangular.all('kartukontrols').customGETLIST().then(function (datas) {
                 $scope.datas = datas;
 
@@ -28,7 +28,7 @@ angular.module('kpmApp')
                     }
                 });
                 $scope.match = _.where($scope.temp, {
-                    did: '24',
+                    did: lid.toString(),
                     bulan: b.toString(),
                     tahun: t.toString()
                 });
@@ -38,8 +38,10 @@ angular.module('kpmApp')
             });
         };
 
-        $scope.getData($scope.bulan, $scope.tahun);
+        $scope.getData($scope.bulan, $scope.tahun, $stateParams.lid);
 
+        $scope.laporans = ['TB Paru BTA Positif', 'TB Paru BTA Negatif', 'TB Paru Anak (Tersangka) Kelenjar', 'TB Paru Anak (Tersangka) Gizi Buruk', 'TB Paru Anak (Tersangka) Kontak', 'TB Ekstra Paru', 'ISPA Non Pneumonia Non Bronkhitis', 'ISPA Non Pneumonia Bronkhitis', 'ISPA Pneumonia < 5 Tahun', 'ISPA Pneumonia > 5 Tahun', 'Abces Paru', 'Empyema', 'Atelektasis', 'Pneumothoraks', 'Hydropneumothoraks', 'Asma Bronkhial', 'PPOK (Bronkhitis Kronik / Emfisema)', 'Cor Pulmonak Chonicum (CPC)', 'Tumor Paru', 'Tumor Mediastinum', 'Tumor Pleura', 'Trauma Thoraks', 'Penyakit Vascular Paru', 'Post TB Paru', 'Penyakit Paru / Saluran Napas Lainnya', 'Penyakit Non Paru / Non Saluran Napas Lainnya'];
+        $scope.header = $scope.laporans[$stateParams.lid - 1];
         $scope.bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $scope.tahuns = _.range(2010, $scope.tahun + 1, 1);
         $scope.b = {
@@ -52,7 +54,7 @@ angular.module('kpmApp')
         $scope.get = function (b, t) {
             $scope.bulan = _.indexOf($scope.bulans, b);
             $scope.tahun = t;
-            $scope.getData($scope.bulan, $scope.tahun);
+            $scope.getData($scope.bulan, $scope.tahun, $stateParams.lid);
         };
 
         $scope.$on('$destroy', function () {

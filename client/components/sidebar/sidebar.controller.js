@@ -19,82 +19,82 @@ angular.module('kpmApp')
         }, {
             laporan: [{
                 'title': 'TB Paru BTA Positif',
-                'link': 'rekam.tbpositif',
+                'link': 'rekam.laporan({lid: 1})',
             }, {
                 'title': 'TB Paru BTA Negatif',
-                'link': 'rekam.tbnegatif',
+                'link': 'rekam.laporan({lid: 2})',
             }, {
                 'title': 'TB Paru Anak (Tersangka) Kelenjar',
-                'link': 'rekam.tbanakkelenjar',
+                'link': 'rekam.laporan({lid: 3})',
             }, {
                 'title': 'TB Paru Anak (Tersangka) Gizi Buruk',
-                'link': 'rekam.tbanakgiziburuk',
+                'link': 'rekam.laporan({lid: 4})',
             }, {
                 'title': 'TB Paru Anak (Tersangka) Kontak',
-                'link': 'rekam.tbanakkontak',
+                'link': 'rekam.laporan({lid: 5})',
             }, {
                 'title': 'TB Ekstra Paru',
-                'link': 'rekam.tbekstra',
+                'link': 'rekam.laporan({lid: 6})',
             }, {
                 'title': 'ISPA Non Pneumonia Non Bronkhitis',
-                'link': 'rekam.nonbronkhitis',
+                'link': 'rekam.laporan({lid: 7})',
             }, {
                 'title': 'ISPA Non Pneumonia Bronkhitis',
-                'link': 'rekam.bronkhitis',
+                'link': 'rekam.laporan({lid: 8})',
             }, {
                 'title': 'ISPA Pneumonia < 5 Tahun',
-                'link': 'rekam.pneumonia5kd',
+                'link': 'rekam.laporan({lid: 9})',
             }, {
                 'title': 'ISPA Pneumonia > 5 Tahun',
-                'link': 'rekam.pneumonia5bd',
+                'link': 'rekam.laporan({lid: 10})',
             }, {
                 'title': 'Abces Paru',
-                'link': 'rekam.abcesparu',
+                'link': 'rekam.laporan({lid: 11})',
             }, {
                 'title': 'Empyema',
-                'link': 'rekam.empyema',
+                'link': 'rekam.laporan({lid: 12})',
             }, {
                 'title': 'Atelektasis',
-                'link': 'rekam.atelektasis',
+                'link': 'rekam.laporan({lid: 13})',
             }, {
                 'title': 'Pneumothoraks',
-                'link': 'rekam.pneumothoraks',
+                'link': 'rekam.laporan({lid: 14})',
             }, {
                 'title': 'Hydropneumothoraks',
-                'link': 'rekam.hydropneumothoraks',
+                'link': 'rekam.laporan({lid: 15})',
             }, {
                 'title': 'Asma Bronkhial',
-                'link': 'rekam.asmabronkhial',
+                'link': 'rekam.laporan({lid: 16})',
             }, {
                 'title': 'PPOK (Bronkhitis Kronik / Emfisema)',
-                'link': 'rekam.ppok',
+                'link': 'rekam.laporan({lid: 17})',
             }, {
                 'title': 'Cor Pulmonak Chonicum (CPC)',
-                'link': 'rekam.cpc',
+                'link': 'rekam.laporan({lid: 18})',
             }, {
                 'title': 'Tumor Paru',
-                'link': 'rekam.tumorparu',
+                'link': 'rekam.laporan({lid: 19})',
             }, {
                 'title': 'Tumor Mediastinum',
-                'link': 'rekam.tumormediastinum',
+                'link': 'rekam.laporan({lid: 20})',
             }, {
                 'title': 'Tumor Pleura',
-                'link': 'rekam.tumorpleura',
+                'link': 'rekam.laporan({lid: 21})',
             }, {
                 'title': 'Trauma Thoraks',
-                'link': 'rekam.traumathoraks',
+                'link': 'rekam.laporan({lid: 22})',
             }, {
                 'title': 'Penyakit Vascular Paru',
-                'link': 'rekam.vascularparu',
+                'link': 'rekam.laporan({lid: 23})',
             }, {
                 'title': 'Post TB Paru',
-                'link': 'rekam.posttbparu',
+                'link': 'rekam.laporan({lid: 24})',
             }, {
                 'title': 'Penyakit Paru / Saluran Napas Lainnya',
-                'link': 'rekam.penyakitparu',
+                'link': 'rekam.laporan({lid: 25})',
             }, {
                 'title': 'Penyakit Non Paru / Non Saluran Napas Lainnya',
-                'link': 'rekam.penyakitnonparu',
+                'link': 'rekam.laporan({lid: 26})',
             }]
         }, {
             setting: [{
