@@ -593,7 +593,9 @@ exports.cetak = function (req, res) {
             content += '<tr>';
             content += '<td colspan=\'2\'>Dikirim / Konsul dari</td>';
             content += '<td>:</td>';
-            if (pasienObj.dikirim === 'Puskesmas' || pasienObj.dikirim === 'Rumah Sakit / Klinik' || pasienObj.dikirim === 'Praktek Dokter Swasta (PDS)' || pasienObj.dikirim === 'Dll') {
+            if (pasienObj.dikirim === null) {
+                content += '<td></td>';
+            } else if (pasienObj.dikirim === 'Puskesmas' || pasienObj.dikirim === 'Rumah Sakit / Klinik' || pasienObj.dikirim === 'Praktek Dokter Swasta (PDS)' || pasienObj.dikirim === 'Dll') {
                 content += '<td>' + pasienObj.dikirim + ' <strong>' + pasienObj.kdikirim + '</strong></td>';
             } else {
                 content += '<td>' + pasienObj.dikirim + '</td>';
@@ -602,7 +604,9 @@ exports.cetak = function (req, res) {
             content += '<tr>';
             content += '<td colspan=\'2\'>Pembiayaan</td>';
             content += '<td>:</td>';
-            if (pasienObj.pembiayaan === 'Dll') {
+            if (pasienObj.pembiayaan === null) {
+                content += '<td></td>';
+            } else if (pasienObj.pembiayaan === 'Dll') {
                 content += '<td>' + pasienObj.pembiayaan + ' <strong>' + pasienObj.kpembiayaan + '</strong></td>';
             } else {
                 content += '<td>' + pasienObj.pembiayaan + '</td>';
@@ -1191,7 +1195,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>a.</td>';
             content += '<td colspan=\'2\' style=\'width: 40%;\'>Thorak PA / Bilateral</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._radiologi.thorakpatgl === '') {
+            if (pasienObj._radiologi.thorakpatgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._radiologi.thorakpatgl).format('DD MMMM YYYY') + '</td>';
@@ -1207,7 +1211,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>b.</td>';
             content += '<td colspan=\'2\'>CT Scan Thorak</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._radiologi.thorakcttgl === '') {
+            if (pasienObj._radiologi.thorakcttgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._radiologi.thorakcttgl).format('DD MMMM YYYY') + '</td>';
@@ -1223,7 +1227,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>c.</td>';
             content += '<td colspan=\'2\'>USG Thorak</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._radiologi.thorakusgtgl === '') {
+            if (pasienObj._radiologi.thorakusgtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._radiologi.thorakusgtgl).format('DD MMMM YYYY') + '</td>';
@@ -1412,7 +1416,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>b.</td>';
             content += '<td>Kultur / Resistansi Sputum</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.sputumtgl === '') {
+            if (pasienObj._laboratorium.sputumtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.sputumtgl).format('DD MMMM YYYY') + '</td>';
@@ -1444,7 +1448,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>f.</td>';
             content += '<td>Kultur Jamur</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.jamurtgl === '') {
+            if (pasienObj._laboratorium.jamurtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.jamurtgl).format('DD MMMM YYYY') + '</td>';
@@ -1455,7 +1459,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>g.</td>';
             content += '<td>Kultur Cairan Pleura</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.kulturpleuratgl === '') {
+            if (pasienObj._laboratorium.kulturpleuratgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.kulturpleuratgl).format('DD MMMM YYYY') + '</td>';
@@ -1472,7 +1476,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>a.</td>';
             content += '<td>Analisa Cairan Pleura</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.analisapleuratgl === '') {
+            if (pasienObj._laboratorium.analisapleuratgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.analisapleuratgl).format('DD MMMM YYYY') + '</td>';
@@ -1511,7 +1515,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>c.</td>';
             content += '<td>Faal Hati</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.faalhatitgl === '') {
+            if (pasienObj._laboratorium.faalhatitgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.faalhatitgl).format('DD MMMM YYYY') + '</td>';
@@ -1571,7 +1575,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>d.</td>';
             content += '<td>Faal Ginjal</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.faalginjaltgl === '') {
+            if (pasienObj._laboratorium.faalginjaltgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.faalginjaltgl).format('DD MMMM YYYY') + '</td>';
@@ -1617,7 +1621,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>e.</td>';
             content += '<td>Elektrolit Darah</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.elektrolittgl === '') {
+            if (pasienObj._laboratorium.elektrolittgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.elektrolittgl).format('DD MMMM YYYY') + '</td>';
@@ -1656,7 +1660,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>f.</td>';
             content += '<td>Profil Jantung</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.jantungtgl === '') {
+            if (pasienObj._laboratorium.jantungtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.jantungtgl).format('DD MMMM YYYY') + '</td>';
@@ -1702,7 +1706,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>g.</td>';
             content += '<td>Test Gula Darah</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.glukosatgl === '') {
+            if (pasienObj._laboratorium.glukosatgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.glukosatgl).format('DD MMMM YYYY') + '</td>';
@@ -1734,7 +1738,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>h.</td>';
             content += '<td>Profil Lipid</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._laboratorium.lipidtgl === '') {
+            if (pasienObj._laboratorium.lipidtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._laboratorium.lipidtgl).format('DD MMMM YYYY') + '</td>';
@@ -1783,7 +1787,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>1.</td>';
             content += '<td colspan=\'2\' style=\'width: 40%;\'>Bronkhoskopi</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.bronkhoskopitgl === '') {
+            if (pasienObj._medisdiagnostik.bronkhoskopitgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.bronkhoskopitgl).format('DD MMMM YYYY') + '</td>';
@@ -1806,7 +1810,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>a.</td>';
             content += '<td>Spirometer</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.spirometertgl === '') {
+            if (pasienObj._medisdiagnostik.spirometertgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.spirometertgl).format('DD MMMM YYYY') + '</td>';
@@ -1852,14 +1856,18 @@ exports.cetak = function (req, res) {
             content += '<td></td>';
             content += '<td>Kesimpulan</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            content += '<td>' + pasienObj._medisdiagnostik.kesimpulan + ' : ' + pasienObj._medisdiagnostik.subkesimpulan + '</td>';
+            if (pasienObj._medisdiagnostik.kesimpulan === '') {
+                content += '<td></td>';
+            } else {
+                content += '<td>' + pasienObj._medisdiagnostik.kesimpulan + ' : ' + pasienObj._medisdiagnostik.subkesimpulan + '</td>';
+            }
             content += '</tr>';
             content += '<tr>';
             content += '<td></td>';
             content += '<td style=\'width: 3%;\'>b.</td>';
             content += '<td>PEFR (APE)</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.pefrtgl === '') {
+            if (pasienObj._medisdiagnostik.pefrtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.pefrtgl).format('DD MMMM YYYY') + '</td>';
@@ -1879,7 +1887,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>c.</td>';
             content += '<td>Test Bronkhodilator</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.bronkhodilatortgl === '') {
+            if (pasienObj._medisdiagnostik.bronkhodilatortgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.bronkhodilatortgl).format('DD MMMM YYYY') + '</td>';
@@ -1899,7 +1907,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>d.</td>';
             content += '<td>Test Provokasi Bronkhus</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.bronkhustgl === '') {
+            if (pasienObj._medisdiagnostik.bronkhustgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.bronkhustgl).format('DD MMMM YYYY') + '</td>';
@@ -1919,7 +1927,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>e.</td>';
             content += '<td>Elektrokardiograf (EKG)</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.ekgtgl === '') {
+            if (pasienObj._medisdiagnostik.ekgtgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.ekgtgl).format('DD MMMM YYYY') + '</td>';
@@ -1936,7 +1944,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>f.</td>';
             content += '<td>Test Treadmill</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.treadmilltgl === '') {
+            if (pasienObj._medisdiagnostik.treadmilltgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.treadmilltgl).format('DD MMMM YYYY') + '</td>';
@@ -1984,7 +1992,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>4.</td>';
             content += '<td colspan=\'2\'>Proof Punctie Pleura</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            if (pasienObj._medisdiagnostik.pleuratgl === '') {
+            if (pasienObj._medisdiagnostik.pleuratgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td>' + moment(pasienObj._medisdiagnostik.pleuratgl).format('DD MMMM YYYY') + '</td>';
@@ -2000,7 +2008,7 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%; vertical-align: top;\'>5.</td>';
             content += '<td colspan=\'2\' style=\'vertical-align: top;\'>Histoli, Sitologi (Biopsi Jarum Halus, Biopsi Aspirsi sdb)</td>';
             content += '<td style=\'width: 2%; vertical-align: top;\'>:</td>';
-            if (pasienObj._medisdiagnostik.histolitgl === '') {
+            if (pasienObj._medisdiagnostik.histolitgl === null) {
                 content += '<td></td>';
             } else {
                 content += '<td style=\'vertical-align: top;\'>' + moment(pasienObj._medisdiagnostik.histolitgl).format('DD MMMM YYYY') + '</td>';
@@ -2127,7 +2135,11 @@ exports.cetak = function (req, res) {
             content += '<td style=\'width: 3%;\'>2.</td>';
             content += '<td colspan=\'2\'>Punctie Pleura</td>';
             content += '<td style=\'width: 2%;\'>:</td>';
-            content += '<td>' + pasienObj._terapi.punctie + ' : ' + pasienObj._terapi.subpunctie + '</td>';
+            if (pasienObj._terapi.punctie === '') {
+                content += '<td></td>';
+            } else {
+                content += '<td>' + pasienObj._terapi.punctie + ' : ' + pasienObj._terapi.subpunctie + '</td>';
+            }
             content += '</tr>';
             content += '<tr>';
             content += '<td style=\'width: 3%;\'>3.</td>';
