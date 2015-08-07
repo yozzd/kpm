@@ -40,8 +40,13 @@ angular.module('kpmApp')
 
         $scope.getData($scope.bulan, $scope.tahun, $stateParams.lid);
 
-        $scope.laporans = ['TB Paru BTA Positif', 'TB Paru BTA Negatif', 'TB Paru Anak (Tersangka) Kelenjar', 'TB Paru Anak (Tersangka) Gizi Buruk', 'TB Paru Anak (Tersangka) Kontak', 'TB Ekstra Paru', 'ISPA Non Pneumonia Non Bronkhitis', 'ISPA Non Pneumonia Bronkhitis', 'ISPA Pneumonia < 5 Tahun', 'ISPA Pneumonia > 5 Tahun', 'Abces Paru', 'Empyema', 'Atelektasis', 'Pneumothoraks', 'Hydropneumothoraks', 'Asma Bronkhial', 'PPOK (Bronkhitis Kronik / Emfisema)', 'Cor Pulmonak Chonicum (CPC)', 'Tumor Paru', 'Tumor Mediastinum', 'Tumor Pleura', 'Trauma Thoraks', 'Penyakit Vascular Paru', 'Post TB Paru', 'Penyakit Paru / Saluran Napas Lainnya', 'Penyakit Non Paru / Non Saluran Napas Lainnya'];
-        $scope.header = $scope.laporans[$stateParams.lid - 1];
+        Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
+            $scope.laporans = datas;
+            $scope.header = _.chain($scope.laporans).where({
+                oid: $stateParams.lid.toString()
+            }).pluck('opsi').value().join();
+        });
+
         $scope.bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $scope.tahuns = _.range(2010, $scope.tahun + 1, 1);
         $scope.b = {

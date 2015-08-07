@@ -11,5 +11,6 @@ router.get('/:id', auth.hasRole('oprrekam'), controller.show);
 router.post('/', auth.hasRole('oprrekam'), controller.create);
 router.put('/:id', auth.hasRole('oprrekam'), controller.update);
 router.delete('/:id', auth.hasRole('oprrekam'), controller.destroy);
+router.get('/cetak/:id', controller.cetak);
 
 module.exports = router;

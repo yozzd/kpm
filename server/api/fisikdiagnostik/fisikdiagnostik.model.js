@@ -105,7 +105,7 @@ var FisikDiagnostikSchema = new Schema({
         default: '',
         trim: true
     },
-    sianisis: {
+    sianosis: {
         type: String,
         default: '',
         trim: true

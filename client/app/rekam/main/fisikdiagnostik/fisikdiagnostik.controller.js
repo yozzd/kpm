@@ -14,7 +14,7 @@ angular.module('kpmApp')
                 $scope.orthopnoe.selected = $scope.data.orthopnoe === '' ? null : $scope.data.orthopnoe;
                 $scope.odem.selected = $scope.data.odem === '' ? null : $scope.data.odem;
                 $scope.anemis.selected = $scope.data.anemis === '' ? null : $scope.data.anemis;
-                $scope.sianisis.selected = $scope.data.sianisis === '' ? null : $scope.data.sianisis;
+                $scope.sianosis.selected = $scope.data.sianosis === '' ? null : $scope.data.sianosis;
                 $scope.ikhterus.selected = $scope.data.ikhterus === '' ? null : $scope.data.ikhterus;
 
                 socket.syncUpdates('fisikdiagnostik', [$scope.data], function (event, item, array) {
@@ -35,7 +35,7 @@ angular.module('kpmApp')
         $scope.orthopnoe = {};
         $scope.odem = {};
         $scope.anemis = {};
-        $scope.sianisis = {};
+        $scope.sianosis = {};
         $scope.ikhterus = {};
 
         $scope.submit = function (form) {
@@ -62,7 +62,7 @@ angular.module('kpmApp')
                     limpa: $scope.data.limpa,
                     extrimitas: $scope.data.extrimitas,
                     anemis: $scope.anemis.selected,
-                    sianisis: $scope.sianisis.selected,
+                    sianosis: $scope.sianosis.selected,
                     ikhterus: $scope.ikhterus.selected,
                     berat: $scope.data.berat,
                     tinggi: $scope.data.tinggi,

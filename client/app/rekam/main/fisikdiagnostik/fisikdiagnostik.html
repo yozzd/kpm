@@ -330,13 +330,13 @@
                                             <label>12.</label>
                                         </td>
                                         <td colspan="2" style="width: 28%;">
-                                            <label>Sianisis</label>
+                                            <label>Sianosis</label>
                                         </td>
                                         <td colspan="3">
-                                            <ui-select name="sianisis" ng-model="sianisis.selected" theme="select2" search-enabled="false">
+                                            <ui-select name="sianosis" ng-model="sianosis.selected" theme="select2" search-enabled="false">
                                                 <ui-select-match>{{$select.selected}}</ui-select-match>
-                                                <ui-select-choices repeat="sianisis in opt1 | filter: $select.search">
-                                                    <div ng-bind-html="sianisis | highlight: $select.search"></div>
+                                                <ui-select-choices repeat="sianosis in opt1 | filter: $select.search">
+                                                    <div ng-bind-html="sianosis | highlight: $select.search"></div>
                                                 </ui-select-choices>
                                             </ui-select>
                                         </td>

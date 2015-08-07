@@ -767,13 +767,9 @@
                                             <label>Banyak (btg/hari)</label>
                                         </td>
                                         <td colspan="3">
-                                            <input type="text" name="banyakrokok" class="input-control" ng-model="data.banyakrokok" ng-pattern="/^(\d)+$/" />
+                                            <input type="text" name="banyakrokok" class="input-control" ng-model="data.banyakrokok" />
                                         </td>
-                                        <td class="has-error">
-                                            <p class="help-block" style="margin: 0;" ng-show="form.banyakrokok.$error.pattern && submitted">
-                                                Harus angka
-                                            </p>
-                                        </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>

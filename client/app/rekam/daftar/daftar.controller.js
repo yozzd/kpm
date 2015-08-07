@@ -137,7 +137,14 @@ angular.module('kpmApp')
                 enableColumnMenu: false,
                 enableFiltering: false,
                 cellTemplate: 'app/rekam/daftar/template/delete.html',
-                width: 150,
+                width: 100,
+            }, {
+                name: 'cetak',
+                displayName: '',
+                enableColumnMenu: false,
+                enableFiltering: false,
+                cellTemplate: 'app/rekam/daftar/template/cetak.html',
+                width: 100,
             }
         ];
 
