@@ -283,14 +283,18 @@ angular.module('kpmApp')
                     label: '{{header}}'
                 }
             })
-            .state('rekam.laporan.cetak', {
-                url: '/cetak',
+            .state('rekam.linechart', {
+                url: '/linechart',
                 views: {
                     '@': {
-                        templateUrl: 'app/rekam/pdf/laporan.pdf'
+                        templateUrl: 'app/rekam/chart/linechart/linechart.html',
+                        controller: 'RekamLineChartCtrl'
                     }
                 },
                 authenticate: true,
-                access: 'oprrekam'
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Line Chart'
+                }
             });
     });

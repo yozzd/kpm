@@ -3,5 +3,6 @@ public
 .tmp
 .idea
 client/bower_components
+client/app/rekam/pdf
 dist
-/server/config/local.env.js
+/server/config

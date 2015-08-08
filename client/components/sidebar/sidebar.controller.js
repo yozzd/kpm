@@ -97,6 +97,11 @@ angular.module('kpmApp')
                 'link': 'rekam.laporan({lid: 26})',
             }]
         }, {
+            chart: [{
+                'title': 'Line Chart',
+                'link': 'rekam.linechart',
+            }]
+        }, {
             setting: [{
                 'title': 'Ubah password',
                 'link': 'rekam.change',

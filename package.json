@@ -5,6 +5,8 @@
   "dependencies": {
     "async": "^1.2.1",
     "body-parser": "~1.5.0",
+    "canvas": "^1.2.7",
+    "chartist": "^0.9.4",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
     "connect-mongo": "^0.4.1",
@@ -23,6 +25,7 @@
     "mongoose": "~3.8.8",
     "mongoose-relationship": "^0.1.4",
     "morgan": "~1.0.0",
+    "nchart": "^1.0.1",
     "nodepdf": "^1.2.0",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",

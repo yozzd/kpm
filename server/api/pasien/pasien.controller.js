@@ -21,6 +21,16 @@ var Konsultasi = require('../konsultasi/konsultasi.model');
 var Usul = require('../usul/usul.model');
 var KartuKontrol = require('../kartukontrol/kartukontrol.model');
 
+function base64_encode(file) {
+    var bitmap = fse.readFileSync(file);
+    return new Buffer(bitmap).toString('base64');
+}
+
+function base64_decode(base64str, file) {
+    var bitmap = new Buffer(base64str, 'base64');
+    fse.writeFileSync(file, bitmap);
+}
+
 // Get list of pasiens
 exports.index = function (req, res) {
     var pasienObj = {};
