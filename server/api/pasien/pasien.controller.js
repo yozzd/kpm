@@ -515,7 +515,7 @@ exports.cetak = function (req, res) {
             content += '<table style=\'border: 0; margin-top: 20px;\'>';
             content += '<tr>';
             content += '<td colspan=\'2\' style=\'width: 30%;\'>Nama</td>';
-            content += '<td>:</td>';
+            content += '<td style=\'width: 2%;\'>:</td>';
             content += '<td><strong>' + pasienObj.nama + '</strong></td>';
             content += '</tr>';
             content += '<tr>';

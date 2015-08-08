@@ -11,9 +11,15 @@ angular.module('kpmApp')
                     return chr._id === $stateParams.kid;
                 });
                 $scope.data = find;
-                $scope.diagnosa.selected = {
-                    opsi: find.diagnosa
-                };
+
+                Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
+                    $scope.datas = datas;
+                    var opsi = _.find(datas, function (chr) {
+                        return chr.opsi === find.diagnosa;
+                    });
+
+                    $scope.diagnosa.selected = opsi;
+                });
             });
         };
 

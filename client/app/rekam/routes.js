@@ -282,5 +282,15 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: '{{header}}'
                 }
+            })
+            .state('rekam.laporan.cetak', {
+                url: '/cetak',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/pdf/laporan.pdf'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam'
             });
     });

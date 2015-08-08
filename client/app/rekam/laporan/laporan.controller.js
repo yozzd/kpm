@@ -3,6 +3,8 @@
 angular.module('kpmApp')
     .controller('RekamLaporanCtrl', function ($scope, Restangular, socket, $stateParams) {
 
+        $scope.lid = $stateParams.lid;
+
         var date = new Date();
         $scope.bulan = date.getMonth();
         $scope.tahun = date.getFullYear();
@@ -38,12 +40,12 @@ angular.module('kpmApp')
             });
         };
 
-        $scope.getData($scope.bulan, $scope.tahun, $stateParams.lid);
+        $scope.getData($scope.bulan, $scope.tahun, $scope.lid);
 
         Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
             $scope.laporans = datas;
             $scope.header = _.chain($scope.laporans).where({
-                oid: $stateParams.lid.toString()
+                oid: $scope.lid.toString()
             }).pluck('opsi').value().join();
         });
 
@@ -59,7 +61,14 @@ angular.module('kpmApp')
         $scope.get = function (b, t) {
             $scope.bulan = _.indexOf($scope.bulans, b);
             $scope.tahun = t;
-            $scope.getData($scope.bulan, $scope.tahun, $stateParams.lid);
+            $scope.getData($scope.bulan, $scope.tahun, $scope.lid);
+        };
+
+        $scope.popup = function (a, b, c) {
+            var left = screen.width / 2 - 400;
+            var top = screen.height / 2 - 250;
+            var url = '/api/kartukontrols/cetak/' + a + '/' + b + '/' + c;
+            window.open(url, '', 'top=' + top + ',left=' + left + ',width=800,height=500');
         };
 
         $scope.$on('$destroy', function () {

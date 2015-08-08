@@ -2,10 +2,14 @@
 
 var _ = require('lodash');
 var async = require('async');
-var fse = require('fs-extra');
+var fse = require('fs-extra')
+var NodePDF = require('nodepdf');
+var moment = require('moment');
+moment.locale('id');
 
 var Pasien = require('../pasien/pasien.model');
 var KartuKontrol = require('./kartukontrol.model');
+var OpsiDiagnosa = require('../opsidiagnosa/opsidiagnosa.model');
 
 function base64_encode(file) {
     var bitmap = fse.readFileSync(file);
@@ -240,6 +244,205 @@ exports.rem = function (req, res) {
                     callback();
                 });
                 kartukontrolObj = kartukontrol;
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(kartukontrolObj);
+    });
+};
+
+exports.cetak = function (req, res) {
+    var kartukontrolObj = {};
+    var opsidiagnosaObj = {};
+    var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    var bulan = _.indexOf(bulans, req.params.bulan);
+
+    async.series([
+
+        function (callback) {
+            KartuKontrol.find({}).populate('_pasien').exec(function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrolObj = kartukontrol;
+                callback();
+            });
+        },
+        function (callback) {
+            OpsiDiagnosa.findOne({
+                oid: req.params.lid
+            }, function (err, opsidiagnosa) {
+                if (err) {
+                    return callback(err);
+                }
+                opsidiagnosaObj = opsidiagnosa;
+                callback();
+            });
+        },
+        function (callback) {
+            var temp = [];
+            _.map(kartukontrolObj, function (chr) {
+                for (var i = 0; i < chr.kontrol.length; i++) {
+                    temp.push({
+                        id: chr._pasien._id,
+                        tanggal: moment(chr.kontrol[i].tanggal).format('DD MMMM YYYY'),
+                        bulan: chr.kontrol[i].bulan,
+                        tahun: chr.kontrol[i].tahun,
+                        nomor: chr._pasien.nomor,
+                        nama: chr._pasien.nama,
+                        umur: chr._pasien.umur,
+                        jeniskelamin: chr._pasien.jeniskelamin,
+                        did: chr.kontrol[i].did,
+                        status: chr.kontrol[i].status
+                    });
+                }
+            });
+            var match = _.where(temp, {
+                did: req.params.lid.toString(),
+                bulan: bulan.toString(),
+                tahun: req.params.tahun.toString()
+            });
+            var bydate = _.chain(match).uniq('tanggal').pluck('tanggal').sortBy().value();
+
+            var content = '';
+            content += '<html>';
+            content += '<style>';
+            content += 'body {font-size: 12px;}';
+            content += 'table {font-size: 12px; width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
+            content += '.table th, .table td {padding: 2px 4px 4px 4px; text-align: left; vertical-align: middle; border-right: 1px solid #000000; border-bottom: 1px solid #000000;}';
+            content += '.table th {font-weight: bold; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
+            content += '.table thead th {vertical-align: middle;}';
+            content += '</style>';
+            content += '<body>';
+
+            content += '<div style=\'text-align: center; margin-bottom: 20px;\'>';
+            content += '<h3>Laporan ' + opsidiagnosaObj.opsi + '<br/>Bulan ' + req.params.bulan + ' Tahun ' + req.params.tahun + '</h3>';
+            content += '</div>';
+
+            content += '<table class=\'table\' style=\'border: 0;\'>';
+            content += '<thead>';
+            content += '<tr>';
+            content += '<th style=\'text-align: center;\'>Nomor</th>';
+            content += '<th style=\'text-align: center;\'>Nama</th>';
+            content += '<th style=\'text-align: center;\'>Umur</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>16 - 40</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>41 - 60</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>&gt; 60</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>16 - 40</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>41 - 60</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>&gt; 60</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>B</th>';
+            content += '<th style=\'text-align: center; width: 7%;\'>L</th>';
+            content += '</tr>';
+            content += '<tr>';
+            content += '<th colspan=\'12\' style=\'height: 28px; border-right: 0; border-left: 0; border-bottom: 0;\'></th>';
+            content += '</tr>';
+            content += '</thead>';
+            content += '<tbody>';
+            for (var i = 0; i < bydate.length; i++) {
+                content += '<tr>';
+                content += '<td style=\'border-right: 0;\' colspan=\'12\'>' + bydate[i] + '</td>';
+                content += '</tr>';
+                for (var j = 0; j < match.length; j++) {
+                    if (match[j].tanggal === bydate[i]) {
+                        content += '<tr>';
+                        content += '<td style=\'border-left: 1px solid #000000;\'>' + match[j].nomor + '</td>';
+                        content += '<td>' + match[j].nama + '</td>';
+                        content += '<td style=\'text-align: center;\'>' + match[j].umur + ' tahun</td>';
+                        if (match[j].jeniskelamin === 'L' && match[j].umur >= 16 && match[j].umur <= 40) {
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                        }
+                        if (match[j].jeniskelamin === 'L' && match[j].umur >= 41 && match[j].umur <= 60) {
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                        }
+                        if (match[j].jeniskelamin === 'L' && match[j].umur > 60) {
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                        }
+                        if (match[j].jeniskelamin === 'P' && match[j].umur >= 16 && match[j].umur <= 40) {
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                        }
+                        if (match[j].jeniskelamin === 'P' && match[j].umur >= 41 && match[j].umur <= 60) {
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                        }
+                        if (match[j].jeniskelamin === 'P' && match[j].umur > 60) {
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'width: 5%;\'></td>';
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                        }
+                        if (match[j].status === 'B') {
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                            content += '<td></td>';
+                        }
+                        if (match[j].status === 'L') {
+                            content += '<td></td>';
+                            content += '<td style=\'text-align: center; width: 5%;\'>x</td>';
+                        }
+                        content += '</tr>';
+                    }
+                }
+                content += '<tr>';
+                content += '<td colspan=\'12\' style=\'height: 28px; border-right: 0; border-bottom: 0;\'></td>';
+                content += '</tr>';
+            }
+            content += '</tbody>';
+            content += '</table>';
+
+            content += '</body>';
+            content += '</html>';
+            NodePDF.render(null, 'client/app/rekam/pdf/laporan.pdf', {
+                'content': content,
+                'paperSize': {
+                    'format': 'Legal',
+                    'orientation': 'portrait',
+                    'margin': {
+                        'top': '1cm',
+                        'right': '1cm',
+                        'bottom': '1cm',
+                        'left': '1cm'
+                    }
+                }
+            }, function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            fse.readFile('client/app/rekam/pdf/laporan.pdf', function (err, data) {
+                res.contentType("application/pdf");
+                res.send(data);
             });
         }
     ], function (err) {

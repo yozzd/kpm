@@ -7,10 +7,6 @@ angular.module('kpmApp')
             Restangular.one('kartukontrols').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
-
-                /*socket.syncUpdates('kartukontrol', [$scope.data], function (event, item, array) {
-                    $scope.data = item;
-                });*/
                 $scope.gridOptions.data = $scope.data.kontrol;
                 socket.syncUpdates('kartukontrol', $scope.gridOptions.data);
             });

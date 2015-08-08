@@ -24,13 +24,16 @@
                                         </ui-select-choices>
                                     </ui-select>
                                 </td>
-                                <td>
+                                <td style="width: 110px;">
                                     <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(b.selected, t.selected)" theme="select2">
                                         <ui-select-match>{{$select.selected}}</ui-select-match>
                                         <ui-select-choices repeat="t in tahuns | filter: $select.search">
                                             <div ng-bind-html="t | highlight: $select.search"></div>
                                         </ui-select-choices>
                                     </ui-select>
+                                </td>
+                                <td ng-show="match.length>0">
+                                    <a href="" ng-click="popup(lid, b.selected, t.selected)">Cetak</a>
                                 </td>
                             </tr>
                         </table>
@@ -57,6 +60,11 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
+                        <div class="pull-right">Total : {{match.length}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
                         <div class="alert alert-info" ng-hide="match.length>0">Tidak ada data</div>
                         <div class="lists" ng-show="match.length>0">
                             <div class="datelist" ng-repeat-start="date in bydate">
@@ -64,8 +72,8 @@
                             </div>
                             <div class="list-group">
                                 <a ui-sref="rekam.daftar.options({id: pasien.id})" ng-repeat-start="pasien in match | orderBy: 'nama'" ng-show="pasien.tanggal==date" ng-class="{'list-group-item-blue':pasien.jeniskelamin=='L','list-group-item-red':pasien.jeniskelamin=='P'}">
-                                    <h4 class="list-group-item-heading">{{pasien.nama}}<span class="pull-right">{{pasien.status}}</span></h4>
-                                    <p class="list-group-item-text">{{pasien.umur}} tahun</p>
+                                    <h4 class="list-group-item-heading" style="display: inline-block;">{{pasien.nama}}</h4> <span style="font-size: 13px;">{{pasien.umur}} tahun</span><span class="pull-right" style="font-size: 18px;">{{pasien.status}}</span>
+                                    <div class="clearfix"></div>
                                 </a>
                                 <div ng-repeat-end></div>
                             </div>
