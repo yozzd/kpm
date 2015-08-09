@@ -100,6 +100,12 @@ angular.module('kpmApp')
             chart: [{
                 'title': 'Line Chart',
                 'link': 'rekam.linechart',
+            }, {
+                'title': 'Bar Chart',
+                'link': 'rekam.barchart',
+            }, {
+                'title': 'Pie Chart',
+                'link': 'rekam.piechart',
             }]
         }, {
             setting: [{

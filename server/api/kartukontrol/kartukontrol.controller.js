@@ -8,7 +8,7 @@ var moment = require('moment');
 moment.locale('id');
 
 var Canvas = require('canvas');
-var canvas = new Canvas(900, 450, 'svg');
+var canvas = new Canvas(1000, 500, 'svg');
 var ctx = canvas.getContext('2d');
 var Chart = require('nchart');
 
@@ -490,12 +490,8 @@ exports.linechart = function (req, res) {
             _.map(kartukontrolObj, function (chr) {
                 for (var i = 0; i < chr.kontrol.length; i++) {
                     temp.push({
-                        id: chr._pasien._id,
-                        tanggal: moment(chr.kontrol[i].tanggal).format('DD MMMM YYYY'),
                         bulan: chr.kontrol[i].bulan,
                         tahun: chr.kontrol[i].tahun,
-                        nomor: chr._pasien.nomor,
-                        nama: chr._pasien.nama,
                         umur: chr._pasien.umur,
                         jeniskelamin: chr._pasien.jeniskelamin,
                         did: chr.kontrol[i].did,
@@ -554,14 +550,14 @@ exports.linechart = function (req, res) {
             content += '.table th {font-weight: bold; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
             content += '.table thead th {vertical-align: middle;}';
             content += 'ul {list-style: none;}';
-            content += '.chart-legend,.bar-legend,.line-legend,.pie-legend,.radar-legend,.polararea-legend,.doughnut-legend{list-style-type:none;margin-top:20px;text-align:center}';
-            content += '.chart-legend li,.bar-legend li,.line-legend li,.pie-legend li,.radar-legend li,.polararea-legend li,.doughnut-legend li{display:inline-block;white-space:nowrap;position:relative;margin-bottom:4px;border-radius:5px;padding:2px 8px 2px 28px;font-size:smaller;cursor:default}';
+            content += '.chart-legend,.bar-legend,.line-legend,.pie-legend,.radar-legend,.polararea-legend,.doughnut-legend{list-style-type:none;margin-top:20px;text-align:left;padding-left: 0;position: absolute;right: 8px;top: 0;}';
+            content += '.chart-legend li,.bar-legend li,.line-legend li,.pie-legend li,.radar-legend li,.polararea-legend li,.doughnut-legend li{display:block;white-space:nowrap;position:relative;margin-bottom:4px;border-radius:5px;padding:4px 8px 4px 28px;font-size:smaller;cursor:default}';
             content += '.chart-legend li span,.bar-legend li span,.line-legend li span,.pie-legend li span,.radar-legend li span,.polararea-legend li span,.doughnut-legend li span{display:block;position:absolute;left:0;top:0;width:20px;height:20px;border-radius:5px}';
             content += '</style>';
             content += '<body>';
 
             content += '<h3 style=\'text-align: center;\'>Line Chart ' + opsidiagnosaObj.opsi + '</h3>';
-            content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px;\'> ';
+            content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px; margin: 30px\'> ';
             content += '<div>' + legend + '</div>';
 
             content += '</body>';
@@ -587,6 +583,275 @@ exports.linechart = function (req, res) {
         },
         function (callback) {
             fse.readFile('client/app/rekam/pdf/linechart.pdf', function (err, data) {
+                res.contentType("application/pdf");
+                res.send(data);
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(kartukontrolObj);
+    });
+};
+
+exports.barchart = function (req, res) {
+    var kartukontrolObj = {};
+    var opsidiagnosaObj = {};
+    var legend;
+
+    async.series([
+
+        function (callback) {
+            KartuKontrol.find({}).populate('_pasien').exec(function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrolObj = kartukontrol;
+                callback();
+            });
+        },
+        function (callback) {
+            OpsiDiagnosa.findOne({
+                oid: req.params.d
+            }, function (err, opsidiagnosa) {
+                if (err) {
+                    return callback(err);
+                }
+                opsidiagnosaObj = opsidiagnosa;
+                callback();
+            });
+        },
+        function (callback) {
+            var temp = [];
+            _.map(kartukontrolObj, function (chr) {
+                for (var i = 0; i < chr.kontrol.length; i++) {
+                    temp.push({
+                        bulan: chr.kontrol[i].bulan,
+                        tahun: chr.kontrol[i].tahun,
+                        umur: chr._pasien.umur,
+                        jeniskelamin: chr._pasien.jeniskelamin,
+                        did: chr.kontrol[i].did,
+                        status: chr.kontrol[i].status
+                    });
+                }
+            });
+            var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            var datalength = [];
+            for (var i = 0; i < bulans.length; i++) {
+                var match = _.where(temp, {
+                    bulan: _.indexOf(bulans, bulans[i]).toString(),
+                    tahun: req.params.t.toString(),
+                    did: req.params.d.toString()
+                });
+                datalength.push(match.length);
+            }
+            var data = {
+                labels: bulans,
+                datasets: [
+                    {
+                        label: opsidiagnosaObj.opsi,
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: datalength
+                    }
+                ]
+            };
+            var options = {
+                scaleGridLineColor: "rgba(235,235,235,.05)",
+                scaleLineColor: "rgba(0,0,0,1)",
+                scaleFontColor: "#000"
+            };
+            var barchart = new Chart(ctx).Bar(data, options);
+            legend = barchart.generateLegend();
+            fse.writeFile('client/app/rekam/pdf/chart/bar.svg', canvas.toBuffer(), function (err) {
+                if (err) throw err;
+                callback();
+            });
+        },
+        function (callback) {
+
+            var image = base64_encode('client/app/rekam/pdf/chart/bar.svg');
+
+            var content = '';
+            content += '<html>';
+            content += '<style>';
+            content += 'body {font-size: 12px;}';
+            content += 'table {font-size: 12px; width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
+            content += '.table th, .table td {padding: 2px 4px 4px 4px; text-align: left; vertical-align: middle; border-right: 1px solid #000000; border-bottom: 1px solid #000000;}';
+            content += '.table th {font-weight: bold; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
+            content += '.table thead th {vertical-align: middle;}';
+            content += 'ul {list-style: none;}';
+            content += '.chart-legend,.bar-legend,.line-legend,.pie-legend,.radar-legend,.polararea-legend,.doughnut-legend{list-style-type:none;margin-top:20px;text-align:left;padding-left: 0;position: absolute;right: 8px;top: 0;}';
+            content += '.chart-legend li,.bar-legend li,.line-legend li,.pie-legend li,.radar-legend li,.polararea-legend li,.doughnut-legend li{display:block;white-space:nowrap;position:relative;margin-bottom:4px;border-radius:5px;padding:4px 8px 4px 28px;font-size:smaller;cursor:default}';
+            content += '.chart-legend li span,.bar-legend li span,.line-legend li span,.pie-legend li span,.radar-legend li span,.polararea-legend li span,.doughnut-legend li span{display:block;position:absolute;left:0;top:0;width:20px;height:20px;border-radius:5px}';
+            content += '</style>';
+            content += '<body>';
+
+            content += '<h3 style=\'text-align: center;\'>Bar Chart ' + opsidiagnosaObj.opsi + '</h3>';
+            content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px; margin: 30px\'> ';
+            content += '<div>' + legend + '</div>';
+
+            content += '</body>';
+            content += '</html>';
+            NodePDF.render(null, 'client/app/rekam/pdf/barchart.pdf', {
+                'content': content,
+                'paperSize': {
+                    'format': 'Legal',
+                    'orientation': 'portrait',
+                    'margin': {
+                        'top': '1cm',
+                        'right': '1cm',
+                        'bottom': '1cm',
+                        'left': '1cm'
+                    }
+                }
+            }, function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            fse.readFile('client/app/rekam/pdf/barchart.pdf', function (err, data) {
+                res.contentType("application/pdf");
+                res.send(data);
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(kartukontrolObj);
+    });
+};
+
+exports.piechart = function (req, res) {
+    var kartukontrolObj = {};
+    var opsidiagnosaObj = {};
+
+    async.series([
+
+        function (callback) {
+            KartuKontrol.find({}).populate('_pasien').exec(function (err, kartukontrol) {
+                if (err) {
+                    return callback(err);
+                }
+                kartukontrolObj = kartukontrol;
+                callback();
+            });
+        },
+        function (callback) {
+            OpsiDiagnosa.findOne({
+                oid: req.params.d
+            }, function (err, opsidiagnosa) {
+                if (err) {
+                    return callback(err);
+                }
+                opsidiagnosaObj = opsidiagnosa;
+                callback();
+            });
+        },
+        function (callback) {
+            var temp = [];
+            _.map(kartukontrolObj, function (chr) {
+                for (var i = 0; i < chr.kontrol.length; i++) {
+                    temp.push({
+                        bulan: chr.kontrol[i].bulan,
+                        tahun: chr.kontrol[i].tahun,
+                        umur: chr._pasien.umur,
+                        jeniskelamin: chr._pasien.jeniskelamin,
+                        did: chr.kontrol[i].did,
+                        status: chr.kontrol[i].status
+                    });
+                }
+            });
+            var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            var colors = ['rgba(151,187,205,1)', 'rgba(220,220,220,1)', 'rgba(247,70,74,1)', 'rgba(70,191,189,1)', 'rgba(253,180,92,1)', 'rgba(148,159,177,1)', 'rgba(77,83,96,1)', 'rgba(45,252,119,1)', 'rgba(129,69,111,1)', 'rgba(20,71,185,1)', 'rgba(241,44,128,1)', 'rgba(115,242,86,1)']
+            var datalength = [];
+            for (var i = 0; i < bulans.length; i++) {
+                var match = _.where(temp, {
+                    bulan: _.indexOf(bulans, bulans[i]).toString(),
+                    tahun: req.params.t.toString(),
+                    did: req.params.d.toString()
+                });
+                datalength.push({
+                    value: match.length,
+                    color: colors[i],
+                    label: bulans[i]
+                });
+            }
+            var filter = _.filter(datalength, function (v) {
+                return v.value > 0;
+            });
+            var data = filter;
+            var options = {
+                tooltipEvents: [],
+                showTooltips: true,
+                tooltipFillColor: 'rgba(0,0,0,0.8)',
+                tooltipYPadding: 4,
+                tooltipXPadding: 4,
+                tooltipCaretSize: 0,
+                tooltipCornerRadius: 4,
+                onAnimationComplete: function () {
+                    this.showTooltip(this.segments, true);
+                }
+            };
+            var piechart = new Chart(ctx).Pie(data, options);
+            fse.writeFile('client/app/rekam/pdf/chart/pie.svg', canvas.toBuffer(), function (err) {
+                if (err) throw err;
+                callback();
+            });
+        },
+        function (callback) {
+
+            var image = base64_encode('client/app/rekam/pdf/chart/pie.svg');
+
+            var content = '';
+            content += '<html>';
+            content += '<style>';
+            content += 'body {font-size: 12px;}';
+            content += 'table {font-size: 12px; width: 100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
+            content += '.table th, .table td {padding: 2px 4px 4px 4px; text-align: left; vertical-align: middle; border-right: 1px solid #000000; border-bottom: 1px solid #000000;}';
+            content += '.table th {font-weight: bold; border-top: 1px solid #000000; border-left: 1px solid #000000;}';
+            content += '.table thead th {vertical-align: middle;}';
+            content += 'ul {list-style: none;}';
+            content += '.chart-legend,.bar-legend,.line-legend,.pie-legend,.radar-legend,.polararea-legend,.doughnut-legend{list-style-type:none;margin-top:20px;text-align:left;padding-left: 0;position: absolute;right: 8px;top: 0;}';
+            content += '.chart-legend li,.bar-legend li,.line-legend li,.pie-legend li,.radar-legend li,.polararea-legend li,.doughnut-legend li{display:block;white-space:nowrap;position:relative;margin-bottom:4px;border-radius:5px;padding:4px 8px 4px 28px;font-size:smaller;cursor:default}';
+            content += '.chart-legend li span,.bar-legend li span,.line-legend li span,.pie-legend li span,.radar-legend li span,.polararea-legend li span,.doughnut-legend li span{display:block;position:absolute;left:0;top:0;width:20px;height:20px;border-radius:5px}';
+            content += '</style>';
+            content += '<body>';
+
+            content += '<h3 style=\'text-align: center;\'>Pie Chart ' + opsidiagnosaObj.opsi + '</h3>';
+            content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px; margin: 30px\'> ';
+            content += '</body>';
+            content += '</html>';
+            NodePDF.render(null, 'client/app/rekam/pdf/piechart.pdf', {
+                'content': content,
+                'paperSize': {
+                    'format': 'Legal',
+                    'orientation': 'portrait',
+                    'margin': {
+                        'top': '1cm',
+                        'right': '1cm',
+                        'bottom': '1cm',
+                        'left': '1cm'
+                    }
+                }
+            }, function (err) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
+        function (callback) {
+            fse.readFile('client/app/rekam/pdf/piechart.pdf', function (err, data) {
                 res.contentType("application/pdf");
                 res.send(data);
             });

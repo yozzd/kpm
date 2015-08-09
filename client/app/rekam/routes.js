@@ -296,5 +296,33 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Line Chart'
                 }
+            })
+            .state('rekam.barchart', {
+                url: '/barchart',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/chart/barchart/barchart.html',
+                        controller: 'RekamBarChartCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Bar Chart'
+                }
+            })
+            .state('rekam.piechart', {
+                url: '/piechart',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/chart/piechart/piechart.html',
+                        controller: 'RekamPieChartCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Pie Chart'
+                }
             });
     });
