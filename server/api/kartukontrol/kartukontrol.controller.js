@@ -461,7 +461,6 @@ exports.cetak = function (req, res) {
 exports.linechart = function (req, res) {
     var kartukontrolObj = {};
     var opsidiagnosaObj = {};
-    var legend;
 
     async.series([
 
@@ -501,14 +500,14 @@ exports.linechart = function (req, res) {
             });
             var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
             var datalength = [];
-            for (var i = 0; i < bulans.length; i++) {
-                var match = _.where(temp, {
-                    bulan: _.indexOf(bulans, bulans[i]).toString(),
-                    tahun: req.params.t.toString(),
-                    did: req.params.d.toString()
+
+            _.forEach(bulans, function (val, key) {
+                var filter = _.filter(temp, function (v) {
+                    return v.did === req.params.d.toString() && v.bulan === _.indexOf(bulans, bulans[key]).toString() && v.tahun === req.params.t.toString() && v.jeniskelamin !== req.params.k && v.status !== req.params.s;
                 });
-                datalength.push(match.length);
-            }
+                datalength.push(filter.length);
+            });
+
             var data = {
                 labels: bulans,
                 datasets: [
@@ -544,7 +543,6 @@ exports.linechart = function (req, res) {
                 }
             };
             var linechart = new Chart(ctx).Line(data, options);
-            legend = linechart.generateLegend();
             fse.writeFile('client/app/rekam/pdf/chart/line.svg', canvas.toBuffer(), function (err) {
                 if (err) throw err;
                 callback();
@@ -569,9 +567,23 @@ exports.linechart = function (req, res) {
             content += '</style>';
             content += '<body>';
 
-            content += '<h3 style=\'text-align: center;\'>Line Chart ' + opsidiagnosaObj.opsi + '</h3>';
+            var jk = _.zipObject(['All', 'P', 'L'], ['Laki-laki & Perempuan', 'Laki-laki', 'Perempuan']);
+            var st = _.zipObject(['All', 'L', 'B'], ['Baru & Lama', 'Baru', 'Lama']);
+
+            content += '<h3 style=\'text-align: center;\'>Line Chart ' + opsidiagnosaObj.opsi + ' Tahun ' + req.params.t + '</h3>';
+            content += '<table style=\'border: 0; width: 25%; float: right;\'>';
+            content += '<tr>';
+            content += '<td style=\'width: 40%;\'>Jenis Kelamin</td>';
+            content += '<td style=\'width: 5%;\'>:</td>';
+            content += '<td>' + _.chain(jk).pick(req.params.k).pluck().value().join() + '</td>';
+            content += '</tr>';
+            content += '<tr>';
+            content += '<td>Status Pasien</td>';
+            content += '<td>:</td>';
+            content += '<td>' + _.chain(st).pick(req.params.s).pluck().value().join() + '</td>';
+            content += '</tr>';
+            content += '</table>';
             content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px; margin: 30px\'> ';
-            content += '<div>' + legend + '</div>';
 
             content += '</body>';
             content += '</html>';
@@ -611,7 +623,6 @@ exports.linechart = function (req, res) {
 exports.barchart = function (req, res) {
     var kartukontrolObj = {};
     var opsidiagnosaObj = {};
-    var legend;
 
     async.series([
 
@@ -651,14 +662,14 @@ exports.barchart = function (req, res) {
             });
             var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
             var datalength = [];
-            for (var i = 0; i < bulans.length; i++) {
-                var match = _.where(temp, {
-                    bulan: _.indexOf(bulans, bulans[i]).toString(),
-                    tahun: req.params.t.toString(),
-                    did: req.params.d.toString()
+
+            _.forEach(bulans, function (val, key) {
+                var filter = _.filter(temp, function (v) {
+                    return v.did === req.params.d.toString() && v.bulan === _.indexOf(bulans, bulans[key]).toString() && v.tahun === req.params.t.toString() && v.jeniskelamin !== req.params.k && v.status !== req.params.s;
                 });
-                datalength.push(match.length);
-            }
+                datalength.push(filter.length);
+            });
+
             var data = {
                 labels: bulans,
                 datasets: [
@@ -693,7 +704,6 @@ exports.barchart = function (req, res) {
                 }
             };
             var barchart = new Chart(ctx).Bar(data, options);
-            legend = barchart.generateLegend();
             fse.writeFile('client/app/rekam/pdf/chart/bar.svg', canvas.toBuffer(), function (err) {
                 if (err) throw err;
                 callback();
@@ -718,9 +728,23 @@ exports.barchart = function (req, res) {
             content += '</style>';
             content += '<body>';
 
-            content += '<h3 style=\'text-align: center;\'>Bar Chart ' + opsidiagnosaObj.opsi + '</h3>';
+            var jk = _.zipObject(['All', 'P', 'L'], ['Laki-laki & Perempuan', 'Laki-laki', 'Perempuan']);
+            var st = _.zipObject(['All', 'L', 'B'], ['Baru & Lama', 'Baru', 'Lama']);
+
+            content += '<h3 style=\'text-align: center;\'>Bar Chart ' + opsidiagnosaObj.opsi + ' Tahun ' + req.params.t + '</h3>';
+            content += '<table style=\'border: 0; width: 25%; float: right;\'>';
+            content += '<tr>';
+            content += '<td style=\'width: 40%;\'>Jenis Kelamin</td>';
+            content += '<td style=\'width: 5%;\'>:</td>';
+            content += '<td>' + _.chain(jk).pick(req.params.k).pluck().value().join() + '</td>';
+            content += '</tr>';
+            content += '<tr>';
+            content += '<td>Status Pasien</td>';
+            content += '<td>:</td>';
+            content += '<td>' + _.chain(st).pick(req.params.s).pluck().value().join() + '</td>';
+            content += '</tr>';
+            content += '</table>';
             content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px; margin: 30px\'> ';
-            content += '<div>' + legend + '</div>';
 
             content += '</body>';
             content += '</html>';
@@ -800,22 +824,22 @@ exports.piechart = function (req, res) {
             var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
             var colors = ['rgba(151,187,205,1)', 'rgba(220,220,220,1)', 'rgba(247,70,74,1)', 'rgba(70,191,189,1)', 'rgba(253,180,92,1)', 'rgba(148,159,177,1)', 'rgba(77,83,96,1)', 'rgba(45,252,119,1)', 'rgba(129,69,111,1)', 'rgba(20,71,185,1)', 'rgba(241,44,128,1)', 'rgba(115,242,86,1)']
             var datalength = [];
-            for (var i = 0; i < bulans.length; i++) {
-                var match = _.where(temp, {
-                    bulan: _.indexOf(bulans, bulans[i]).toString(),
-                    tahun: req.params.t.toString(),
-                    did: req.params.d.toString()
+
+            _.forEach(bulans, function (val, key) {
+                var filter = _.filter(temp, function (v) {
+                    return v.did === req.params.d.toString() && v.bulan === _.indexOf(bulans, bulans[key]).toString() && v.tahun === req.params.t.toString() && v.jeniskelamin !== req.params.k && v.status !== req.params.s;
                 });
                 datalength.push({
-                    value: match.length,
-                    color: colors[i],
-                    label: bulans[i]
+                    value: filter.length,
+                    color: colors[key],
+                    label: bulans[key]
                 });
-            }
-            var filter = _.filter(datalength, function (v) {
+            });
+            var filter2 = _.filter(datalength, function (v) {
                 return v.value > 0;
             });
-            var data = filter;
+
+            var data = filter2;
             var options = {
                 tooltipEvents: [],
                 showTooltips: true,
@@ -853,7 +877,22 @@ exports.piechart = function (req, res) {
             content += '</style>';
             content += '<body>';
 
-            content += '<h3 style=\'text-align: center;\'>Pie Chart ' + opsidiagnosaObj.opsi + '</h3>';
+            var jk = _.zipObject(['All', 'P', 'L'], ['Laki-laki & Perempuan', 'Laki-laki', 'Perempuan']);
+            var st = _.zipObject(['All', 'L', 'B'], ['Baru & Lama', 'Baru', 'Lama']);
+
+            content += '<h3 style=\'text-align: center;\'>Pie Chart ' + opsidiagnosaObj.opsi + ' Tahun ' + req.params.t + '</h3>';
+            content += '<table style=\'border: 0; width: 25%; float: right;\'>';
+            content += '<tr>';
+            content += '<td style=\'width: 40%;\'>Jenis Kelamin</td>';
+            content += '<td style=\'width: 5%;\'>:</td>';
+            content += '<td>' + _.chain(jk).pick(req.params.k).pluck().value().join() + '</td>';
+            content += '</tr>';
+            content += '<tr>';
+            content += '<td>Status Pasien</td>';
+            content += '<td>:</td>';
+            content += '<td>' + _.chain(st).pick(req.params.s).pluck().value().join() + '</td>';
+            content += '</tr>';
+            content += '</table>';
             content += '<img src=\'data:image/svg+xml;base64,' + image + '\' style=\'width: 900px; height: 450px; margin: 30px\'> ';
             content += '</body>';
             content += '</html>';

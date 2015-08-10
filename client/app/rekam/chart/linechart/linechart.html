@@ -14,10 +14,12 @@
                             <tr>
                                 <td>Diagnosa</td>
                                 <td>Tahun</td>
+                                <td>Jenis Kelamin</td>
+                                <td>Status</td>
                             </tr>
                             <tr>
                                 <td style="width: 310px;">
-                                    <ui-select name="d" style="width: 300px;" ng-model="d.selected" ng-change="get(d.selected, t.selected)" theme="select2">
+                                    <ui-select name="d" style="width: 300px;" ng-model="d.selected" ng-change="get(d.selected, t.selected, k.selected, s.selected)" theme="select2">
                                         <ui-select-match>{{$select.selected.opsi}}</ui-select-match>
                                         <ui-select-choices repeat="d in diagnosas | filter: {opsi: $select.search}">
                                             <div ng-bind-html="d.opsi | highlight: $select.search"></div>
@@ -25,15 +27,31 @@
                                     </ui-select>
                                 </td>
                                 <td style="width: 110px;">
-                                    <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(d.selected, t.selected)" theme="select2">
+                                    <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(d.selected, t.selected, k.selected, s.selected)" theme="select2">
                                         <ui-select-match>{{$select.selected}}</ui-select-match>
                                         <ui-select-choices repeat="t in tahuns | filter: $select.search">
                                             <div ng-bind-html="t | highlight: $select.search"></div>
                                         </ui-select-choices>
                                     </ui-select>
                                 </td>
+                                <td style="width: 110px;">
+                                    <ui-select name="k" style="width: 100px;" ng-model="k.selected" ng-change="get(d.selected, t.selected, k.selected, s.selected)" theme="select2" search-enabled="false">
+                                        <ui-select-match>{{$select.selected.str}}</ui-select-match>
+                                        <ui-select-choices repeat="k in kelamins | filter: $select.search">
+                                            <div ng-bind-html="k.str | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                                <td style="width: 110px;">
+                                    <ui-select name="s" style="width: 100px;" ng-model="s.selected" ng-change="get(d.selected, t.selected, k.selected, s.selected)" theme="select2" search-enabled="false">
+                                        <ui-select-match>{{$select.selected.str}}</ui-select-match>
+                                        <ui-select-choices repeat="s in status | filter: $select.search">
+                                            <div ng-bind-html="s.str | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
                                 <td ng-show="count>0">
-                                    <a href="" ng-click="popup(d.selected, t.selected)">Cetak</a>
+                                    <a href="" ng-click="popup(d.selected, t.selected, k.selected, s.selected)">Cetak</a>
                                 </td>
                             </tr>
                         </table>
@@ -42,7 +60,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="chart-container">
-                            <canvas class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="options">
+                            <canvas class="chart chart-line" data="data" labels="labels" options="options">
                             </canvas>
                         </div>
                     </div>
