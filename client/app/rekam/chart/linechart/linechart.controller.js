@@ -7,7 +7,20 @@ angular.module('kpmApp')
         $scope.tahun = date.getFullYear();
 
         $scope.options = {
-            bezierCurve: false
+            bezierCurve: false,
+            tooltipEvents: [],
+            showTooltips: true,
+            tooltipTemplate: '<%= value %>',
+            tooltipFillColor: 'rgba(0,0,0,0)',
+            tooltipFontColor: '#444',
+            tooltipFontSize: 12,
+            tooltipYPadding: 4,
+            tooltipXPadding: 4,
+            tooltipCaretSize: 0,
+            tooltipCornerRadius: 4,
+            onAnimationComplete: function () {
+                this.showTooltip(this.datasets[0].points, true);
+            }
         };
 
         $scope.getData = function (d, t) {
@@ -18,11 +31,8 @@ angular.module('kpmApp')
                 _.map($scope.datas, function (chr) {
                     for (var i = 0; i < chr.kontrol.length; i++) {
                         $scope.temp.push({
-                            id: chr._pasien._id,
-                            tanggal: chr.kontrol[i].tanggal,
                             bulan: chr.kontrol[i].bulan,
                             tahun: chr.kontrol[i].tahun,
-                            nama: chr._pasien.nama,
                             umur: chr._pasien.umur,
                             jeniskelamin: chr._pasien.jeniskelamin,
                             did: chr.kontrol[i].did,

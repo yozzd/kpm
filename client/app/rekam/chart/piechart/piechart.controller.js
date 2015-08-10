@@ -47,16 +47,16 @@ angular.module('kpmApp')
                         did: d.toString()
                     });
                     $scope.datalength.push({
-                        count: $scope.match.length,
+                        length: $scope.match.length,
                         bulan: $scope.bulans[i]
                     });
                     $scope.count += $scope.match.length;
                 }
                 $scope.filter = _.filter($scope.datalength, function (v) {
-                    return v.count > 0;
+                    return v.length > 0;
                 });
                 $scope.labels = _.pluck($scope.filter, 'bulan');
-                $scope.data = _.pluck($scope.filter, 'count');
+                $scope.data = _.pluck($scope.filter, 'length');
 
                 Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
                     $scope.diagnosas = datas;

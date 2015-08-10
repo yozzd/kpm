@@ -528,7 +528,20 @@ exports.linechart = function (req, res) {
                 bezierCurve: false,
                 scaleGridLineColor: "rgba(235,235,235,.05)",
                 scaleLineColor: "rgba(0,0,0,1)",
-                scaleFontColor: "#000"
+                scaleFontColor: "#000",
+                tooltipEvents: [],
+                showTooltips: true,
+                tooltipTemplate: '<%= value %>',
+                tooltipFillColor: 'rgba(0,0,0,0)',
+                tooltipFontColor: '#000',
+                tooltipFontSize: 12,
+                tooltipYPadding: 4,
+                tooltipXPadding: 4,
+                tooltipCaretSize: 0,
+                tooltipCornerRadius: 4,
+                onAnimationComplete: function () {
+                    this.showTooltip(this.datasets[0].points, true);
+                }
             };
             var linechart = new Chart(ctx).Line(data, options);
             legend = linechart.generateLegend();
@@ -664,7 +677,20 @@ exports.barchart = function (req, res) {
             var options = {
                 scaleGridLineColor: "rgba(235,235,235,.05)",
                 scaleLineColor: "rgba(0,0,0,1)",
-                scaleFontColor: "#000"
+                scaleFontColor: "#000",
+                tooltipEvents: [],
+                showTooltips: true,
+                tooltipTemplate: '<%= value %>',
+                tooltipFillColor: 'rgba(0,0,0,0)',
+                tooltipFontColor: '#000',
+                tooltipFontSize: 12,
+                tooltipYPadding: 4,
+                tooltipXPadding: 4,
+                tooltipCaretSize: 0,
+                tooltipCornerRadius: 4,
+                onAnimationComplete: function () {
+                    this.showTooltip(this.datasets[0].bars, true);
+                }
             };
             var barchart = new Chart(ctx).Bar(data, options);
             legend = barchart.generateLegend();
