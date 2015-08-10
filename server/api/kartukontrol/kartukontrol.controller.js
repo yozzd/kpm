@@ -822,7 +822,7 @@ exports.piechart = function (req, res) {
                 }
             });
             var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-            var colors = ['rgba(151,187,205,1)', 'rgba(220,220,220,1)', 'rgba(247,70,74,1)', 'rgba(70,191,189,1)', 'rgba(253,180,92,1)', 'rgba(148,159,177,1)', 'rgba(77,83,96,1)', 'rgba(45,252,119,1)', 'rgba(129,69,111,1)', 'rgba(20,71,185,1)', 'rgba(241,44,128,1)', 'rgba(115,242,86,1)']
+            var colors = ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360', '#8c564b', '#9467bd', '#ff7f0e', '#bcbd22', '#17becf']
             var datalength = [];
 
             _.forEach(bulans, function (val, key) {
@@ -831,15 +831,21 @@ exports.piechart = function (req, res) {
                 });
                 datalength.push({
                     value: filter.length,
-                    color: colors[key],
+                    color: '',
                     label: bulans[key]
                 });
             });
             var filter2 = _.filter(datalength, function (v) {
                 return v.value > 0;
             });
+            var c = [];
+            _.forEach(filter2, function (val, key) {
+                c.push({
+                    color: colors[key]
+                });
+            });
 
-            var data = filter2;
+            var data = _.merge(filter2, c);
             var options = {
                 tooltipEvents: [],
                 showTooltips: true,

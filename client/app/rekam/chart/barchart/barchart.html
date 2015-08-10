@@ -59,7 +59,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="chart-container">
+                        <div class="alert alert-info" ng-if="count==0">Tidak ada data</div>
+                        <div class="chart-container" ng-if="count>0">
                             <canvas class="chart chart-bar" data="data" labels="labels" options="options">
                             </canvas>
                         </div>
