@@ -12,10 +12,64 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-10">
-            tes
+            <ul class="widgets" ng-repeat="menu in menus1">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="widgets" ng-repeat="menu in menus2">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="widgets" ng-repeat="menu in menus3">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="widgets" ng-repeat="menu in menus4">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="widgets" ng-repeat="menu in menus5">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="widgets" ng-repeat="menu in menus6">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="widgets" ng-repeat="menu in menus7">
+                <li class="widget {{menu.class}}">
+                    <a ui-sref="{{menu.link}}" title="{{menu.title}}"><i class="{{menu.icon}}"></i>
+                    </a>
+                    <a ui-sref="{{menu.link}}" class="widget-link" title="{{menu.title}}">{{menu.title}}</a>
+                </li>
+            </ul>
         </div>
         <div class="col-xs-2">
-            <div ng-include="'components/sidebar/sidebar.html'" class="slideup1"></div>
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
         </div>
     </div>
 </div>

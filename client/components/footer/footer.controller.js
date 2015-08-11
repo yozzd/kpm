@@ -7,6 +7,6 @@ angular.module('kpmApp')
         $scope.year1 = parseInt(2015);
         $scope.year2 = d.getFullYear();
 
-        $scope.link = 'home.contact';
+        $scope.link = 'rekam.contact';
 
     });
