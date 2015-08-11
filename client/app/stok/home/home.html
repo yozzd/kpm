@@ -1,9 +1,22 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
+<div class="hero">
     <div class="container">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-        <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+        <div class="hero-inner">
+            <div class="hero-title">
+                <h1>Selamat Datang di Aplikasi Pengendalian Stok Obat</h1>
+            </div>
+        </div>
     </div>
-</header>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

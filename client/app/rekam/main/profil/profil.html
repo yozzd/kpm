@@ -63,8 +63,16 @@
                                             <label>Umur <sup class="req">*</sup>
                                             </label>
                                         </td>
-                                        <td colspan="2">
+                                        <td>
                                             <input type="text" name="umur" class="input-control" ng-model="data.umur" ng-pattern="/^(\d)+$/" required />
+                                        </td>
+                                        <td style="width: 25%;">
+                                            <ui-select name="satuanumur" ng-model="satuanumur.selected" theme="select2" search-enabled="false">
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="satuanumur in satuanumurs | filter: $select.search">
+                                                    <div ng-bind-html="satuanumur | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
                                         </td>
                                         <td class="has-error" style="width: 30%;">
                                             <p class="help-block" style="margin: 0;" ng-show="form.umur.$error.required && submitted">
@@ -226,10 +234,10 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="width: 30%;">
-                                            <label>Pembiayaan</label>
+                                            <label>Pembiayaan <sup class="req">*</sup></label>
                                         </td>
                                         <td style="width: 25%;">
-                                            <ui-select name="pembiayaan" ng-model="pembiayaan.selected" theme="select2" search-enabled="false">
+                                            <ui-select name="pembiayaan" ng-model="pembiayaan.selected" theme="select2" search-enabled="false" required>
                                                 <ui-select-match>{{$select.selected}}</ui-select-match>
                                                 <ui-select-choices repeat="pembiayaan in pembiayaans | filter: $select.search">
                                                     <div ng-bind-html="pembiayaan | highlight: $select.search"></div>
@@ -239,7 +247,11 @@
                                         <td>
                                             <input type="text" name="kpembiayaan" class="input-control" ng-model="data.kpembiayaan" ng-hide="pembiayaan.selected==null||pembiayaan.selected=='BPJS'||pembiayaan.selected=='Biaya Sendiri'" />
                                         </td>
-                                        <td></td>
+                                        <td class="has-error">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pembiayaan.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>

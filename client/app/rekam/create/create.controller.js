@@ -3,6 +3,11 @@
 angular.module('kpmApp')
     .controller('RekamCreateCtrl', function ($scope, Restangular, $alert) {
 
+        $scope.satuanumur = {
+            selected: 'tahun'
+        };
+        $scope.satuanumurs = ['tahun', 'bulan'];
+
         $scope.jeniskelamin = {};
         $scope.jeniskelamins = ['L', 'P'];
 
@@ -24,6 +29,7 @@ angular.module('kpmApp')
                     tanggal: $scope.data.tanggal,
                     nama: $scope.data.nama,
                     umur: $scope.data.umur,
+                    satuanumur: $scope.satuanumur.selected,
                     jeniskelamin: $scope.jeniskelamin.selected,
                     jalan: $scope.data.jalan,
                     lingkungan: $scope.data.lingkungan,

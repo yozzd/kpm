@@ -24,6 +24,11 @@ var PasienSchema = new Schema({
         default: '',
         trim: true
     },
+    satuanumur: {
+        type: String,
+        default: '',
+        trim: true
+    },
     jeniskelamin: {
         type: String,
         default: '',
@@ -146,6 +151,10 @@ var PasienSchema = new Schema({
     _kartukontrol: {
         type: Schema.Types.ObjectId,
         ref: 'KartuKontrol'
+    },
+    _resep: {
+        type: Schema.Types.ObjectId,
+        ref: 'Resep'
     },
     created: {
         type: Date,

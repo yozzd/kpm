@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('SidebarCtrl', function ($scope) {
+    .controller('SidebarCtrl', function ($scope, Auth) {
+
+        $scope.isOprRekam = Auth.isOprRekam;
+        $scope.isOprStok = Auth.isOprStok;
 
         $scope.rekam = [{
             home: [{
@@ -111,6 +114,26 @@ angular.module('kpmApp')
             setting: [{
                 'title': 'Ubah password',
                 'link': 'rekam.ubah',
+            }]
+        }];
+
+        $scope.stok = [{
+            home: [{
+                'title': 'Home',
+                'link': 'stok'
+            }]
+        }, {
+            resep: [{
+                'title': 'BPJS',
+                'link': 'stok.bpjs',
+            }, {
+                'title': 'Umum',
+                'link': 'stok.umum',
+            }]
+        }, {
+            setting: [{
+                'title': 'Ubah password',
+                'link': 'stok.ubah',
             }]
         }];
 

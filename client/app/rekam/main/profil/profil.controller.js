@@ -3,6 +3,9 @@
 angular.module('kpmApp')
     .controller('RekamProfilCtrl', function ($scope, $stateParams, Restangular, socket, $alert) {
 
+        $scope.satuanumur = {};
+        $scope.satuanumurs = ['tahun', 'bulan'];
+
         $scope.jeniskelamin = {};
         $scope.jeniskelamins = ['L', 'P'];
 
@@ -19,6 +22,7 @@ angular.module('kpmApp')
             Restangular.one('pasiens').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
                 $scope.nama = data.nama;
+                $scope.satuanumur.selected = $scope.data.satuanumur;
                 $scope.jeniskelamin.selected = $scope.data.jeniskelamin;
                 $scope.statuskeluarga.selected = $scope.data.statuskeluarga;
                 $scope.dikirim.selected = $scope.data.dikirim === '' ? null : $scope.data.dikirim;
@@ -39,6 +43,7 @@ angular.module('kpmApp')
                     tanggal: $scope.data.tanggal,
                     nama: $scope.data.nama,
                     umur: $scope.data.umur,
+                    satuanumur: $scope.satuanumur.selected,
                     jeniskelamin: $scope.jeniskelamin.selected,
                     jalan: $scope.data.jalan,
                     lingkungan: $scope.data.lingkungan,

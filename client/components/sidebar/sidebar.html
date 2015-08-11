@@ -1,5 +1,5 @@
 <div ng-controller="SidebarCtrl">
-    <div ng-repeat="rekam in rekam">
+    <div ng-repeat="rekam in rekam" ng-if="isOprRekam()">
         <ul ng-repeat="home in rekam.home">
             <li ui-sref-active-eq="sidebar-active"><a ui-sref="{{home.link}}" title="{{home.title}}"> {{home.title}}</a>
             </li>
@@ -19,6 +19,21 @@
             </li>
         </ul>
         <ul ng-repeat="setting in rekam.setting">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{setting.link}}" title="{{setting.title}}"> {{setting.title}}</a>
+            </li>
+        </ul>
+        <hr ng-repeat-end style="border-top: 1px solid #c7c7c7; border-style: dotted;" />
+    </div>
+    <div ng-repeat="stok in stok" ng-if="isOprStok()">
+        <ul ng-repeat="home in stok.home">
+            <li ui-sref-active-eq="sidebar-active"><a ui-sref="{{home.link}}" title="{{home.title}}"> {{home.title}}</a>
+            </li>
+        </ul>
+        <ul ng-repeat="resep in stok.resep">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{resep.link}}" title="{{resep.title}}"> {{resep.title}}</a>
+            </li>
+        </ul>
+        <ul ng-repeat="setting in stok.setting">
             <li ui-sref-active="sidebar-active"><a ui-sref="{{setting.link}}" title="{{setting.title}}"> {{setting.title}}</a>
             </li>
         </ul>

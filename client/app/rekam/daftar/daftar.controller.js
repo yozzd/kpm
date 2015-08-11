@@ -55,6 +55,7 @@ angular.module('kpmApp')
                 name: 'umur',
                 displayName: 'Umur',
                 enableColumnMenu: false,
+                cellTemplate: 'app/rekam/daftar/template/umur.html',
                 width: 100
             }, {
                 name: 'jeniskelamin',

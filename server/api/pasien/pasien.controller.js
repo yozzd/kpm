@@ -20,6 +20,7 @@ var Rehabilitasi = require('../rehabilitasi/rehabilitasi.model');
 var Konsultasi = require('../konsultasi/konsultasi.model');
 var Usul = require('../usul/usul.model');
 var KartuKontrol = require('../kartukontrol/kartukontrol.model');
+var Resep = require('../resep/resep.model');
 
 function base64_encode(file) {
     var bitmap = fse.readFileSync(file);
@@ -38,7 +39,7 @@ exports.index = function (req, res) {
     async.series([
 
         function (callback) {
-            Pasien.find({}).populate('_anamnesa _fisikdiagnostik _radiologi _laboratorium _medisdiagnostik _diagnosa _pengobatan _terapi _rehabilitasi _konsultasi _usul _kartukontrol').exec(function (err, pasien) {
+            Pasien.find({}).populate('_anamnesa _fisikdiagnostik _radiologi _laboratorium _medisdiagnostik _diagnosa _pengobatan _terapi _rehabilitasi _konsultasi _usul _kartukontrol _resep').exec(function (err, pasien) {
                 if (err) {
                     return callback(err);
                 }
@@ -238,7 +239,17 @@ exports.create = function (req, res) {
                     callback();
                 })
             });
-        }
+        },
+        function (callback) {
+            Resep.create({
+                _pasien: pasienObj._id
+            }, function (err, pasien) {
+                if (err) {
+                    return callback(err);
+                }
+                callback();
+            });
+        },
     ], function (err) {
         if (err) {
             return res.send(err);
@@ -451,6 +462,18 @@ exports.destroy = function (req, res) {
                     return callback(err);
                 }
                 kartukontrol.remove(function (data) {
+                    callback();
+                });
+            });
+        },
+        function (callback) {
+            Resep.findOne({
+                _pasien: pasienObj._id
+            }, function (err, resep) {
+                if (err) {
+                    return callback(err);
+                }
+                resep.remove(function (data) {
                     callback();
                 });
             });

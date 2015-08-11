@@ -339,16 +339,13 @@ angular.module('kpmApp')
                     label: 'Ubah Password'
                 }
             })
-            .state('rekam.contact', {
+            .state('contact', {
                 url: '/contact',
                 views: {
                     '@': {
                         templateUrl: 'app/contact/contact.html',
                         controller: 'ContactCtrl'
                     }
-                },
-                ncyBreadcrumb: {
-                    label: 'Contact'
                 }
             });
     });
