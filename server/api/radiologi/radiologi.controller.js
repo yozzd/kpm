@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var async = require('async');
-var fse = require('fs-extra')
+var fse = require('fs-extra');
 
 var Pasien = require('../pasien/pasien.model');
 var Radiologi = require('./radiologi.model');
@@ -100,6 +100,7 @@ exports.files = function (req, res) {
                 if (file === undefined) {
                     radiologi.image = radiologi.image === '' ? '' : radiologi.image;
                     radiologi.imagename = radiologi.imagename === '' ? '' : radiologi.imagename;
+                    radiologi.contenttype = radiologi.contenttype === '' ? '' : radiologi.contenttype;
                     radiologi.thorakpatgl = req.body.thorakpatgl;
                     radiologi.thorakpahasil = req.body.thorakpahasil;
                     radiologi.thorakcttgl = req.body.thorakcttgl;
@@ -110,8 +111,9 @@ exports.files = function (req, res) {
                         callback();
                     });
                 } else {
-                    radiologi.image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
+                    radiologi.image = base64_encode(file.path);
                     radiologi.imagename = file.name;
+                    radiologi.contenttype = file.type;
                     radiologi.thorakpatgl = req.body.thorakpatgl;
                     radiologi.thorakpahasil = req.body.thorakpahasil;
                     radiologi.thorakcttgl = req.body.thorakcttgl;

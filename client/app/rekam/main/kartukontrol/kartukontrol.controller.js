@@ -3,11 +3,45 @@
 angular.module('kpmApp')
     .controller('RekamKartuKontrolCtrl', function ($scope, Restangular, $stateParams, socket, $alert, $modal, uiGridConstants) {
 
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
+
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var blob = new Blob(byteArrays, {
+                type: contentType
+            });
+            return blob;
+        }
+
         $scope.getData = function () {
             Restangular.one('kartukontrols').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
-                $scope.gridOptions.data = $scope.data.kontrol;
+
+                $scope.blob = [];
+                for (var i = 0; i < $scope.data.kontrol.length; i++) {
+                    $scope.blob.push({
+                        blobUrl: !$scope.data.kontrol[i].image ? '' : URL.createObjectURL(b64toBlob($scope.data.kontrol[i].image, $scope.data.kontrol[i].contenttype))
+                    });
+                }
+                $scope.merge = _.merge($scope.data.kontrol, $scope.blob);
+                $scope.gridOptions.data = $scope.merge;
                 socket.syncUpdates('kartukontrol', $scope.gridOptions.data);
             });
         };
@@ -110,10 +144,10 @@ angular.module('kpmApp')
             }
         ];
 
-        $scope.imgmodal = function (image) {
+        $scope.imgmodal = function (blobUrl) {
             var scope = $scope.$new();
             scope.data = {
-                image: image
+                blobUrl: blobUrl
             };
             var imgmodal = $modal({
                 scope: scope,

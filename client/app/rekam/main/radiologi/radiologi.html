@@ -18,10 +18,10 @@
                                             <label>a.</label>
                                         </td>
                                         <td colspan="2" style="width: 28%;">
-                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 1,5MB</span></label>
+                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 3MB</span></label>
                                         </td>
                                         <td colspan="3">
-                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='1500000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
+                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='3000000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
                                             <table style="width: 100%;" ng-show="file" class="req2">
                                                 <tr>
                                                     <td style="width: 20%;">Nama file</td>
@@ -55,8 +55,8 @@
                                         </td>
                                         <td style="width: 30%;" class="text-center">
                                             <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="data.image" style="max-width: 150px;">
-                                            <a href="" ng-click="imgmodal(data.image)" ng-show="data.image">
-                                                <img ng-src="{{data.image}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                            <a href="" ng-click="imgmodal(blobUrl)" ng-show="data.image">
+                                                <img ng-src="{{blobUrl}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
                                             </a>
                                             <br/>
                                             <a href="" ng-click="delimg()" ng-show="data.image">Delete</a>

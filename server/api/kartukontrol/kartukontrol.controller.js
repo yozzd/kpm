@@ -94,6 +94,7 @@ exports.files = function (req, res) {
                         tahun: date.getFullYear(),
                         image: kartukontrol.image === '' ? '' : kartukontrol.image,
                         imagename: kartukontrol.imagename === '' ? '' : kartukontrol.imagename,
+                        contenttype: kartukontrol.contenttype === '' ? '' : kartukontrol.contenttype,
                         keluhan: req.body.keluhan,
                         lab: req.body.lab,
                         sputum: req.body.sputum,
@@ -113,8 +114,9 @@ exports.files = function (req, res) {
                         tanggal: req.body.tanggal,
                         bulan: date.getMonth(),
                         tahun: date.getFullYear(),
-                        image: 'data:' + file.type + ';base64,' + base64_encode(file.path),
+                        image: base64_encode(file.path),
                         imagename: file.name,
+                        contenttype: file.type,
                         keluhan: req.body.keluhan,
                         lab: req.body.lab,
                         sputum: req.body.sputum,
@@ -177,6 +179,7 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].tahun = date.getFullYear();
                     kartukontrol.kontrol[index].image = kartukontrol.image === '' ? '' : kartukontrol.image;
                     kartukontrol.kontrol[index].imagename = kartukontrol.imagename === '' ? '' : kartukontrol.imagename;
+                    kartukontrol.kontrol[index].contenttype = kartukontrol.contenttype === '' ? '' : kartukontrol.contenttype;
                     kartukontrol.kontrol[index].keluhan = req.body.keluhan;
                     kartukontrol.kontrol[index].lab = req.body.lab;
                     kartukontrol.kontrol[index].sputum = req.body.sputum;
@@ -194,8 +197,9 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].tanggal = req.body.tanggal;
                     kartukontrol.kontrol[index].bulan = date.getMonth();
                     kartukontrol.kontrol[index].tahun = date.getFullYear();
-                    kartukontrol.kontrol[index].image = 'data:' + file.type + ';base64,' + base64_encode(file.path);
+                    kartukontrol.kontrol[index].image = base64_encode(file.path);
                     kartukontrol.kontrol[index].imagename = file.name;
+                    kartukontrol.kontrol[index].contenttype = file.type;
                     kartukontrol.kontrol[index].keluhan = req.body.keluhan;
                     kartukontrol.kontrol[index].lab = req.body.lab;
                     kartukontrol.kontrol[index].sputum = req.body.sputum;

@@ -3,6 +3,32 @@
 angular.module('kpmApp')
     .controller('RekamEditKartuKontrolCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $state, $modal) {
 
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
+
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var blob = new Blob(byteArrays, {
+                type: contentType
+            });
+            return blob;
+        }
+
         $scope.getData = function () {
             Restangular.one('kartukontrols').customGET($stateParams.id).then(function (data) {
                 $scope.id = data._id;
@@ -11,6 +37,8 @@ angular.module('kpmApp')
                     return chr._id === $stateParams.kid;
                 });
                 $scope.data = find;
+
+                $scope.blobUrl = !$scope.data.image ? '' : URL.createObjectURL(b64toBlob($scope.data.image, $scope.data.contenttype));
 
                 Restangular.all('opsidiagnosas').customGETLIST().then(function (datas) {
                     $scope.datas = datas;
@@ -76,10 +104,10 @@ angular.module('kpmApp')
             }
         };
 
-        $scope.imgmodal = function (image) {
+        $scope.imgmodal = function (blobUrl) {
             var scope = $scope.$new();
             scope.data = {
-                image: image
+                blobUrl: blobUrl
             };
             var imgmodal = $modal({
                 scope: scope,

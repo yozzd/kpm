@@ -3,10 +3,38 @@
 angular.module('kpmApp')
     .controller('RekamRadiologiCtrl', function ($scope, Restangular, $stateParams, socket, $alert, Upload, $modal) {
 
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
+
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            var blob = new Blob(byteArrays, {
+                type: contentType
+            });
+            return blob;
+        }
+
         $scope.getData = function () {
             Restangular.one('radiologis').customGET($stateParams.id).then(function (data) {
                 $scope.data = data;
                 $scope.nama = data._pasien.nama;
+
+                $scope.blobUrl = !$scope.data.image ? '' : URL.createObjectURL(b64toBlob($scope.data.image, $scope.data.contenttype));
 
                 socket.syncUpdates('radiologi', [$scope.data], function (event, item, array) {
                     $scope.data = item;
@@ -51,10 +79,10 @@ angular.module('kpmApp')
             }
         };
 
-        $scope.imgmodal = function (image) {
+        $scope.imgmodal = function (blobUrl) {
             var scope = $scope.$new();
             scope.data = {
-                image: image
+                blobUrl: blobUrl
             };
             var imgmodal = $modal({
                 scope: scope,
@@ -68,7 +96,8 @@ angular.module('kpmApp')
         $scope.delimg = function () {
             Restangular.one('radiologis/delimg/').customPUT({
                 image: '',
-                imagename: ''
+                imagename: '',
+                contenttype: ''
             }, $scope.data._id).then(function () {
                 $scope.progress = 0;
                 $alert({

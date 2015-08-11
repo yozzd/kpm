@@ -36,7 +36,7 @@ angular.module('kpmApp', [
             }
             return elem;
         });
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|data):/);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|data|blob):/);
     })
 
 .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {

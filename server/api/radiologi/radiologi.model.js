@@ -15,6 +15,11 @@ var RadiologiSchema = new Schema({
         default: '',
         trim: true
     },
+    contenttype: {
+        type: String,
+        default: '',
+        trim: true
+    },
     thorakpatgl: {
         type: Date,
         default: '',

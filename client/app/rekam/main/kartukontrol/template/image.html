@@ -1,6 +1,6 @@
 <div class="ui-grid-cell-contents text-center">
-    <a href="" ng-click="grid.appScope.imgmodal(row.entity.image)" ng-show="row.entity.image">
-        <img ng-src="{{row.entity.image}}" class="thumb" title="{{row.entity.imagename}}" style="max-width: 100px; max-height: 100px;">
+    <a href="" ng-click="grid.appScope.imgmodal(row.entity.blobUrl)" ng-show="row.entity.image">
+        <img ng-src="{{row.entity.blobUrl}}" class="thumb" title="{{row.entity.imagename}}" style="max-width: 100px; max-height: 100px;">
     </a>
     <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="row.entity.image" style="max-width: 100px;">
 </div>

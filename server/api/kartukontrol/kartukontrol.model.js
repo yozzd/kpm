@@ -31,6 +31,16 @@ var KartuKontrolSchema = new Schema({
             default: '',
             trim: true
         },
+        contenttype: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        blobUrl: {
+            type: String,
+            default: '',
+            trim: true
+        },
         keluhan: {
             type: String,
             default: '',
