@@ -324,5 +324,19 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Pie Chart'
                 }
+            })
+            .state('rekam.ubah', {
+                url: '/ubah',
+                views: {
+                    '@': {
+                        templateUrl: 'app/rekam/ubah/ubah.html',
+                        controller: 'RekamUbahCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprrekam',
+                ncyBreadcrumb: {
+                    label: 'Ubah Password'
+                }
             });
     });

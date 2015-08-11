@@ -110,7 +110,7 @@ angular.module('kpmApp')
         }, {
             setting: [{
                 'title': 'Ubah password',
-                'link': 'rekam.change',
+                'link': 'rekam.ubah',
             }]
         }];
 

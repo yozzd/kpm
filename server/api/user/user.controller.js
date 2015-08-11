@@ -69,11 +69,14 @@ exports.destroy = function (req, res) {
  */
 exports.changePassword = function (req, res, next) {
     var userId = req.user._id;
+    var newemail = req.body.email;
     var oldPass = String(req.body.oldPassword);
     var newPass = String(req.body.newPassword);
 
     User.findById(userId, function (err, user) {
         if (user.authenticate(oldPass)) {
+            user.email = newemail;
+            user.name = newemail;
             user.password = newPass;
             user.save(function (err) {
                 if (err) return validationError(res, err);

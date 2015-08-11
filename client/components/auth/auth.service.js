@@ -85,12 +85,13 @@ angular.module('kpmApp')
              * @param  {Function} callback    - optional
              * @return {Promise}
              */
-            changePassword: function (oldPassword, newPassword, callback) {
+            changePassword: function (email, oldPassword, newPassword, callback) {
                 var cb = callback || angular.noop;
 
                 return User.changePassword({
                     id: currentUser._id
                 }, {
+                    email: email,
                     oldPassword: oldPassword,
                     newPassword: newPassword
                 }, function (user) {
