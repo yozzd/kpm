@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var async = require('async');
-var fse = require('fs-extra')
+var fse = require('fs-extra');
 var NodePDF = require('nodepdf');
 var moment = require('moment');
 moment.locale('id');
@@ -554,7 +554,7 @@ exports.cetak = function (req, res) {
             content += '<tr>';
             content += '<td colspan=\'2\'>Umur</td>';
             content += '<td>:</td>';
-            content += '<td>' + pasienObj.umur + '</td>';
+            content += '<td>' + pasienObj.umur + ' ' + pasienObj.satuanumur + '</td>';
             content += '</tr>';
             content += '<tr>';
             content += '<td colspan=\'2\'>Jenis Kelamin</td>';

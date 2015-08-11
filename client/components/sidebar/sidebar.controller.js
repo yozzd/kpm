@@ -123,11 +123,27 @@ angular.module('kpmApp')
                 'link': 'stok'
             }]
         }, {
+            obat: [{
+                'title': 'Daftar Obat',
+                'link': 'stok.daftarobat',
+            }, {
+                'title': 'Create Obat',
+                'link': 'stok.createobat',
+            }]
+        }, {
+            stok: [{
+                'title': 'Daftar Stok',
+                'link': 'stok.daftarstok',
+            }, {
+                'title': 'Create Stok',
+                'link': 'stok.createstok',
+            }]
+        }, {
             resep: [{
-                'title': 'BPJS',
+                'title': 'Resep BPJS',
                 'link': 'stok.bpjs',
             }, {
-                'title': 'Umum',
+                'title': 'Resep Umum',
                 'link': 'stok.umum',
             }]
         }, {

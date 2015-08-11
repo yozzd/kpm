@@ -338,14 +338,5 @@ angular.module('kpmApp')
                 ncyBreadcrumb: {
                     label: 'Ubah Password'
                 }
-            })
-            .state('contact', {
-                url: '/contact',
-                views: {
-                    '@': {
-                        templateUrl: 'app/contact/contact.html',
-                        controller: 'ContactCtrl'
-                    }
-                }
             });
     });

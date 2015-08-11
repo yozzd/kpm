@@ -29,6 +29,14 @@
             <li ui-sref-active-eq="sidebar-active"><a ui-sref="{{home.link}}" title="{{home.title}}"> {{home.title}}</a>
             </li>
         </ul>
+        <ul ng-repeat="obat in stok.obat">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{obat.link}}" title="{{obat.title}}"> {{obat.title}}</a>
+            </li>
+        </ul>
+        <ul ng-repeat="stok in stok.stok">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{stok.link}}" title="{{stok.title}}"> {{stok.title}}</a>
+            </li>
+        </ul>
         <ul ng-repeat="resep in stok.resep">
             <li ui-sref-active="sidebar-active"><a ui-sref="{{resep.link}}" title="{{resep.title}}"> {{resep.title}}</a>
             </li>
