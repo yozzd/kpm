@@ -1,0 +1,140 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Edit Rekap</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div><sup class="req">*</sup><span class="req"> Tidak boleh kosong</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Bulan <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="b" style="width: 200px;" ng-model="b.selected" theme="select2" ng-disabled="true" required>
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="b in bulans | filter: $select.search">
+                                                    <div ng-bind-html="b | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.b.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Tahun <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="t" style="width: 100px;" ng-model="t.selected" theme="select2" ng-disabled="true" required>
+                                                <ui-select-match>{{$select.selected}}</ui-select-match>
+                                                <ui-select-choices repeat="t in tahuns | filter: $select.search">
+                                                    <div ng-bind-html="t | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.t.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nama Obat <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="obat" ng-model="obat.selected" theme="select2" ng-change="pick(obat.selected)" ng-disabled="true" required>
+                                                <ui-select-match>{{$select.selected.nama}}</ui-select-match>
+                                                <ui-select-choices repeat="obat in datas | filter: {nama: $select.search} | orderBy:'nama'">
+                                                    <div ng-bind-html="obat.nama | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.obat.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Satuan Obat</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <label>{{satuan}}</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Pindahan <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="pindahan" class="input-control" ng-model="data.pindahan" ng-pattern="/^(\d)+$/" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pindahan.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pindahan.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Masuk <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="masuk" class="input-control" ng-model="data.masuk" ng-pattern="/^(\d)+$/" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.masuk.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="form.masuk.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">
+                                            <button class="tmb" type="submit">Simpan</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

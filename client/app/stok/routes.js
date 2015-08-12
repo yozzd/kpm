@@ -45,6 +45,48 @@ angular.module('kpmApp')
                     label: 'Create Obat'
                 }
             })
+            .state('stok.createrekap', {
+                url: '/rekap/create',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/rekap/create/create.html',
+                        controller: 'StokCreateRekapCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Create Rekap'
+                }
+            })
+            .state('stok.daftarrekap', {
+                url: '/rekap/daftar',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/rekap/daftar/daftar.html',
+                        controller: 'StokDaftarRekapCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Rekap BPJS & Umum'
+                }
+            })
+            .state('stok.daftarrekap.edit', {
+                url: '/edit/{id}',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/rekap/daftar/edit.html',
+                        controller: 'StokEditRekapCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Edit Rekap'
+                }
+            })
             .state('stok.ubah', {
                 url: '/ubah',
                 views: {

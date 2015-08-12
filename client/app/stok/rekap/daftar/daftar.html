@@ -1,0 +1,53 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3 style="display: inline;">Daftar Rekap BPJS &amp; Umum </h3> <a ui-sref="stok.createrekap">Tambah</a>
+                </div>
+                <div class="row" style="margin-bottom: 50px;">
+                    <div class="col-xs-12">
+                        <table>
+                            <tr>
+                                <td>Bulan</td>
+                                <td>Tahun</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 220px;">
+                                    <ui-select name="b" style="width: 200px;" ng-model="b.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="b in bulans | filter: $select.search">
+                                            <div ng-bind-html="b | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                                <td style="width: 110px;">
+                                    <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="t in tahuns | filter: $select.search">
+                                            <div ng-bind-html="t | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-info" ng-if="!gridOptions.data.length">Tidak ada data. <a ui-sref="stok.createrekap">Create Rekap?</a></div>
+                        <div ui-grid="gridOptions" class="grid" ui-grid-pinning ui-grid-resize-columns ng-if="gridOptions.data.length>0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

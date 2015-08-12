@@ -131,12 +131,18 @@ angular.module('kpmApp')
                 'link': 'stok.createobat',
             }]
         }, {
-            stok: [{
-                'title': 'Daftar Stok',
-                'link': 'stok.daftarstok',
+            rekap: [{
+                'title': 'Create Rekap',
+                'link': 'stok.createrekap',
             }, {
-                'title': 'Create Stok',
-                'link': 'stok.createstok',
+                'title': 'Rekap BPJS & Umum',
+                'link': 'stok.daftarrekap',
+            }, {
+                'title': 'Rekap BPJS',
+                'link': 'stok.rekapbpjs',
+            }, {
+                'title': 'Rekap Umum',
+                'link': 'stok.rekapumum',
             }]
         }, {
             resep: [{

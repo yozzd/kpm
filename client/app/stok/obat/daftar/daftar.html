@@ -10,27 +10,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="alert alert-info" ng-hide="datas.length>0">Tidak ada data. <a ui-sref="stok.createobat">Create Obat?</a></div>
-                        <div ng-show="datas.length>0">
-                            <table class="table table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Obat</th>
-                                        <th>Satuan Obat</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="data in datas | orderBy:'nama'">
-                                        <td>{{$index+1}}</td>
-                                        <td>{{data.nama}}</td>
-                                        <td>{{data.satuan}}</td>
-                                        <td><a href="" ng-click="delete(data._id)">Delete</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <div class="alert alert-info" ng-if="!gridOptions.data.length">Tidak ada data. <a ui-sref="stok.createobat">Create Obat?</a></div>
+                        <div ui-grid="gridOptions" class="grid" ui-grid-pinning ui-grid-resize-columns ng-if="gridOptions.data.length>0"></div>
                     </div>
                 </div>
             </div>
