@@ -1,59 +1,131 @@
 'use strict';
 
 var _ = require('lodash');
+var async = require('async');
+
 var Resep = require('./resep.model');
 
 // Get list of reseps
-exports.index = function(req, res) {
-  Resep.find(function (err, reseps) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, reseps);
-  });
+exports.index = function (req, res) {
+    var resepObj = {};
+
+    async.series([
+
+        function (callback) {
+            Resep.find({}, function (err, resep) {
+                if (err) {
+                    return callback(err);
+                }
+                resepObj = resep;
+                callback();
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(resepObj);
+    });
 };
 
 // Get a single resep
-exports.show = function(req, res) {
-  Resep.findById(req.params.id, function (err, resep) {
-    if(err) { return handleError(res, err); }
-    if(!resep) { return res.send(404); }
-    return res.json(resep);
-  });
+exports.show = function (req, res) {
+    Resep.findById(req.params.id, function (err, resep) {
+        if (err) {
+            return handleError(res, err);
+        }
+        if (!resep) {
+            return res.send(404);
+        }
+        return res.json(resep);
+    });
 };
 
 // Creates a new resep in the DB.
-exports.create = function(req, res) {
-  Resep.create(req.body, function(err, resep) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, resep);
-  });
+exports.create = function (req, res) {
+    var resepObj = {};
+
+    var dt = req.body.tanggal;
+    var date = new Date(dt);
+
+    req.body.bulan = date.getMonth();
+    req.body.tahun = date.getFullYear();
+    req.body.created = Date.now();
+    req.body.updated = null;
+    req.body.by = req.user.name;
+
+    async.series([
+
+        function (callback) {
+            Resep.create(req.body, function (err, resep) {
+                if (err) {
+                    return callback(err);
+                }
+                resepObj = resep;
+                callback();
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(resepObj);
+    });
 };
 
 // Updates an existing resep in the DB.
-exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Resep.findById(req.params.id, function (err, resep) {
-    if (err) { return handleError(res, err); }
-    if(!resep) { return res.send(404); }
-    var updated = _.merge(resep, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, resep);
-    });
-  });
+exports.update = function (req, res) {
+    console.log(req.body);
+    /*var resepObj = {};
+
+    var dt = req.body.tanggal;
+    var date = new Date(dt);
+
+    req.body.bulan = date.getMonth();
+    req.body.tahun = date.getFullYear();
+    req.body.updated = Date.now();
+    req.body.by = req.user.name;
+
+    async.series([
+
+        function (callback) {
+            Resep.findById(req.params.id, function (err, resep) {
+                if (err) {
+                    return callback(err);
+                }
+                var updated = _.merge(resep, req.body);
+                updated.save(function (data) {
+                    callback();
+                });
+                resepObj = resep;
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(resepObj);
+    });*/
 };
 
 // Deletes a resep from the DB.
-exports.destroy = function(req, res) {
-  Resep.findById(req.params.id, function (err, resep) {
-    if(err) { return handleError(res, err); }
-    if(!resep) { return res.send(404); }
-    resep.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
+exports.destroy = function (req, res) {
+    Resep.findById(req.params.id, function (err, resep) {
+        if (err) {
+            return handleError(res, err);
+        }
+        if (!resep) {
+            return res.send(404);
+        }
+        resep.remove(function (err) {
+            if (err) {
+                return handleError(res, err);
+            }
+            return res.send(204);
+        });
     });
-  });
 };
 
 function handleError(res, err) {
-  return res.send(500, err);
+    return res.send(500, err);
 }

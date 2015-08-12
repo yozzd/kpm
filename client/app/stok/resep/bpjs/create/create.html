@@ -1,0 +1,92 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Create Resep BPJS</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div><sup class="req">*</sup><span class="req"> Tidak boleh kosong</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Tanggal <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="tanggal" class="input-control" ng-model="data.tanggal" data-date-format="dd MMMM yyyy" bs-datepicker required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.tanggal.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nama Pasien <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="pasien" ng-model="pasien.selected" theme="select2" ng-change="pick(pasien.selected)" required>
+                                                <ui-select-match>{{$select.selected.nama}}</ui-select-match>
+                                                <ui-select-choices repeat="pasien in pasiens | filter: {nama: $select.search} | orderBy:'nama'">
+                                                    <div class="pull-left" ng-bind-html="pasien.nama | highlight: $select.search"></div>
+                                                    <div class="pull-right" ng-bind="pasien.nomor"></div>
+                                                    <div class="clearfix"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pasien.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Umur</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <label>{{umur}}</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Jenis Kelamin</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <label>{{jeniskelamin}}</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">
+                                            <button class="tmb" type="submit">Simpan</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

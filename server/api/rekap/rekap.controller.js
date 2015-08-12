@@ -7,11 +7,24 @@ var Rekap = require('./rekap.model');
 
 // Get list of rekaps
 exports.index = function (req, res) {
-    Rekap.find(function (err, rekaps) {
-        if (err) {
-            return handleError(res, err);
+    var rekapObj = {};
+
+    async.series([
+
+        function (callback) {
+            Rekap.find({}, function (err, rekap) {
+                if (err) {
+                    return callback(err);
+                }
+                rekapObj = rekap;
+                callback();
+            });
         }
-        return res.json(200, rekaps);
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(rekapObj);
     });
 };
 

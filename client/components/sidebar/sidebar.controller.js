@@ -146,11 +146,11 @@ angular.module('kpmApp')
             }]
         }, {
             resep: [{
-                'title': 'Resep BPJS',
-                'link': 'stok.bpjs',
+                'title': 'Daftar Resep BPJS',
+                'link': 'stok.resepbpjs',
             }, {
-                'title': 'Resep Umum',
-                'link': 'stok.umum',
+                'title': 'Daftar Resep Umum',
+                'link': 'stok.resepumum',
             }]
         }, {
             setting: [{
