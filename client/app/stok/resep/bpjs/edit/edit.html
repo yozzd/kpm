@@ -1,3 +1,201 @@
-<div class="col-md-12">
-This is the edit view.
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3>Edit Resep BPJS</h3>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div><sup class="req">*</sup><span class="req"> Tidak boleh kosong</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <form class="form" name="form" ng-submit="submit(form)" novalidate>
+                            <table class="table table-condensed">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Tanggal <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="tanggal" class="input-control" ng-model="data.tanggal" data-date-format="dd MMMM yyyy" bs-datepicker required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.tanggal.$invalid && submitted">
+                                                Format tanggal salah
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nama Pasien <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <ui-select name="pasien" ng-model="pasien.selected" theme="select2" ng-change="pick(pasien.selected)" required>
+                                                <ui-select-match>{{$select.selected.nama}}</ui-select-match>
+                                                <ui-select-choices repeat="pasien in pasiens | filter: {nama: $select.search} | orderBy:'nama'">
+                                                    <div class="pull-left" ng-bind-html="pasien.nama | highlight: $select.search"></div>
+                                                    <div class="pull-right" ng-bind="pasien.nomor"></div>
+                                                    <div class="clearfix"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pasien.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Umur</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <label>{{umur}}</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Jenis Kelamin</label>
+                                        </td>
+                                        <td colspan="2">
+                                            <label>{{jeniskelamin}}</label>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nama Dokter <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="dokter" class="input-control" ng-model="data.dokter" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.dokter.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 3MB</span></label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='3000000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
+                                            <table style="width: 100%;" ng-show="file" class="req2">
+                                                <tr>
+                                                    <td style="width: 20%;">Nama file</td>
+                                                    <td style="width: 2%;">:</td>
+                                                    <td>{{file.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 20%;">Ukuran file</td>
+                                                    <td style="width: 2%;">:</td>
+                                                    <td>{{file.size/1000000|number:'2'}}MB</td>
+                                                </tr>
+                                            </table>
+                                            <div ng-repeat="f in reject" class="req">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td style="width: 20%;">Nama file</td>
+                                                        <td style="width: 2%;">:</td>
+                                                        <td>{{f.name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 20%;">Ukuran file</td>
+                                                        <td style="width: 2%;">:</td>
+                                                        <td>{{f.size/1000000|number:'2'}}MB</td>
+                                                    </tr>
+                                                </table>
+                                                <span>Ukuran file melebihi batas maksimum</span>
+                                            </div>
+                                            <div class="progress" style="margin-top: 10px;">
+                                                <div class="progress-bar" role="progressbar" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 30%;" class="text-center">
+                                            <label>
+                                                <a href="" ng-click="imgmodal(blobUrl)" ng-show="blobUrl">
+                                                    <img ng-src="{{blobUrl}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                                </a>
+                                                <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="blobUrl" style="max-width: 150px;">
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;"></td>
+                                        <td colspan="2">
+                                            <div class="pull-right" style="margin-right: 5px;">
+                                                <button type="button" class="btn btn-primary btn-xs" ng-click="tambah()"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-warning btn-xs" ng-show="arr.length>1" ng-click="kurang()"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-repeat="key in arr">
+                                        <td colspan="2" style="width: 30%;"></td>
+                                        <td colspan="2">
+                                            <table class="table table-condensed">
+                                                <tr>
+                                                    <td style="width: 25%;">
+                                                        <label>Nama Obat</label>
+                                                    </td>
+                                                    <td>
+                                                        <ui-select name="obat" ng-model="arr[$index].obat.selected" theme="select2">
+                                                            <ui-select-match>{{$select.selected.nama}} {{$select.selected.satuan}}</ui-select-match>
+                                                            <ui-select-choices repeat="obat in datas | filter: {nama: $select.search} | orderBy:'nama'">
+                                                                <div class="pull-left" ng-bind-html="obat.nama | highlight: $select.search"></div>
+                                                                <div class="pull-right" ng-bind="obat.satuan"></div>
+                                                                <div class="clearfix"></div>
+                                                            </ui-select-choices>
+                                                        </ui-select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 25%;">
+                                                        <label>Keterangan</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="keterangan" class="input-control" ng-model="arr[$index].keterangan" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 25%;">
+                                                        <label>Jumlah</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="keterangan" class="input-control" ng-model="arr[$index].jumlah" ng-pattern="/^(\d)+$/" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">
+                                            <button class="tmb" type="submit">Update</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
 </div>
+
+<div ng-include="'components/footer/footer.html'"></div>

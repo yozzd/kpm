@@ -43,33 +43,6 @@ angular.module('kpmApp')
             $scope.arr.splice($scope.arr.length - 1);
         };
 
-        /*$scope.submit = function (form) {
-            $scope.temp = [];
-            _.forEach($scope.arr, function (val, key) {
-                $scope.temp.push({
-                    obat: $scope.arr[key].obat.selected.nama,
-                    satuan: $scope.arr[key].obat.selected.satuan,
-                    keterangan: $scope.arr[key].keterangan,
-                    jumlah: $scope.arr[key].jumlah
-                });
-            });
-            $scope.submitted = true;
-            if (form.$valid) {
-                Restangular.one('reseps').customPUT({
-                    tanggal: $scope.data.tanggal,
-                    arr: $scope.temp,
-                    dokter: $scope.data.dokter
-                }, $scope.pasien.selected._id).then(function () {
-                    $alert({
-                        content: 'Data sukses disimpan',
-                        placement: 'top-right',
-                        type: 'info',
-                        duration: 5
-                    });
-                });
-            }
-        };*/
-
         $scope.submit = function (form) {
             $scope.temp = [];
             _.forEach($scope.arr, function (val, key) {

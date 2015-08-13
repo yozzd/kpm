@@ -205,6 +205,72 @@ exports.update = function (req, res) {
     });
 };
 
+
+exports.upres = function (req, res) {
+    var resepObj = {};
+    var file = req.files.file;
+    var arr = JSON.parse(req.body.arr);
+
+    var dt = req.body.tanggal;
+    var date = new Date(dt);
+
+    req.body.bulan = date.getMonth();
+    req.body.tahun = date.getFullYear();
+    req.body.updated = Date.now();
+    req.body.by = req.user.name;
+
+    async.series([
+
+        function (callback) {
+            Resep.findOne({
+                _pasien: req.params.id
+            }, function (err, resep) {
+                if (err) {
+                    return callback(err);
+                }
+                var index = _.findIndex(resep.lists, function (value) {
+                    return value._id.toString() === req.params.lid;
+                });
+                if (file === undefined) {
+                    resep.lists[index].tanggal = req.body.tanggal;
+                    resep.lists[index].bulan = req.body.bulan;
+                    resep.lists[index].tahun = req.body.tahun;
+                    resep.lists[index].items = arr;
+                    resep.lists[index].dokter = req.body.dokter;
+                    resep.lists[index].image = resep.lists[index].image === '' ? '' : resep.lists[index].image;
+                    resep.lists[index].imagename = resep.lists[index].imagename === '' ? '' : resep.lists[index].imagename;
+                    resep.lists[index].contenttype = resep.lists[index].contenttype === '' ? '' : resep.lists[index].contenttype;
+                    resep.lists[index].updated = req.body.updated;
+                    resep.lists[index].by = req.body.by;
+                    resep.save(function (data) {
+                        callback();
+                    });
+                } else {
+                    resep.lists[index].tanggal = req.body.tanggal;
+                    resep.lists[index].bulan = req.body.bulan;
+                    resep.lists[index].tahun = req.body.tahun;
+                    resep.lists[index].items = arr;
+                    resep.lists[index].dokter = req.body.dokter;
+                    resep.lists[index].image = base64_encode(file.path);
+                    resep.lists[index].imagename = file.name;
+                    resep.lists[index].contenttype = file.type;
+                    resep.lists[index].updated = req.body.updated;
+                    resep.lists[index].by = req.body.by;
+                    resep.save(function (data) {
+                        callback();
+                    });
+                }
+                resepObj = resep;
+            });
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(resepObj);
+    });
+};
+
 // Deletes a resep from the DB.
 exports.destroy = function (req, res) {
     Resep.findById(req.params.id, function (err, resep) {
