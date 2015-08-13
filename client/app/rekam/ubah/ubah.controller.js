@@ -25,9 +25,14 @@ angular.module('kpmApp')
                         };
                         var timeout = $timeout($scope.onTimeout, 1000);
                     })
-                    .catch(function () {
-                        form.password.$setValidity('mongoose', false);
-                        $scope.errors.password = 'Password salah';
+                    .catch(function (err) {
+                        if (err.data === 'Forbidden') {
+                            $scope.error = false;
+                            form.password.$setValidity('mongoose', false);
+                            $scope.errors.password = 'Password salah';
+                        } else {
+                            $scope.error = err.data;
+                        }
                     });
             }
         };

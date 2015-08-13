@@ -27,6 +27,7 @@
                                             <p class="help-block" style="margin: 0;" ng-show="(form.email.$error.minlength || form.email.$error.required) && (form.email.$dirty || submitted)">
                                                 Password harus lebih dari 3 karakter
                                             </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="error">{{error}}</p>
                                         </td>
                                     </tr>
                                     <tr>

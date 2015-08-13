@@ -75,25 +75,39 @@ exports.create = function (req, res) {
 
 // Updates an existing resep in the DB.
 exports.update = function (req, res) {
-    console.log(req.body);
-    /*var resepObj = {};
+    var resepObj = {};
 
     var dt = req.body.tanggal;
     var date = new Date(dt);
 
     req.body.bulan = date.getMonth();
     req.body.tahun = date.getFullYear();
-    req.body.updated = Date.now();
+    req.body.created = Date.now();
+    req.body.updated = null;
     req.body.by = req.user.name;
 
     async.series([
 
         function (callback) {
-            Resep.findById(req.params.id, function (err, resep) {
+            Resep.findOne({
+                _pasien: req.params.id
+            }, function (err, resep) {
                 if (err) {
                     return callback(err);
                 }
-                var updated = _.merge(resep, req.body);
+                var arr = {
+                    lists: []
+                };
+                arr.lists.push({
+                    tanggal: req.body.tanggal,
+                    bulan: req.body.bulan,
+                    tahun: req.body.tahun,
+                    items: req.body.arr,
+                    created: req.body.created,
+                    updated: req.body.updated,
+                    by: req.body.by
+                })
+                var updated = _.merge(resep, arr);
                 updated.save(function (data) {
                     callback();
                 });
@@ -105,7 +119,7 @@ exports.update = function (req, res) {
             return res.send(err);
         }
         return res.json(resepObj);
-    });*/
+    });
 };
 
 // Deletes a resep from the DB.

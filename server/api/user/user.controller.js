@@ -73,17 +73,28 @@ exports.changePassword = function (req, res, next) {
     var oldPass = String(req.body.oldPassword);
     var newPass = String(req.body.newPassword);
 
-    User.findById(userId, function (err, user) {
-        if (user.authenticate(oldPass)) {
-            user.email = newemail;
-            user.name = newemail;
-            user.password = newPass;
-            user.save(function (err) {
-                if (err) return validationError(res, err);
-                res.send(200);
+    User.find({
+        email: newemail,
+        _id: {
+            $ne: userId
+        }
+    }, function (err, user) {
+        if (user.length < 1) {
+            User.findById(userId, function (err, user) {
+                if (user.authenticate(oldPass)) {
+                    user.email = newemail;
+                    user.name = newemail;
+                    user.password = newPass;
+                    user.save(function (err) {
+                        if (err) return validationError(res, err);
+                        res.send(200);
+                    });
+                } else {
+                    res.send(403);
+                }
             });
         } else {
-            res.send(403);
+            res.send(403, 'Username sudah terdaftar di database');
         }
     });
 };

@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var relationship = require("mongoose-relationship");
 
 var ResepSchema = new Schema({
-    reseps: [{
+    lists: [{
         tanggal: {
             type: Date,
             default: '',
@@ -21,6 +21,28 @@ var ResepSchema = new Schema({
             default: '',
             trim: true
         },
+        items: [{
+            obat: {
+                type: String,
+                default: '',
+                trim: true
+            },
+            satuan: {
+                type: String,
+                default: '',
+                trim: true
+            },
+            keterangan: {
+                type: String,
+                default: '',
+                trim: true
+            },
+            jumlah: {
+                type: Number,
+                default: '',
+                trim: true
+            },
+        }],
         created: {
             type: Date,
             default: '',
