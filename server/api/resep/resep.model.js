@@ -41,8 +41,28 @@ var ResepSchema = new Schema({
                 type: Number,
                 default: '',
                 trim: true
-            },
+            }
         }],
+        dokter: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        image: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        imagename: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        contenttype: {
+            type: String,
+            default: '',
+            trim: true
+        },
         created: {
             type: Date,
             default: '',

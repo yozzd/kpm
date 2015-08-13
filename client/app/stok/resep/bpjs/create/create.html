@@ -70,6 +70,62 @@
                                         <td></td>
                                     </tr>
                                     <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Nama Dokter <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="dokter" class="input-control" ng-model="data.dokter" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.dokter.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Gambar <sup class="req">*</sup><span class="req">Ukuran file maksimum 3MB</span></label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="file" name="file" ngf-select ng-model="file" ngf-max-size='3000000' ng-model-rejected="reject" ngf-change="progresszero()" style="margin-top: 5px; margin-bottom: 5px;">
+                                            <table style="width: 100%;" ng-show="file" class="req2">
+                                                <tr>
+                                                    <td style="width: 20%;">Nama file</td>
+                                                    <td style="width: 2%;">:</td>
+                                                    <td>{{file.name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 20%;">Ukuran file</td>
+                                                    <td style="width: 2%;">:</td>
+                                                    <td>{{file.size/1000000|number:'2'}}MB</td>
+                                                </tr>
+                                            </table>
+                                            <div ng-repeat="f in reject" class="req">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td style="width: 20%;">Nama file</td>
+                                                        <td style="width: 2%;">:</td>
+                                                        <td>{{f.name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 20%;">Ukuran file</td>
+                                                        <td style="width: 2%;">:</td>
+                                                        <td>{{f.size/1000000|number:'2'}}MB</td>
+                                                    </tr>
+                                                </table>
+                                                <span>Ukuran file melebihi batas maksimum</span>
+                                            </div>
+                                            <div class="progress" style="margin-top: 10px;">
+                                                <div class="progress-bar" role="progressbar" style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                                            </div>
+                                        </td>
+                                        <td style="width: 30%;" class="text-center" ng-show="file!=null">
+                                            <div>Preview</div>
+                                            <img ngf-src="file" class="thumb" style="max-width: 80px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="2" style="width: 30%;"></td>
                                         <td colspan="2">
                                             <div class="pull-right" style="margin-right: 5px;">

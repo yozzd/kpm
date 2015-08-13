@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('StokCreateBpjsCtrl', function ($scope, Restangular, $alert) {
+    .controller('StokCreateBpjsCtrl', function ($scope, Restangular, $alert, Upload) {
 
         $scope.getPasien = function () {
             Restangular.all('pasiens').customGETLIST().then(function (datas) {
@@ -43,7 +43,7 @@ angular.module('kpmApp')
             $scope.arr.splice($scope.arr.length - 1);
         };
 
-        $scope.submit = function (form) {
+        /*$scope.submit = function (form) {
             $scope.temp = [];
             _.forEach($scope.arr, function (val, key) {
                 $scope.temp.push({
@@ -57,7 +57,8 @@ angular.module('kpmApp')
             if (form.$valid) {
                 Restangular.one('reseps').customPUT({
                     tanggal: $scope.data.tanggal,
-                    arr: $scope.temp
+                    arr: $scope.temp,
+                    dokter: $scope.data.dokter
                 }, $scope.pasien.selected._id).then(function () {
                     $alert({
                         content: 'Data sukses disimpan',
@@ -67,5 +68,44 @@ angular.module('kpmApp')
                     });
                 });
             }
+        };*/
+
+        $scope.submit = function (form) {
+            $scope.temp = [];
+            _.forEach($scope.arr, function (val, key) {
+                $scope.temp.push({
+                    obat: $scope.arr[key].obat.selected.nama,
+                    satuan: $scope.arr[key].obat.selected.satuan,
+                    keterangan: $scope.arr[key].keterangan,
+                    jumlah: $scope.arr[key].jumlah
+                });
+            });
+            $scope.submitted = true;
+            if (form.$valid) {
+                if ($scope.file !== null) {
+                    Upload.upload({
+                        url: '/api/reseps/' + $scope.pasien.selected._id,
+                        file: $scope.file,
+                        method: 'PUT',
+                        fields: {
+                            tanggal: $scope.data.tanggal,
+                            dokter: $scope.data.dokter,
+                            arr: $scope.temp
+                        },
+                    }).progress(function (evt) {
+                        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                    }).success(function (data, status, headers, config) {
+                        $alert({
+                            content: 'Data sukses disimpan',
+                            placement: 'top-right',
+                            type: 'info',
+                            duration: 5
+                        });
+                    }).error(function (data, status, headers, config) {
+                        console.log('error status: ' + status);
+                    });
+                }
+            }
         };
+
     });

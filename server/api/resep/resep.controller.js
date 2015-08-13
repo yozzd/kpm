@@ -2,8 +2,19 @@
 
 var _ = require('lodash');
 var async = require('async');
+var fse = require('fs-extra');
 
 var Resep = require('./resep.model');
+
+function base64_encode(file) {
+    var bitmap = fse.readFileSync(file);
+    return new Buffer(bitmap).toString('base64');
+}
+
+function base64_decode(base64str, file) {
+    var bitmap = new Buffer(base64str, 'base64');
+    fse.writeFileSync(file, bitmap);
+}
 
 // Get list of reseps
 exports.index = function (req, res) {
@@ -71,6 +82,10 @@ exports.detail = function (req, res) {
                     bulan: filter[0].bulan,
                     tahun: filter[0].tahun,
                     items: filter[0].items,
+                    dokter: filter[0].dokter,
+                    image: filter[0].image,
+                    imagename: filter[0].imagename,
+                    contenttype: filter[0].contenttype,
                     nama: resep._pasien.nama,
                     umur: resep._pasien.umur,
                     satuanumur: resep._pasien.satuanumur,
@@ -123,6 +138,8 @@ exports.create = function (req, res) {
 // Updates an existing resep in the DB.
 exports.update = function (req, res) {
     var resepObj = {};
+    var file = req.files.file;
+    var arr = JSON.parse(req.body.arr);
 
     var dt = req.body.tanggal;
     var date = new Date(dt);
@@ -142,18 +159,41 @@ exports.update = function (req, res) {
                 if (err) {
                     return callback(err);
                 }
-                resep.lists.push({
-                    tanggal: req.body.tanggal,
-                    bulan: req.body.bulan,
-                    tahun: req.body.tahun,
-                    items: req.body.arr,
-                    created: req.body.created,
-                    updated: req.body.updated,
-                    by: req.body.by,
-                })
-                resep.save(function (data) {
-                    callback();
-                });
+                if (file === undefined) {
+                    resep.lists.push({
+                        tanggal: req.body.tanggal,
+                        bulan: req.body.bulan,
+                        tahun: req.body.tahun,
+                        items: arr,
+                        dokter: req.body.dokter,
+                        image: '',
+                        imagename: '',
+                        contenttype: '',
+                        created: req.body.created,
+                        updated: req.body.updated,
+                        by: req.body.by,
+                    })
+                    resep.save(function (data) {
+                        callback();
+                    });
+                } else {
+                    resep.lists.push({
+                        tanggal: req.body.tanggal,
+                        bulan: req.body.bulan,
+                        tahun: req.body.tahun,
+                        items: arr,
+                        dokter: req.body.dokter,
+                        image: base64_encode(file.path),
+                        imagename: file.name,
+                        contenttype: file.type,
+                        created: req.body.created,
+                        updated: req.body.updated,
+                        by: req.body.by,
+                    })
+                    resep.save(function (data) {
+                        callback();
+                    });
+                }
                 resepObj = resep;
             });
         }

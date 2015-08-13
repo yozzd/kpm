@@ -50,32 +50,34 @@ angular.module('kpmApp')
 
         $scope.submit = function (form) {
             $scope.submitted = true;
-            if ($scope.file !== null) {
-                Upload.upload({
-                    url: '/api/radiologis/files/' + $scope.data._id,
-                    file: $scope.file,
-                    method: 'PUT',
-                    fields: {
-                        thorakpatgl: $scope.data.thorakpatgl,
-                        thorakpahasil: $scope.data.thorakpahasil,
-                        thorakcttgl: $scope.data.thorakcttgl,
-                        thorakcthasil: $scope.data.thorakcthasil,
-                        thorakusgtgl: $scope.data.thorakusgtgl,
-                        thorakusghasil: $scope.data.thorakusghasil
-                    },
-                }).progress(function (evt) {
-                    $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-                }).success(function (data, status, headers, config) {
-                    $scope.getData();
-                    $alert({
-                        content: 'Data sukses diupdate',
-                        placement: 'top-right',
-                        type: 'info',
-                        duration: 5
+            if (form.$valid) {
+                if ($scope.file !== null) {
+                    Upload.upload({
+                        url: '/api/radiologis/files/' + $scope.data._id,
+                        file: $scope.file,
+                        method: 'PUT',
+                        fields: {
+                            thorakpatgl: $scope.data.thorakpatgl,
+                            thorakpahasil: $scope.data.thorakpahasil,
+                            thorakcttgl: $scope.data.thorakcttgl,
+                            thorakcthasil: $scope.data.thorakcthasil,
+                            thorakusgtgl: $scope.data.thorakusgtgl,
+                            thorakusghasil: $scope.data.thorakusghasil
+                        },
+                    }).progress(function (evt) {
+                        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                    }).success(function (data, status, headers, config) {
+                        $scope.getData();
+                        $alert({
+                            content: 'Data sukses diupdate',
+                            placement: 'top-right',
+                            type: 'info',
+                            duration: 5
+                        });
+                    }).error(function (data, status, headers, config) {
+                        console.log('error status: ' + status);
                     });
-                }).error(function (data, status, headers, config) {
-                    console.log('error status: ' + status);
-                });
+                }
             }
         };
 
