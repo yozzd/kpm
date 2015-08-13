@@ -6,11 +6,11 @@
             <div ncy-breadcrumb></div>
             <div class="well-content">
                 <div class="page-header">
-                    <h3 style="display: inline;">Daftar Resep BPJS </h3> <a ui-sref=".create">Tambah</a>
+                    <h3 style="display: inline;">Daftar Resep BPJS </h3> <a ui-sref="stok.createresepbpjs">Tambah</a>
                 </div>
                 <div class="row" style="margin-bottom: 50px;">
                     <div class="col-xs-12">
-                        <table>
+                        <table class="pull-left">
                             <tr>
                                 <td>Bulan</td>
                                 <td>Tahun</td>
@@ -34,10 +34,35 @@
                                 </td>
                             </tr>
                         </table>
+                        <table class="pull-right">
+                            <tr>
+                                <td class="bg-info" style="width: 20px;"></td>
+                                <td class="text-center" style="width: 20px;">=</td>
+                                <td style="width: 80px;">Laki-laki</td>
+                                <td class="bg-danger" style="width: 20px;"></td>
+                                <td class="text-center" style="width: 20px;">=</td>
+                                <td>Perempuan</td>
+                            </tr>
+                        </table>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
+                        <div class="alert alert-info" ng-hide="match.length>0">Tidak ada data</div>
+                        <div class="lists" ng-show="match.length>0">
+                            <div class="datelist" ng-repeat-start="date in bydate">
+                                <span class="fa-stack iconlist"><i class="fa fa-circle fa-stack-2x fa-inverse"></i><i class="fa fa-calendar fa-stack-1x"></i></span> {{date|amDateFormat:'DD MMMM YYYY'}}
+                            </div>
+                            <div class="list-group">
+                                <div ng-repeat-start="pasien in match | orderBy:'nama'" ng-show="pasien.tanggal==date" ng-class="{'list-group-item-blue':pasien.jeniskelamin=='L','list-group-item-red':pasien.jeniskelamin=='P'}">
+                                    <h4 class="list-group-item-heading" style="display: inline-block;">{{pasien.nama}}</h4> <span style="font-size: 13px;">{{pasien.umur}} {{pasien.satuanumur}}</span>
+                                    <div class="pull-right" style="margin-top: 3px;"><a ui-sref=".detail({id: pasien.id, lid:pasien.lid})" title="Detail">Detail</a> | <a ui-sref=".edit({id: pasien.id, lid:pasien.lid})" title="Edit">Edit</a></div>
+                                </div>
+                                <div ng-repeat-end></div>
+                            </div>
+                            <div ng-repeat-end ng-hide="false"></div>
+                        </div>
                     </div>
                 </div>
             </div>

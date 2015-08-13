@@ -37,8 +37,12 @@
             <li ui-sref-active="sidebar-active"><a ui-sref="{{rekap.link}}" title="{{rekap.title}}"> {{rekap.title}}</a>
             </li>
         </ul>
-        <ul ng-repeat="resep in stok.resep">
-            <li ui-sref-active="sidebar-active"><a ui-sref="{{resep.link}}" title="{{resep.title}}"> {{resep.title}}</a>
+        <ul ng-repeat="bpjs in stok.bpjs">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{bpjs.link}}" title="{{bpjs.title}}"> {{bpjs.title}}</a>
+            </li>
+        </ul>
+        <ul ng-repeat="umum in stok.umum">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{umum.link}}" title="{{umum.title}}"> {{umum.title}}</a>
             </li>
         </ul>
         <ul ng-repeat="setting in stok.setting">

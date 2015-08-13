@@ -101,8 +101,8 @@ angular.module('kpmApp')
                     label: 'Daftar Resep BPJS'
                 }
             })
-            .state('stok.resepbpjs.create', {
-                url: '/create',
+            .state('stok.createresepbpjs', {
+                url: '/resep/bpjs/create',
                 views: {
                     '@': {
                         templateUrl: 'app/stok/resep/bpjs/create/create.html',
@@ -113,6 +113,34 @@ angular.module('kpmApp')
                 access: 'oprstok',
                 ncyBreadcrumb: {
                     label: 'Create Resep BPJS'
+                }
+            })
+            .state('stok.resepbpjs.detail', {
+                url: '/detail/{id}/{lid}',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/resep/bpjs/detail/detail.html',
+                        controller: 'StokDetailBpjsCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Detail Resep BPJS'
+                }
+            })
+            .state('stok.resepbpjs.edit', {
+                url: '/edit/{id}/{lid}',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/resep/bpjs/edit/edit.html',
+                        controller: 'StokEditBpjsCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Edit Resep BPJS'
                 }
             })
             .state('stok.ubah', {

@@ -145,12 +145,20 @@ angular.module('kpmApp')
                 'link': 'stok.rekapumum',
             }]
         }, {
-            resep: [{
+            bpjs: [{
                 'title': 'Daftar Resep BPJS',
                 'link': 'stok.resepbpjs',
             }, {
-                'title': 'Daftar Resep Umum',
+                'title': 'Create Resep BPJS',
+                'link': 'stok.createresepbpjs',
+            }]
+        }, {
+            umum: [{
+                'title': 'Daftar Resep BPJS',
                 'link': 'stok.resepumum',
+            }, {
+                'title': 'Create Resep BPJS',
+                'link': 'stok.createresepumum',
             }]
         }, {
             setting: [{

@@ -72,7 +72,7 @@
                             </div>
                             <div class="list-group">
                                 <a ui-sref="rekam.daftar.options({id: pasien.id})" ng-repeat-start="pasien in match | orderBy: 'nama'" ng-show="pasien.tanggal==date" ng-class="{'list-group-item-blue':pasien.jeniskelamin=='L','list-group-item-red':pasien.jeniskelamin=='P'}">
-                                    <h4 class="list-group-item-heading" style="display: inline-block;">{{pasien.nama}}</h4> <span style="font-size: 13px;">{{pasien.umur}} tahun</span><span class="pull-right" style="font-size: 18px;">{{pasien.status}}</span>
+                                    <h4 class="list-group-item-heading" style="display: inline-block;">{{pasien.nama}}</h4> <span style="font-size: 13px;">{{pasien.umur}} {{pasien.satuanumur}}</span><span class="pull-right" style="font-size: 18px;">{{pasien.status}}</span>
                                     <div class="clearfix"></div>
                                 </a>
                                 <div ng-repeat-end></div>

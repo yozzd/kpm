@@ -45,14 +45,14 @@ angular.module('kpmApp')
 
         $scope.submit = function (form) {
             $scope.temp = [];
-            for (var i = 0; i < $scope.arr.length; i++) {
+            _.forEach($scope.arr, function (val, key) {
                 $scope.temp.push({
-                    obat: $scope.arr[i].obat.selected.nama,
-                    satuan: $scope.arr[i].obat.selected.satuan,
-                    keterangan: $scope.arr[i].keterangan,
-                    jumlah: $scope.arr[i].jumlah
+                    obat: $scope.arr[key].obat.selected.nama,
+                    satuan: $scope.arr[key].obat.selected.satuan,
+                    keterangan: $scope.arr[key].keterangan,
+                    jumlah: $scope.arr[key].jumlah
                 });
-            }
+            });
             $scope.submitted = true;
             if (form.$valid) {
                 Restangular.one('reseps').customPUT({

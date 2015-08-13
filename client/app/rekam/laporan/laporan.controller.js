@@ -23,6 +23,7 @@ angular.module('kpmApp')
                             tahun: chr.kontrol[i].tahun,
                             nama: chr._pasien.nama,
                             umur: chr._pasien.umur,
+                            satuanumur: chr._pasien.satuanumur,
                             jeniskelamin: chr._pasien.jeniskelamin,
                             did: chr.kontrol[i].did,
                             status: chr.kontrol[i].status
