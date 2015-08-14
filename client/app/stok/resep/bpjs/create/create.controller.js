@@ -47,6 +47,7 @@ angular.module('kpmApp')
             $scope.temp = [];
             _.forEach($scope.arr, function (val, key) {
                 $scope.temp.push({
+                    oid: $scope.arr[key].obat.selected._id,
                     obat: $scope.arr[key].obat.selected.nama,
                     satuan: $scope.arr[key].obat.selected.satuan,
                     keterangan: $scope.arr[key].keterangan,

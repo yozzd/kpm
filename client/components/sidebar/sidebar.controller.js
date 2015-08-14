@@ -154,10 +154,10 @@ angular.module('kpmApp')
             }]
         }, {
             umum: [{
-                'title': 'Daftar Resep BPJS',
+                'title': 'Daftar Resep Umum',
                 'link': 'stok.resepumum',
             }, {
-                'title': 'Create Resep BPJS',
+                'title': 'Create Resep Umum',
                 'link': 'stok.createresepumum',
             }]
         }, {

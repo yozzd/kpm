@@ -22,6 +22,11 @@ var ResepSchema = new Schema({
             trim: true
         },
         items: [{
+            oid: {
+                type: String,
+                default: '',
+                trim: true
+            },
             obat: {
                 type: String,
                 default: '',

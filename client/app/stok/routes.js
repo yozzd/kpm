@@ -87,6 +87,20 @@ angular.module('kpmApp')
                     label: 'Edit Rekap'
                 }
             })
+            .state('stok.rekapbpjs', {
+                url: '/rekap/bpjs',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/rekap/bpjs/bpjs.html',
+                        controller: 'StokRekapBpjsCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Rekap BPJS'
+                }
+            })
             .state('stok.resepbpjs', {
                 url: '/resep/bpjs/daftar',
                 views: {

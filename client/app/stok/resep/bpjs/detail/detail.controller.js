@@ -3,6 +3,9 @@
 angular.module('kpmApp')
     .controller('StokDetailBpjsCtrl', function ($scope, Restangular, $stateParams, $modal) {
 
+        $scope.id = $stateParams.id;
+        $scope.lid = $stateParams.lid;
+
         function b64toBlob(b64Data, contentType, sliceSize) {
             contentType = contentType || '';
             sliceSize = sliceSize || 512;
