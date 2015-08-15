@@ -14,6 +14,16 @@ var ObatSchema = new Schema({
         default: '',
         trim: true
     },
+    pindahan: {
+        type: Number,
+        default: 0,
+        trim: true
+    },
+    masuk: {
+        type: Number,
+        default: 0,
+        trim: true
+    },
     created: {
         type: Date,
         default: '',

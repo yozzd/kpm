@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('StokRekapBpjsCtrl', function ($scope, Restangular, socket) {
+    .controller('StokRekapUmumCtrl', function ($scope, Restangular, socket) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
@@ -23,7 +23,7 @@ angular.module('kpmApp')
             Restangular.all('reseps').customGETLIST().then(function (datas) {
 
                 var filter1 = _.filter(datas, function (value) {
-                    return value.lists.length > 0 && value._pasien.pembiayaan === 'BPJS';
+                    return value.lists.length > 0 && value._pasien.pembiayaan !== 'BPJS';
                 });
 
                 var temp1 = [];
@@ -80,9 +80,8 @@ angular.module('kpmApp')
                     }
                 });
 
-                $scope.total = 0;
-                _.forEach(jumlah, function (val) {
-                    $scope.total += val;
+                $scope.total = _.reduce(jumlah, function (a, b) {
+                    return a + b;
                 });
 
                 //column partition

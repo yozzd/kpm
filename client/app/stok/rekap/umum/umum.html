@@ -6,11 +6,11 @@
             <div ncy-breadcrumb></div>
             <div class="well-content">
                 <div class="page-header">
-                    <h3 style="display: inline;">Daftar Rekap BPJS &amp; Umum </h3> <a ui-sref="stok.createrekap" class="pull-right" style="margin-top: 8px;" title="Tambah">Tambah</a>
+                    <h3>Rekap Umum</h3>
                 </div>
                 <div class="row" style="margin-bottom: 50px;">
                     <div class="col-xs-12">
-                        <table>
+                        <table class="pull-left">
                             <tr>
                                 <td>Bulan</td>
                                 <td>Tahun</td>
@@ -43,22 +43,22 @@
                                 <tr>
                                     <th class="text-center">No</th>
                                     <th>Nama Obat</th>
-                                    <th>Pindahan</th>
-                                    <th>Masuk</th>
-                                    <th>Keluar</th>
-                                    <th>Sisa</th>
-                                    <th></th>
+                                    <th ng-repeat="date in bydate" class="text-center">{{date|amDateFormat:'DD'}}</th>
+                                    <th class="text-center">Jumlah</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="r in result">
+                                <tr ng-repeat="obat in obat">
                                     <td class="text-center" style="width: 5%;">{{$index+1}}</td>
-                                    <td>{{r.obat}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.pindahan}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.masuk}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.keluar}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.pindahan+r.masuk-r.keluar}}</td>
-                                    <td style="width: 10%;" class="text-center"><a ui-sref=".edit({id: r.id})">Edit</a></td>
+                                    <td>{{obat}}</td>
+                                    <td class="text-center" style="width: 5%;" ng-repeat="n in column[$index] track by $index">{{n}}</td>
+                                    <td class="text-center" style="width: 5%;" ng-repeat="j in jumlah[$index] track by $index">{{j}}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-center" ng-repeat="r in row track by $index">{{r[0]}}</td>
+                                    <td class="text-center">{{total}}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -8,11 +8,40 @@
                 <div class="page-header">
                     <h3>Rekap BPJS</h3>
                 </div>
+                <div class="row" style="margin-bottom: 50px;">
+                    <div class="col-xs-12">
+                        <table class="pull-left">
+                            <tr>
+                                <td>Bulan</td>
+                                <td>Tahun</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 220px;">
+                                    <ui-select name="b" style="width: 200px;" ng-model="b.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="b in bulans | filter: $select.search">
+                                            <div ng-bind-html="b | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                                <td style="width: 110px;">
+                                    <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="t in tahuns | filter: $select.search">
+                                            <div ng-bind-html="t | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <table class="table table-condensed table-bordered">
                             <thead>
                                 <tr>
+                                    <th class="text-center">No</th>
                                     <th>Nama Obat</th>
                                     <th ng-repeat="date in bydate" class="text-center">{{date|amDateFormat:'DD'}}</th>
                                     <th class="text-center">Jumlah</th>
@@ -20,11 +49,13 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="obat in obat">
+                                    <td class="text-center" style="width: 5%;">{{$index+1}}</td>
                                     <td>{{obat}}</td>
                                     <td class="text-center" style="width: 5%;" ng-repeat="n in column[$index] track by $index">{{n}}</td>
                                     <td class="text-center" style="width: 5%;" ng-repeat="j in jumlah[$index] track by $index">{{j}}</td>
                                 </tr>
                                 <tr>
+                                    <td></td>
                                     <td><strong>Total</strong></td>
                                     <td class="text-center" ng-repeat="r in row track by $index">{{r[0]}}</td>
                                     <td class="text-center">{{total}}</td>

@@ -45,20 +45,6 @@ angular.module('kpmApp')
                     label: 'Create Obat'
                 }
             })
-            .state('stok.createrekap', {
-                url: '/rekap/create',
-                views: {
-                    '@': {
-                        templateUrl: 'app/stok/rekap/create/create.html',
-                        controller: 'StokCreateRekapCtrl'
-                    }
-                },
-                authenticate: true,
-                access: 'oprstok',
-                ncyBreadcrumb: {
-                    label: 'Create Rekap'
-                }
-            })
             .state('stok.daftarrekap', {
                 url: '/rekap/daftar',
                 views: {
@@ -77,7 +63,7 @@ angular.module('kpmApp')
                 url: '/edit/{id}',
                 views: {
                     '@': {
-                        templateUrl: 'app/stok/rekap/daftar/edit.html',
+                        templateUrl: 'app/stok/rekap/edit/edit.html',
                         controller: 'StokEditRekapCtrl'
                     }
                 },
@@ -99,6 +85,20 @@ angular.module('kpmApp')
                 access: 'oprstok',
                 ncyBreadcrumb: {
                     label: 'Rekap BPJS'
+                }
+            })
+            .state('stok.rekapumum', {
+                url: '/rekap/umum',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/rekap/umum/umum.html',
+                        controller: 'StokRekapUmumCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Rekap Umum'
                 }
             })
             .state('stok.resepbpjs', {
@@ -155,6 +155,62 @@ angular.module('kpmApp')
                 access: 'oprstok',
                 ncyBreadcrumb: {
                     label: 'Edit Resep BPJS'
+                }
+            })
+            .state('stok.resepumum', {
+                url: '/resep/umum/daftar',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/resep/umum/daftar/daftar.html',
+                        controller: 'StokDaftarUmumCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Daftar Resep Umum'
+                }
+            })
+            .state('stok.createresepumum', {
+                url: '/resep/umum/create',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/resep/umum/create/create.html',
+                        controller: 'StokCreateUmumCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Create Resep Umum'
+                }
+            })
+            .state('stok.resepumum.detail', {
+                url: '/detail/{id}/{lid}',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/resep/umum/detail/detail.html',
+                        controller: 'StokDetailUmumCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Detail Resep Umum'
+                }
+            })
+            .state('stok.resepumum.edit', {
+                url: '/edit/{id}/{lid}',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/resep/umum/edit/edit.html',
+                        controller: 'StokEditUmumCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Edit Resep Umum'
                 }
             })
             .state('stok.ubah', {

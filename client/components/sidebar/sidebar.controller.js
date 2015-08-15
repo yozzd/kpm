@@ -132,9 +132,6 @@ angular.module('kpmApp')
             }]
         }, {
             rekap: [{
-                'title': 'Create Rekap',
-                'link': 'stok.createrekap',
-            }, {
                 'title': 'Rekap BPJS & Umum',
                 'link': 'stok.daftarrekap',
             }, {

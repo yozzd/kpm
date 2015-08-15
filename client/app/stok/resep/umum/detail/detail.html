@@ -1,0 +1,119 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10">
+            <div ncy-breadcrumb></div>
+            <div class="well-content">
+                <div class="page-header">
+                    <h3 style="display: inline;">Detail Resep BPJS</h3> <a ui-sref="stok.resepumum.edit({id: id, lid:lid})" class="pull-right" style="margin-top: 8px;" title="Edit">Edit</a>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="width: 30%;">
+                                        <label>Tanggal</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <label>{{data.tanggal|amDateFormat:'dddd, DD MMMM YYYY'}}</label>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%;">
+                                        <label>Nama Pasien</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <label>{{data.nama}}</label>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%;">
+                                        <label>Umur</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <label>{{data.umur}} {{data.satuanumur}}</label>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%;">
+                                        <label>Jenis Kelamin</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <label>{{data.jeniskelamin}}</label>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%;">
+                                        <label>Nama Dokter</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <label>{{data.dokter}}</label>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%;">
+                                        <label>Gambar Resep</label>
+                                    </td>
+                                    <td colspan="2">
+                                        <label>
+                                            <a href="" ng-click="imgmodal(blobUrl)" ng-show="blobUrl">
+                                                <img ng-src="{{blobUrl}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                            </a>
+                                            <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="blobUrl" style="max-width: 150px;">
+                                        </label>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                                <tr ng-repeat="item in data.items | orderBy:'obat'">
+                                    <td colspan="2" style="width: 30%;">
+                                    </td>
+                                    <td colspan="2">
+                                        <table class="table table-condensed table-bordered">
+                                            <tr>
+                                                <td style="width: 25%;">
+                                                    <label>Nama Obat</label>
+                                                </td>
+                                                <td>
+                                                    <label>{{item.obat}}</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%;">
+                                                    <label>Keterangan</label>
+                                                </td>
+                                                <td>
+                                                    <label>{{item.keterangan}}</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 25%;">
+                                                    <label>Jumlah</label>
+                                                </td>
+                                                <td>
+                                                    <label>{{item.jumlah}}</label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="width: 30%;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/footer/footer.html'"></div>

@@ -23,9 +23,7 @@ var ResepSchema = new Schema({
         },
         items: [{
             oid: {
-                type: String,
-                default: '',
-                trim: true
+                type: Schema.Types.ObjectId
             },
             obat: {
                 type: String,
