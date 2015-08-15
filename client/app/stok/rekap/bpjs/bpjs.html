@@ -15,12 +15,19 @@
                                 <tr>
                                     <th>Nama Obat</th>
                                     <th ng-repeat="date in bydate" class="text-center">{{date|amDateFormat:'DD'}}</th>
+                                    <th class="text-center">Jumlah</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="obat in obat">
                                     <td>{{obat}}</td>
-                                    <td ng-repeat="item in result[$index] track by $index">{{item.jumlah}}</td>
+                                    <td class="text-center" style="width: 5%;" ng-repeat="n in column[$index] track by $index">{{n}}</td>
+                                    <td class="text-center" style="width: 5%;" ng-repeat="j in jumlah[$index] track by $index">{{j}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-center" ng-repeat="r in row track by $index">{{r[0]}}</td>
+                                    <td class="text-center">{{total}}</td>
                                 </tr>
                             </tbody>
                         </table>
