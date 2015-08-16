@@ -941,3 +941,6 @@ ul.widgets li.widget a.widget-link {
     text-decoration: none;
     color: #444;
 }
+.dropdown-menu {
+    font-size: 13px;
+}

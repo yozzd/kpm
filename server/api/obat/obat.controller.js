@@ -53,14 +53,16 @@ exports.create = function (req, res) {
 
         function (callback) {
             Obat.findOne({
-                nama: req.body.nama,
-                satuan: req.body.satuan
+                obat: req.body.obat,
+                satuan: req.body.satuan,
+                bulan: req.body.bulan,
+                tahun: req.body.tahun
             }, function (err, obat) {
                 if (err) {
                     return callback(err);
                 } else if (obat) {
                     obatObj = {
-                        error: 'Nama Obat "' + obat.nama + '" dengan satuan "' + obat.satuan + '" sudah terdaftar di database. Silahkan input Nomor obat yang lain'
+                        error: 'Nama Obat "' + obat.obat + '" dengan satuan "' + obat.satuan + '" sudah terdaftar di database. Silahkan input Nomor obat yang lain'
                     }
                     callback();
                 } else if (!obat) {

@@ -4,7 +4,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ObatSchema = new Schema({
-    nama: {
+    bulan: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    tahun: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    obat: {
         type: String,
         default: '',
         trim: true

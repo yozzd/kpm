@@ -12,14 +12,22 @@ angular.module('kpmApp')
             });
         };
 
-        $scope.getObat = function () {
+        $scope.getObat = function (b, t) {
             Restangular.all('obats').customGETLIST().then(function (datas) {
-                $scope.datas = datas;
+                $scope.datas = _.filter(datas, function (value) {
+                    return value.bulan === b.toString() && value.tahun === t.toString();
+                });
             });
         };
 
+        $scope.get = function (x) {
+            var date = new Date(x);
+            $scope.bulan = date.getMonth();
+            $scope.tahun = date.getFullYear();
+            $scope.getObat($scope.bulan, $scope.tahun);
+        };
+
         $scope.getPasien();
-        $scope.getObat();
         $scope.pasien = {};
 
         $scope.pick = function (x) {
@@ -48,7 +56,7 @@ angular.module('kpmApp')
             _.forEach($scope.arr, function (val, key) {
                 $scope.temp.push({
                     oid: $scope.arr[key].obat.selected._id,
-                    obat: $scope.arr[key].obat.selected.nama,
+                    obat: $scope.arr[key].obat.selected.obat,
                     satuan: $scope.arr[key].obat.selected.satuan,
                     keterangan: $scope.arr[key].keterangan,
                     jumlah: $scope.arr[key].jumlah

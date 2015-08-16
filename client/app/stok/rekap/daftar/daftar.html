@@ -38,30 +38,33 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <table class="table table-condensed table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th>Nama Obat</th>
-                                    <th>Pindahan</th>
-                                    <th>Masuk</th>
-                                    <th>Keluar</th>
-                                    <th>Sisa</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="r in result">
-                                    <td class="text-center" style="width: 5%;">{{$index+1}}</td>
-                                    <td>{{r.obat}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.pindahan}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.masuk}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.keluar}}</td>
-                                    <td style="width: 10%;" class="text-right">{{r.pindahan+r.masuk-r.keluar}}</td>
-                                    <td style="width: 10%;" class="text-center"><a ui-sref=".edit({id: r.id})">Edit</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="alert alert-info" ng-hide="result.length>0">Tidak ada data</div>
+                        <div ng-show="result.length>0">
+                            <table class="table table-condensed table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th>Nama Obat</th>
+                                        <th>Pindahan</th>
+                                        <th>Masuk</th>
+                                        <th>Keluar</th>
+                                        <th>Sisa</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in result">
+                                        <td class="text-center" style="width: 5%;">{{$index+1}}</td>
+                                        <td>{{r.obat}}</td>
+                                        <td style="width: 10%;" class="text-right">{{r.pindahan}}</td>
+                                        <td style="width: 10%;" class="text-right">{{r.masuk}}</td>
+                                        <td style="width: 10%;" class="text-right">{{r.keluar}}</td>
+                                        <td style="width: 10%;" class="text-right">{{r.pindahan+r.masuk-r.keluar}}</td>
+                                        <td style="width: 10%;" class="text-center"><a ui-sref=".edit({id: r.id})">Edit</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

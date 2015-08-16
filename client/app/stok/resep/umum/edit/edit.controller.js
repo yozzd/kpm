@@ -44,7 +44,7 @@ angular.module('kpmApp')
                     $scope.arr.push({
                         obat: {
                             selected: {
-                                nama: $scope.data.items[key].obat,
+                                obat: $scope.data.items[key].obat,
                                 satuan: $scope.data.items[key].satuan
                             }
                         },
@@ -115,7 +115,7 @@ angular.module('kpmApp')
             $scope.temp = [];
             _.forEach($scope.arr, function (val, key) {
                 $scope.temp.push({
-                    obat: $scope.arr[key].obat.selected.nama,
+                    obat: $scope.arr[key].obat.selected.obat,
                     satuan: $scope.arr[key].obat.selected.satuan,
                     keterangan: $scope.arr[key].keterangan,
                     jumlah: $scope.arr[key].jumlah

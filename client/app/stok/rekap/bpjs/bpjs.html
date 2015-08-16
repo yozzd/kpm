@@ -38,30 +38,33 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <table class="table table-condensed table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th>Nama Obat</th>
-                                    <th ng-repeat="date in bydate" class="text-center">{{date|amDateFormat:'DD'}}</th>
-                                    <th class="text-center">Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="obat in obat">
-                                    <td class="text-center" style="width: 5%;">{{$index+1}}</td>
-                                    <td>{{obat}}</td>
-                                    <td class="text-center" style="width: 5%;" ng-repeat="n in column[$index] track by $index">{{n}}</td>
-                                    <td class="text-center" style="width: 5%;" ng-repeat="j in jumlah[$index] track by $index">{{j}}</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><strong>Total</strong></td>
-                                    <td class="text-center" ng-repeat="r in row track by $index">{{r[0]}}</td>
-                                    <td class="text-center">{{total}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="alert alert-info" ng-hide="obat.length>0">Tidak ada data</div>
+                        <div ng-show="obat.length>0">
+                            <table class="table table-condensed table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th>Nama Obat</th>
+                                        <th ng-repeat="date in bydate" class="text-center">{{date|amDateFormat:'DD'}}</th>
+                                        <th class="text-center">Jumlah</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obat in obat">
+                                        <td class="text-center" style="width: 5%;">{{$index+1}}</td>
+                                        <td>{{obat}}</td>
+                                        <td class="text-center" style="width: 5%;" ng-repeat="n in column[$index] track by $index">{{n}}</td>
+                                        <td class="text-center" style="width: 5%;" ng-repeat="j in jumlah[$index] track by $index">{{j}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-center" ng-repeat="r in row track by $index">{{r[0]}}</td>
+                                        <td class="text-center">{{total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
                                             </label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="text" name="tanggal" class="input-control" ng-model="data.tanggal" data-date-format="dd MMMM yyyy" bs-datepicker required />
+                                            <input type="text" name="tanggal" class="input-control" ng-model="data.tanggal" data-date-format="dd MMMM yyyy" ng-change="get(data.tanggal)" bs-datepicker required />
                                         </td>
                                         <td class="has-error" style="width: 30%;">
                                             <p class="help-block" style="margin: 0;" ng-show="form.tanggal.$invalid && submitted">
@@ -145,10 +145,10 @@
                                                     </td>
                                                     <td>
                                                         <ui-select name="obat" ng-model="arr[$index].obat.selected" theme="select2">
-                                                            <ui-select-match>{{$select.selected.nama}} {{$select.selected.satuan}}</ui-select-match>
-                                                            <ui-select-choices repeat="obat in datas | filter: {nama: $select.search} | orderBy:'nama'">
-                                                                <div class="pull-left" ng-bind-html="obat.nama | highlight: $select.search"></div>
-                                                                <div class="pull-right" ng-bind="obat.satuan"></div>
+                                                            <ui-select-match>{{$select.selected.obat}} {{$select.selected.satuan}}</ui-select-match>
+                                                            <ui-select-choices repeat="data in datas | filter: {obat: $select.search} | orderBy:'obat'">
+                                                                <div class="pull-left" ng-bind-html="data.obat | highlight: $select.search"></div>
+                                                                <div class="pull-right" ng-bind="data.satuan"></div>
                                                                 <div class="clearfix"></div>
                                                             </ui-select-choices>
                                                         </ui-select>

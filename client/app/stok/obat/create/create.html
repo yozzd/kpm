@@ -8,6 +8,34 @@
                 <div class="page-header">
                     <h3>Create Obat</h3>
                 </div>
+                <div class="row" style="margin-bottom: 50px;">
+                    <div class="col-xs-12">
+                        <table class="pull-left">
+                            <tr>
+                                <td>Bulan</td>
+                                <td>Tahun</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 220px;">
+                                    <ui-select name="b" style="width: 200px;" ng-model="b.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="b in bulans | filter: $select.search">
+                                            <div ng-bind-html="b | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                                <td style="width: 110px;">
+                                    <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="t in tahuns | filter: $select.search">
+                                            <div ng-bind-html="t | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <div><sup class="req">*</sup><span class="req"> Tidak boleh kosong</span>
@@ -22,10 +50,10 @@
                                             </label>
                                         </td>
                                         <td colspan="2">
-                                            <input type="text" name="nama" class="input-control" ng-model="data.nama" required />
+                                            <input type="text" name="obat" class="input-control" ng-model="data.obat" bs-options="obat for obat in obats" bs-typeahead required />
                                         </td>
                                         <td class="has-error" style="width: 30%;">
-                                            <p class="help-block" style="margin: 0;" ng-show="form.nama.$error.required && submitted">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.obat.$error.required && submitted">
                                                 Tidak boleh kosong
                                             </p>
                                         </td>
@@ -46,6 +74,43 @@
                                         <td class="has-error" style="width: 30%;">
                                             <p class="help-block" style="margin: 0;" ng-show="form.satuan.$error.required && submitted">
                                                 Tidak boleh kosong
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Pindahan <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="pindahan" class="input-control" ng-model="data.pindahan" ng-pattern="/^(\d)+$/" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pindahan.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="form.pindahan.$error.pattern && submitted">
+                                                Harus angka
+                                            </p>
+                                            <p class="info-block" style="margin: 0;" ng-show="infos">
+                                                {{info}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="width: 30%;">
+                                            <label>Masuk <sup class="req">*</sup>
+                                            </label>
+                                        </td>
+                                        <td colspan="2">
+                                            <input type="text" name="masuk" class="input-control" ng-model="data.masuk" ng-pattern="/^(\d)+$/" required />
+                                        </td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin: 0;" ng-show="form.masuk.$error.required && submitted">
+                                                Tidak boleh kosong
+                                            </p>
+                                            <p class="help-block" style="margin: 0;" ng-show="form.masuk.$error.pattern && submitted">
+                                                Harus angka
                                             </p>
                                         </td>
                                     </tr>

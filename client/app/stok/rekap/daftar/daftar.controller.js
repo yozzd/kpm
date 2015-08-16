@@ -18,8 +18,10 @@ angular.module('kpmApp')
 
         $scope.getData = function (b, t) {
             Restangular.all('obats').customGETLIST().then(function (datas) {
-                $scope.datas = datas;
-                $scope.obat = _.chain($scope.datas).uniq('nama').pluck('nama').sortBy().value();
+                $scope.datas = _.filter(datas, function (value) {
+                    return value.bulan === b.toString() && value.tahun === t.toString();
+                });
+                $scope.obat = _.chain($scope.datas).uniq('obat').pluck('obat').sortBy().value();
                 $scope.pindahan = _.chain($scope.datas).uniq('pindahan').pluck('pindahan').sortBy().value();
                 $scope.masuk = _.chain($scope.datas).uniq('masuk').pluck('masuk').sortBy().value();
 
@@ -90,7 +92,7 @@ angular.module('kpmApp')
                 _.forEach($scope.datas, function (val) {
                     arr2.push({
                         id: val._id,
-                        obat: val.nama,
+                        obat: val.obat,
                         pindahan: val.pindahan,
                         masuk: val.masuk
                     });

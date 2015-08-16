@@ -3,14 +3,36 @@
 angular.module('kpmApp')
     .controller('StokDaftarObatCtrl', function ($scope, Restangular, socket, $alert, uiGridConstants) {
 
-        $scope.getObat = function () {
+        var date = new Date();
+        $scope.bulan = date.getMonth();
+        $scope.tahun = date.getFullYear();
+
+        $scope.bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $scope.tahuns = _.range(2010, $scope.tahun + 1, 1);
+        $scope.b = {
+            selected: $scope.bulans[$scope.bulan]
+        };
+        $scope.t = {
+            selected: $scope.tahun
+        };
+
+        $scope.getObat = function (b, t) {
             Restangular.all('obats').customGETLIST().then(function (datas) {
-                $scope.gridOptions.data = datas;
+                $scope.datas = _.filter(datas, function (value) {
+                    return value.bulan === b.toString() && value.tahun === t.toString();
+                });
+                $scope.gridOptions.data = $scope.datas;
                 socket.syncUpdates('obat', $scope.gridOptions.data);
             });
         };
 
-        $scope.getObat();
+        $scope.getObat($scope.bulan, $scope.tahun);
+
+        $scope.get = function (b, t) {
+            $scope.bulan = _.indexOf($scope.bulans, b);
+            $scope.tahun = t;
+            $scope.getObat($scope.bulan, $scope.tahun);
+        };
 
         $scope.gridOptions = {};
         $scope.gridOptions.enableFiltering = true;
@@ -27,9 +49,10 @@ angular.module('kpmApp')
                 cellTemplate: 'app/stok/obat/daftar/template/index.html',
                 width: 50
             }, {
-                name: 'nama',
+                name: 'obat',
                 displayName: 'Nama Obat',
                 enableColumnMenu: false,
+                pinnedLeft: true,
                 sort: {
                     direction: uiGridConstants.ASC,
                     priority: 0,
@@ -39,7 +62,20 @@ angular.module('kpmApp')
                 name: 'satuan',
                 displayName: 'Satuan Obat',
                 enableColumnMenu: false,
+                pinnedLeft: true,
                 width: 150
+            }, {
+                name: 'pindahan',
+                displayName: 'Pindahan',
+                enableColumnMenu: false,
+                pinnedLeft: true,
+                width: 100
+            }, {
+                name: 'masuk',
+                displayName: 'Masuk',
+                enableColumnMenu: false,
+                pinnedLeft: true,
+                width: 100
             }, {
                 name: 'timestamp',
                 displayName: '',

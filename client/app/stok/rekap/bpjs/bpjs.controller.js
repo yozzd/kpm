@@ -18,7 +18,10 @@ angular.module('kpmApp')
 
         $scope.getData = function (b, t) {
             Restangular.all('obats').customGETLIST().then(function (datas) {
-                $scope.obat = _.chain(datas).uniq('nama').pluck('nama').sortBy().value();
+                $scope.datas = _.filter(datas, function (value) {
+                    return value.bulan === b.toString() && value.tahun === t.toString();
+                });
+                $scope.obat = _.chain($scope.datas).uniq('obat').pluck('obat').sortBy().value();
             });
             Restangular.all('reseps').customGETLIST().then(function (datas) {
 
