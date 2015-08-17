@@ -3,6 +3,8 @@
 angular.module('kpmApp')
     .controller('StokCreateUmumCtrl', function ($scope, Restangular, $alert, Upload) {
 
+        var bulans = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
         $scope.getPasien = function () {
             Restangular.all('pasiens').customGETLIST().then(function (datas) {
                 $scope.filter = _.filter(datas, function (value) {
@@ -25,6 +27,7 @@ angular.module('kpmApp')
             $scope.bulan = date.getMonth();
             $scope.tahun = date.getFullYear();
             $scope.getObat($scope.bulan, $scope.tahun);
+            $scope.b = bulans[$scope.bulan];
         };
 
         $scope.getPasien();
@@ -52,19 +55,19 @@ angular.module('kpmApp')
         };
 
         $scope.submit = function (form) {
-            $scope.temp = [];
-            _.forEach($scope.arr, function (val, key) {
-                $scope.temp.push({
-                    oid: $scope.arr[key].obat.selected._id,
-                    obat: $scope.arr[key].obat.selected.obat,
-                    satuan: $scope.arr[key].obat.selected.satuan,
-                    keterangan: $scope.arr[key].keterangan,
-                    jumlah: $scope.arr[key].jumlah
-                });
-            });
             $scope.submitted = true;
             if (form.$valid) {
                 if ($scope.file !== null) {
+                    $scope.temp = [];
+                    _.forEach($scope.arr, function (val, key) {
+                        $scope.temp.push({
+                            oid: $scope.arr[key].obat.selected._id,
+                            obat: $scope.arr[key].obat.selected.obat,
+                            satuan: $scope.arr[key].obat.selected.satuan,
+                            keterangan: $scope.arr[key].keterangan,
+                            jumlah: $scope.arr[key].jumlah
+                        });
+                    });
                     Upload.upload({
                         url: '/api/reseps/' + $scope.pasien.selected._id,
                         file: $scope.file,

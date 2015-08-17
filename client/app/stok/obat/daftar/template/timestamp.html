@@ -1,8 +1,8 @@
 <div class="ui-grid-cell-contents ago" style="padding-top: 8px;">
-    <div ng-hide="row.entity.updated"><i class="fa fa-info-circle text-info" data-title="{{row.entity.created|amDateFormat:'dddd, DD MMMM YYYY, HH:mm'}}" data-placement="bottom" bs-tooltip></i> Created &mdash;
-        <span class="text-muted" am-time-ago="row.entity.created"></span> &mdash; oleh {{row.entity.by}}
+    <div ng-hide="row.entity.updated">
+        Created &mdash; <span class="text-muted" am-time-ago="row.entity.created"></span> <i class="fa fa-info-circle text-info" data-title="{{row.entity.created|amDateFormat:'dddd, DD MMMM YYYY, HH:mm'}}" data-placement="bottom" bs-tooltip></i> &mdash; oleh {{row.entity.by}}
     </div>
-    <div ng-show="row.entity.updated"><i class="fa fa-info-circle text-info" data-title="{{row.entity.updated|amDateFormat:'dddd, DD MMMM YYYY, HH:mm'}}" data-placement="bottom" bs-tooltip></i> Updated &mdash;
-        <span class="text-muted" am-time-ago="row.entity.updated"></span> &mdash; oleh {{row.entity.by}}
+    <div ng-show="row.entity.updated">
+        Updated &mdash; <span class="text-muted" am-time-ago="row.entity.updated"></span> <i class="fa fa-info-circle text-info" data-title="{{row.entity.updated|amDateFormat:'dddd, DD MMMM YYYY, HH:mm'}}" data-placement="bottom" bs-tooltip></i> &mdash; oleh {{row.entity.by}}
     </div>
 </div>

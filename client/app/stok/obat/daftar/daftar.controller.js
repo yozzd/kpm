@@ -42,7 +42,7 @@ angular.module('kpmApp')
         $scope.gridOptions.columnDefs = [
             {
                 name: 'index',
-                displayName: 'No.',
+                displayName: 'No',
                 enableColumnMenu: false,
                 enableFiltering: false,
                 pinnedLeft: true,

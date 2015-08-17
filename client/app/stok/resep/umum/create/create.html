@@ -144,7 +144,7 @@
                                                         <label>Nama Obat</label>
                                                     </td>
                                                     <td>
-                                                        <ui-select name="obat" ng-model="arr[$index].obat.selected" theme="select2">
+                                                        <ui-select name="obat" ng-model="arr[$index].obat.selected" theme="select2" ng-disabled="!datas||datas.length==0">
                                                             <ui-select-match>{{$select.selected.obat}} {{$select.selected.satuan}}</ui-select-match>
                                                             <ui-select-choices repeat="data in datas | filter: {obat: $select.search} | orderBy:'obat'">
                                                                 <div class="pull-left" ng-bind-html="data.obat | highlight: $select.search"></div>
@@ -159,7 +159,7 @@
                                                         <label>Keterangan</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="keterangan" class="input-control" ng-model="arr[$index].keterangan" />
+                                                        <input type="text" name="keterangan" class="input-control" ng-model="arr[$index].keterangan" ng-disabled="!datas||datas.length==0" />
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -167,12 +167,16 @@
                                                         <label>Jumlah</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="keterangan" class="input-control" ng-model="arr[$index].jumlah" ng-pattern="/^(\d)+$/" />
+                                                        <input type="text" name="keterangan" class="input-control" ng-model="arr[$index].jumlah" ng-pattern="/^(\d)+$/" ng-disabled="!datas||datas.length==0" />
                                                     </td>
                                                 </tr>
                                             </table>
                                         </td>
-                                        <td></td>
+                                        <td class="has-error" style="width: 30%;">
+                                            <p class="help-block" style="margin-top: 5px;" ng-show="datas.length==0">
+                                                Data Obat bulan {{b}} tidak ada
+                                            </p>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>

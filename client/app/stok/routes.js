@@ -45,6 +45,20 @@ angular.module('kpmApp')
                     label: 'Create Obat'
                 }
             })
+            .state('stok.copyobat', {
+                url: '/obat/copy',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/obat/copy/copy.html',
+                        controller: 'StokCopyObatCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Copy Obat'
+                }
+            })
             .state('stok.daftarrekap', {
                 url: '/rekap/daftar',
                 views: {
