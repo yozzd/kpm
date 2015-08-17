@@ -67,8 +67,14 @@
                         <button type="button" class="tmb" ng-click="konfirmasi()" style="margin-bottom: 10px;" ng-disabled="result.length==0">Copy</button>
                         <div class="alert alert-danger" ng-show="result.length==0">Data Obat bulan {{b1.selected}} tahun {{t1.selected}} tidak ada</div>
                         <div class="alert alert-info" ng-hide="result.length==0">Data Obat bulan {{b1.selected}} tahun {{t1.selected}} ada</div>
-                        <div class="alert alert-danger" ng-show="dialog">Anda yakin akan meng-copy Data Obat bulan {{b1.selected}} tahun {{t1.selected}} ke bulan {{b2.selected}} tahun {{t2.selected}} ?
+                        <div class="alert alert-danger" ng-show="dialog">
+                            <strong>Perhatian!!!</strong> Anda akan menghapus seluruh Data Obat bulan {{b2.selected}} tahun {{t2.selected}} jika ada
+                            <br>Anda yakin akan meng-copy Data Obat bulan {{b1.selected}} tahun {{t1.selected}} ke bulan {{b2.selected}} tahun {{t2.selected}} ?
                             <a href="" ng-click="copy(b1.selected, t1.selected, b2.selected, t2.selected)">Ya</a>
+                        </div>
+                        <div class="text-center" ng-show="loading">
+                            <rotating-plane-spinner></rotating-plane-spinner>
+                            <div>Memproses...</div>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,8 @@ angular.module('kpmApp', [
     'ui.grid.pinning',
     'ui.grid.resizeColumns',
     'ngFileUpload',
-    'chart.js'
+    'chart.js',
+    'angular-spinkit'
 ])
     .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider, $compileProvider) {
         $urlRouterProvider

@@ -941,6 +941,16 @@ ul.widgets li.widget a.widget-link {
     text-decoration: none;
     color: #444;
 }
+
+/*dropdown*/
+
 .dropdown-menu {
     font-size: 13px;
+}
+
+/*spinner*/
+
+.three-dots-row-spinner {
+    margin: 10px auto;
+    background-color: #F7464A;
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('StokCopyObatCtrl', function ($scope, Restangular, socket, $alert) {
+    .controller('StokCopyObatCtrl', function ($scope, Restangular, socket, $alert, $timeout) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
@@ -157,12 +157,16 @@ angular.module('kpmApp')
             Restangular.all('obats/copy').customPOST({
                 arr: $scope.arr
             }).then(function () {
-                $alert({
-                    content: 'Data sukses di-copy',
-                    placement: 'top-right',
-                    type: 'info',
-                    duration: 5
-                });
+                $scope.loading = true;
+                $timeout(function () {
+                    $scope.loading = false;
+                    $alert({
+                        content: 'Data sukses di-copy',
+                        placement: 'top-right',
+                        type: 'info',
+                        duration: 5
+                    });
+                }, 3000);
             });
         };
 
