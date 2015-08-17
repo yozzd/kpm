@@ -45,6 +45,20 @@ angular.module('kpmApp')
                     label: 'Create Obat'
                 }
             })
+            .state('stok.daftarobat.edit', {
+                url: '/edit/{id}',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/obat/edit/edit.html',
+                        controller: 'StokEditObatCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Edit Obat'
+                }
+            })
             .state('stok.copyobat', {
                 url: '/obat/copy',
                 views: {
@@ -71,20 +85,6 @@ angular.module('kpmApp')
                 access: 'oprstok',
                 ncyBreadcrumb: {
                     label: 'Rekap BPJS & Umum'
-                }
-            })
-            .state('stok.daftarrekap.edit', {
-                url: '/edit/{id}',
-                views: {
-                    '@': {
-                        templateUrl: 'app/stok/rekap/edit/edit.html',
-                        controller: 'StokEditRekapCtrl'
-                    }
-                },
-                authenticate: true,
-                access: 'oprstok',
-                ncyBreadcrumb: {
-                    label: 'Edit Rekap'
                 }
             })
             .state('stok.rekapbpjs', {

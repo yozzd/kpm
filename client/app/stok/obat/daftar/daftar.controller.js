@@ -62,19 +62,16 @@ angular.module('kpmApp')
                 name: 'satuan',
                 displayName: 'Satuan Obat',
                 enableColumnMenu: false,
-                pinnedLeft: true,
                 width: 150
             }, {
                 name: 'pindahan',
                 displayName: 'Pindahan',
                 enableColumnMenu: false,
-                pinnedLeft: true,
                 width: 100
             }, {
                 name: 'masuk',
                 displayName: 'Masuk',
                 enableColumnMenu: false,
-                pinnedLeft: true,
                 width: 100
             }, {
                 name: 'timestamp',
@@ -85,26 +82,16 @@ angular.module('kpmApp')
                 cellTemplate: 'app/stok/obat/daftar/template/timestamp.html',
                 width: 350,
             }, {
-                name: 'delete',
+                name: 'edit',
                 displayName: '',
                 enableColumnMenu: false,
+                enableSorting: false,
                 enableFiltering: false,
-                cellTemplate: 'app/stok/obat/daftar/template/delete.html',
+                pinnedRight: true,
+                cellTemplate: 'app/stok/obat/daftar/template/edit.html',
                 width: 100,
             }
         ];
-
-        $scope.delete = function (id) {
-            Restangular.one('obats').customDELETE(id).then(function () {
-                $alert({
-                    content: 'Data sukses dihapus',
-                    placement: 'top-right',
-                    type: 'danger',
-                    duration: 5
-                });
-                $scope.getObat();
-            });
-        };
 
         $scope.$on('$destroy', function () {
             socket.unsyncUpdates('obat');

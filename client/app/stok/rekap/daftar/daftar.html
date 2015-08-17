@@ -49,7 +49,6 @@
                                         <th>Masuk</th>
                                         <th>Keluar</th>
                                         <th>Sisa</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,7 +59,6 @@
                                         <td style="width: 10%;" class="text-right">{{r.masuk}}</td>
                                         <td style="width: 10%;" class="text-right">{{r.keluar}}</td>
                                         <td style="width: 10%;" class="text-right">{{r.pindahan+r.masuk-r.keluar}}</td>
-                                        <td style="width: 10%;" class="text-center"><a ui-sref=".edit({id: r.id})">Edit</a></td>
                                     </tr>
                                 </tbody>
                             </table>

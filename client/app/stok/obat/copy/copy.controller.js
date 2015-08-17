@@ -106,7 +106,7 @@ angular.module('kpmApp')
                         obat: val.obat,
                         satuan: val.satuan,
                         pindahan: val.pindahan,
-                        masuk: 0
+                        masuk: val.masuk
                     });
                 });
                 var arr3 = _.chain(arr2).sortBy('obat').value();

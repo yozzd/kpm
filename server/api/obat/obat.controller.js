@@ -90,6 +90,27 @@ exports.copy = function (req, res) {
 
     async.series([
 
+
+        function (callback) {
+            Obat.find({
+                bulan: req.body.arr[0].bulan,
+                tahun: req.body.arr[0].tahun
+            }, function (err, obat) {
+                if (err) {
+                    return callback(err);
+                }
+                if (obat.length > 1) {
+                    _.forEach(obat, function (val) {
+                        Obat.findById(val._id, function (err, obat) {
+                            obat.remove();
+                        });
+                    });
+                    callback();
+                } else {
+                    callback();
+                }
+            });
+        },
         function (callback) {
             _.forEach(req.body.arr, function (val) {
                 req.body.bulan = val.bulan;
@@ -97,7 +118,7 @@ exports.copy = function (req, res) {
                 req.body.obat = val.obat;
                 req.body.satuan = val.satuan;
                 req.body.pindahan = val.pindahan + val.masuk - val.keluar;
-                req.body.masuk = val.masuk;
+                req.body.masuk = 0;
                 req.body.created = Date.now();
                 req.body.updated = null;
                 req.body.by = req.user.name;
@@ -118,23 +139,27 @@ exports.copy = function (req, res) {
 
 // Updates an existing obat in the DB.
 exports.update = function (req, res) {
-    if (req.body._id) {
-        delete req.body._id;
-    }
-    Obat.findById(req.params.id, function (err, obat) {
+    var obatObj = {};
+
+    async.series([
+
+        function (callback) {
+            Obat.findById(req.params.id, function (err, obat) {
+                if (err) {
+                    return callback(err);
+                }
+                var updated = _.merge(obat, req.body);
+                updated.save(function (data) {
+                    callback();
+                });
+                obatObj = obat;
+            });
+        }
+    ], function (err) {
         if (err) {
-            return handleError(res, err);
+            return res.send(err);
         }
-        if (!obat) {
-            return res.send(404);
-        }
-        var updated = _.merge(obat, req.body);
-        updated.save(function (err) {
-            if (err) {
-                return handleError(res, err);
-            }
-            return res.json(200, obat);
-        });
+        return res.json(obatObj);
     });
 };
 
