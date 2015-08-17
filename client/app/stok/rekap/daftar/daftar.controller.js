@@ -93,6 +93,7 @@ angular.module('kpmApp')
                     arr2.push({
                         id: val._id,
                         obat: val.obat,
+                        satuan: val.satuan,
                         pindahan: val.pindahan,
                         masuk: val.masuk
                     });

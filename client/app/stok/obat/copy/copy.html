@@ -8,27 +8,53 @@
                 <div class="page-header">
                     <h3>Copy Obat</h3>
                 </div>
-                <div class="row" style="margin-bottom: 50px;">
-                    <div class="col-xs-12">
-                        <table class="pull-left">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-xs-6">
+                        <table>
                             <tr>
                                 <td>Bulan</td>
                                 <td>Tahun</td>
                             </tr>
                             <tr>
                                 <td style="width: 220px;">
-                                    <ui-select name="b" style="width: 200px;" ng-model="b.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                    <ui-select name="b1" style="width: 200px;" ng-model="b1.selected" ng-change="get(b1.selected, t1.selected)" theme="select2">
                                         <ui-select-match>{{$select.selected}}</ui-select-match>
-                                        <ui-select-choices repeat="b in bulans | filter: $select.search">
-                                            <div ng-bind-html="b | highlight: $select.search"></div>
+                                        <ui-select-choices repeat="b1 in bulans | filter: $select.search">
+                                            <div ng-bind-html="b1 | highlight: $select.search"></div>
                                         </ui-select-choices>
                                     </ui-select>
                                 </td>
                                 <td style="width: 110px;">
-                                    <ui-select name="t" style="width: 100px;" ng-model="t.selected" ng-change="get(b.selected, t.selected)" theme="select2">
+                                    <ui-select name="t1" style="width: 100px;" ng-model="t1.selected" ng-change="get(b1.selected, t1.selected)" theme="select2">
                                         <ui-select-match>{{$select.selected}}</ui-select-match>
-                                        <ui-select-choices repeat="t in tahuns | filter: $select.search">
-                                            <div ng-bind-html="t | highlight: $select.search"></div>
+                                        <ui-select-choices repeat="t1 in tahuns | filter: $select.search">
+                                            <div ng-bind-html="t1 | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-xs-6">
+                        <table>
+                            <tr>
+                                <td>Bulan</td>
+                                <td>Tahun</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 220px;">
+                                    <ui-select name="b2" style="width: 200px;" ng-model="b2.selected" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="b2 in bulans | filter: $select.search">
+                                            <div ng-bind-html="b2 | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                                <td style="width: 110px;">
+                                    <ui-select name="t2" style="width: 100px;" ng-model="t2.selected" theme="select2">
+                                        <ui-select-match>{{$select.selected}}</ui-select-match>
+                                        <ui-select-choices repeat="t2 in tahuns | filter: $select.search">
+                                            <div ng-bind-html="t2 | highlight: $select.search"></div>
                                         </ui-select-choices>
                                     </ui-select>
                                 </td>
@@ -38,6 +64,12 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
+                        <button type="button" class="tmb" ng-click="konfirmasi()" style="margin-bottom: 10px;" ng-disabled="result.length==0">Copy</button>
+                        <div class="alert alert-danger" ng-show="result.length==0">Data Obat bulan {{b1.selected}} tahun {{t1.selected}} tidak ada</div>
+                        <div class="alert alert-info" ng-hide="result.length==0">Data Obat bulan {{b1.selected}} tahun {{t1.selected}} ada</div>
+                        <div class="alert alert-danger" ng-show="dialog">Anda yakin akan meng-copy Data Obat bulan {{b1.selected}} tahun {{t1.selected}} ke bulan {{b2.selected}} tahun {{t2.selected}} ?
+                            <a href="" ng-click="copy(b1.selected, t1.selected, b2.selected, t2.selected)">Ya</a>
+                        </div>
                     </div>
                 </div>
             </div>

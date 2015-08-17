@@ -84,6 +84,38 @@ exports.create = function (req, res) {
     });
 };
 
+
+exports.copy = function (req, res) {
+    var obatObj = {};
+
+    async.series([
+
+        function (callback) {
+            _.forEach(req.body.arr, function (val) {
+                req.body.bulan = val.bulan;
+                req.body.tahun = val.tahun;
+                req.body.obat = val.obat;
+                req.body.satuan = val.satuan;
+                req.body.pindahan = val.pindahan + val.masuk - val.keluar;
+                req.body.masuk = val.masuk;
+                req.body.created = Date.now();
+                req.body.updated = null;
+                req.body.by = req.user.name;
+                console.log(req.body);
+                Obat.create(req.body, function (err, obat) {
+                    obatObj = obat;
+                });
+            });
+            callback();
+        }
+    ], function (err) {
+        if (err) {
+            return res.send(err);
+        }
+        return res.json(obatObj);
+    });
+};
+
 // Updates an existing obat in the DB.
 exports.update = function (req, res) {
     if (req.body._id) {
