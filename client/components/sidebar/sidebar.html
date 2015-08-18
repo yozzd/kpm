@@ -51,4 +51,19 @@
         </ul>
         <hr ng-repeat-end style="border-top: 1px solid #c7c7c7; border-style: dotted;" />
     </div>
+    <div ng-repeat="admin in admin" ng-if="isAdmin()">
+        <ul ng-repeat="home in admin.home">
+            <li ui-sref-active-eq="sidebar-active"><a ui-sref="{{home.link}}" title="{{home.title}}"> {{home.title}}</a>
+            </li>
+        </ul>
+        <ul ng-repeat="user in admin.user">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{user.link}}" title="{{user.title}}"> {{user.title}}</a>
+            </li>
+        </ul>
+        <ul ng-repeat="app in admin.app">
+            <li ui-sref-active="sidebar-active"><a ui-sref="{{app.link}}" title="{{app.title}}"> {{app.title}}</a>
+            </li>
+        </ul>
+        <hr ng-repeat-end style="border-top: 1px solid #c7c7c7; border-style: dotted;" />
+    </div>
 </div>

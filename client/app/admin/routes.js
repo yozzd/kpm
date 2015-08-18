@@ -12,6 +12,23 @@ angular.module('kpmApp')
                     }
                 },
                 authenticate: true,
-                access: 'admin'
+                access: 'admin',
+                ncyBreadcrumb: {
+                    label: 'Home'
+                }
+            })
+            .state('admin.create', {
+                url: '/create',
+                views: {
+                    '@': {
+                        templateUrl: 'app/admin/create/create.html',
+                        controller: 'AdminCreateCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'admin',
+                ncyBreadcrumb: {
+                    label: 'Create User'
+                }
             });
     });

@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('AdminHomeCtrl', function ($scope, $http, Auth, User) {
-
-        // Use the User $resource to fetch all users
+    .controller('AdminHomeCtrl', function ($scope, Auth, User) {
         $scope.users = User.query();
 
         $scope.delete = function (user) {

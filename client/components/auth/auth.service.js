@@ -63,7 +63,7 @@ angular.module('kpmApp')
                 var deferred = $q.defer();
                 User.save(user,
                     function (data) {
-                        $cookieStore.put('token', data.token);
+                        //$cookieStore.put('token', data.token);
                         currentUser = User.get(function () {
                             deferred.resolve(data);
                             return cb(currentUser);

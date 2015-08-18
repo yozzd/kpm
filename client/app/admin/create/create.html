@@ -6,7 +6,7 @@
             <div ncy-breadcrumb></div>
             <div class="well-content">
                 <div class="page-header">
-                    <h3>Ubah Password</h3>
+                    <h3>Create User</h3>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -32,10 +32,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label>Current Password <sup class="req">*</sup></label>
+                                            <label>Password <sup class="req">*</sup></label>
                                         </td>
                                         <td>
-                                            <input type="password" name="password" class="input-control" ng-model="user.oldPassword" mongoose-error ng-minlength="3" required />
+                                            <input type="password" name="password" class="input-control" ng-model="user.password" mongoose-error ng-minlength="3" required />
                                         </td>
                                         <td class="has-error">
                                             <p class="help-block" style="margin: 0;" ng-show="form.password.$error.mongoose">
@@ -48,31 +48,27 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label>New Password <sup class="req">*</sup>
+                                            <label>Role <sup class="req">*</sup>
                                             </label>
                                         </td>
                                         <td>
-                                            <input type="password" name="newPassword" class="input-control" ng-model="user.newPassword" ng-minlength="3" required />
+                                            <ui-select name="role" ng-model="role.selected" theme="select2" required>
+                                                <ui-select-match>{{$select.selected.str}}</ui-select-match>
+                                                <ui-select-choices repeat="role in roles | filter: {str: $select.search} | orderBy:'str'">
+                                                    <div ng-bind-html="role.str | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
                                         </td>
                                         <td class="has-error">
-                                            <p class="help-block" style="margin: 0;" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-                                                Password harus lebih dari 3 karakter
+                                            <p class="help-block" style="margin: 0;" ng-show="form.role.$error.required && submitted">
+                                                Tidak boleh kosong
                                             </p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <button class="tmb" type="submit">Ubah</button>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <div ng-show="counter" console.log(field); class="alert alert-info">Password berhasil diubah
-                                                <br/><strong class="h3">{{counter}}</strong>
-                                                <br/>Silahkan Login sesuai dengan password baru anda</div>
+                                            <button class="tmb" type="submit">Create</button>
                                         </td>
                                         <td></td>
                                     </tr>

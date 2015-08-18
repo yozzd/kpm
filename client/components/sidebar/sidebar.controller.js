@@ -5,6 +5,7 @@ angular.module('kpmApp')
 
         $scope.isOprRekam = Auth.isOprRekam;
         $scope.isOprStok = Auth.isOprStok;
+        $scope.isAdmin = Auth.isAdmin;
 
         $scope.rekam = [{
             home: [{
@@ -161,6 +162,26 @@ angular.module('kpmApp')
             setting: [{
                 'title': 'Ubah password',
                 'link': 'stok.ubah',
+            }]
+        }];
+
+        $scope.admin = [{
+            home: [{
+                'title': 'Home',
+                'link': 'admin'
+            }]
+        }, {
+            user: [{
+                'title': 'Create User',
+                'link': 'admin.create'
+            }]
+        }, {
+            app: [{
+                'title': 'Aplikasi Rekam Medik',
+                'link': 'rekam',
+            }, {
+                'title': 'Aplikasi Pengendalian Stok Obat',
+                'link': 'stok',
             }]
         }];
 
