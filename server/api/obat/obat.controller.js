@@ -141,6 +141,9 @@ exports.copy = function (req, res) {
 exports.update = function (req, res) {
     var obatObj = {};
 
+    req.body.updated = Date.now();
+    req.body.by = req.user.name;
+
     async.series([
 
         function (callback) {
@@ -168,6 +171,7 @@ exports.destroy = function (req, res) {
     var obatObj = {};
 
     async.series([
+
         function (callback) {
             Obat.findById(req.params.id, function (err, obat) {
                 if (err) {

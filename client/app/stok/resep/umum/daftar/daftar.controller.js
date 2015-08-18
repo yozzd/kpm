@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('StokDaftarUmumCtrl', function ($scope, Restangular, socket) {
+    .controller('StokDaftarUmumCtrl', function ($scope, Restangular, socket, $modal) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
@@ -45,7 +45,7 @@ angular.module('kpmApp')
                 });
                 $scope.bydate = _.chain($scope.match).uniq('tanggal').pluck('tanggal').sortBy().value();
 
-                socket.syncUpdates('kartukontrol', $scope.datas);
+                socket.syncUpdates('resep', $scope.match);
             });
         };
         $scope.getResep($scope.bulan, $scope.tahun);
@@ -55,5 +55,26 @@ angular.module('kpmApp')
             $scope.tahun = t;
             $scope.getResep($scope.bulan, $scope.tahun);
         };
+
+
+
+        $scope.deletemodal = function (data) {
+            var scope = $scope.$new();
+            scope.data = {
+                id: data.id,
+                lid: data.lid
+            };
+            var deletemodal = $modal({
+                scope: scope,
+                template: 'app/stok/resep/umum/daftar/template/deletemodal.html',
+                show: false,
+                animation: 'am-fade-and-slide-top'
+            });
+            deletemodal.$promise.then(deletemodal.show);
+        };
+
+        $scope.$on('$destroy', function () {
+            socket.unsyncUpdates('resep');
+        });
 
     });

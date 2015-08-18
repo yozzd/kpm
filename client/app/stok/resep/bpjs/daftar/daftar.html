@@ -57,7 +57,7 @@
                             <div class="list-group">
                                 <div ng-repeat-start="pasien in match | orderBy:'nama'" ng-show="pasien.tanggal==date" ng-class="{'list-group-item-blue':pasien.jeniskelamin=='L','list-group-item-red':pasien.jeniskelamin=='P'}">
                                     <h4 class="list-group-item-heading" style="display: inline-block;">{{pasien.nama}}</h4> <span style="font-size: 13px;">{{pasien.umur}} {{pasien.satuanumur}}</span>
-                                    <div class="pull-right" style="margin-top: 3px;"><a ui-sref=".detail({id: pasien.id, lid:pasien.lid})" title="Detail">Detail</a> | <a ui-sref=".edit({id: pasien.id, lid:pasien.lid})" title="Edit">Edit</a></div>
+                                    <div class="pull-right" style="margin-top: 3px;"><a ui-sref=".detail({id: pasien.id, lid:pasien.lid})" title="Detail">Detail</a> | <a ui-sref=".edit({id: pasien.id, lid:pasien.lid})" title="Edit">Edit</a> | <a href="" ng-click="deletemodal(pasien)" title="Delete">Delete</a></div>
                                 </div>
                                 <div ng-repeat-end></div>
                             </div>

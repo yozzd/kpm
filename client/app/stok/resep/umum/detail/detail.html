@@ -6,68 +6,44 @@
             <div ncy-breadcrumb></div>
             <div class="well-content">
                 <div class="page-header">
-                    <h3 style="display: inline;">Detail Resep BPJS</h3> <a ui-sref="stok.resepumum.edit({id: id, lid:lid})" class="pull-right" style="margin-top: 8px;" title="Edit">Edit</a>
+                    <h3 style="display: inline;">Detail Resep Umum</h3> <a ui-sref="stok.resepumum.edit({id: id, lid:lid})" class="pull-right" style="margin-top: 8px;" title="Edit">Edit</a>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <table class="table table-condensed">
                             <tbody>
                                 <tr>
-                                    <td colspan="2" style="width: 30%;">
-                                        <label>Tanggal</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <label>{{data.tanggal|amDateFormat:'dddd, DD MMMM YYYY'}}</label>
-                                    </td>
+                                    <td colspan="2" style="width: 30%;">Tanggal</td>
+                                    <td colspan="2">{{data.tanggal|amDateFormat:'dddd, DD MMMM YYYY'}}</td>
                                     <td style="width: 30%;"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="width: 30%;">
-                                        <label>Nama Pasien</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <label>{{data.nama}}</label>
-                                    </td>
+                                    <td colspan="2" style="width: 30%;">Nama Pasien</td>
+                                    <td colspan="2">{{data.nama}}</td>
                                     <td style="width: 30%;"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="width: 30%;">
-                                        <label>Umur</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <label>{{data.umur}} {{data.satuanumur}}</label>
-                                    </td>
+                                    <td colspan="2" style="width: 30%;">Umur</td>
+                                    <td colspan="2">{{data.umur}} {{data.satuanumur}}</td>
                                     <td style="width: 30%;"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="width: 30%;">
-                                        <label>Jenis Kelamin</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <label>{{data.jeniskelamin}}</label>
-                                    </td>
+                                    <td colspan="2" style="width: 30%;">Jenis Kelamin</td>
+                                    <td colspan="2">{{data.jeniskelamin}}</td>
                                     <td style="width: 30%;"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="width: 30%;">
-                                        <label>Nama Dokter</label>
-                                    </td>
-                                    <td colspan="2">
-                                        <label>{{data.dokter}}</label>
-                                    </td>
+                                    <td colspan="2" style="width: 30%;">Nama Dokter</td>
+                                    <td colspan="2">{{data.dokter}}</td>
                                     <td style="width: 30%;"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="width: 30%;">
-                                        <label>Gambar Resep</label>
-                                    </td>
+                                    <td colspan="2" style="width: 30%;">Gambar Resep</td>
                                     <td colspan="2">
-                                        <label>
-                                            <a href="" ng-click="imgmodal(blobUrl)" ng-show="blobUrl">
-                                                <img ng-src="{{blobUrl}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
-                                            </a>
-                                            <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="blobUrl" style="max-width: 150px;">
-                                        </label>
+                                        <a href="" ng-click="imgmodal(blobUrl)" ng-show="blobUrl">
+                                            <img ng-src="{{blobUrl}}" class="thumb" title="{{data.imagename}}" style="max-width: 150px;">
+                                        </a>
+                                        <img src="/assets/images/noimage.jpg" class="thumb" title="noimage.jpg" ng-hide="blobUrl" style="max-width: 150px;">
                                     </td>
                                     <td style="width: 30%;"></td>
                                 </tr>
@@ -75,30 +51,24 @@
                                     <td colspan="2" style="width: 30%;">
                                     </td>
                                     <td colspan="2">
-                                        <table class="table table-condensed table-bordered">
+                                        <table class="table table-condensed">
                                             <tr>
-                                                <td style="width: 25%;">
-                                                    <label>Nama Obat</label>
-                                                </td>
-                                                <td>
-                                                    <label>{{item.obat}}</label>
-                                                </td>
+                                                <td>{{$index+1}}.</td>
+                                                <td style="width: 25%;">Nama Obat</td>
+                                                <td>:</td>
+                                                <td>{{item.obat}}</td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 25%;">
-                                                    <label>Keterangan</label>
-                                                </td>
-                                                <td>
-                                                    <label>{{item.keterangan}}</label>
-                                                </td>
+                                                <td></td>
+                                                <td style="width: 25%;">Keterangan</td>
+                                                <td>:</td>
+                                                <td>{{item.keterangan}}</td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 25%;">
-                                                    <label>Jumlah</label>
-                                                </td>
-                                                <td>
-                                                    <label>{{item.jumlah}}</label>
-                                                </td>
+                                                <td></td>
+                                                <td style="width: 25%;">Jumlah</td>
+                                                <td>:</td>
+                                                <td>{{item.jumlah}}</td>
                                             </tr>
                                         </table>
                                     </td>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kpmApp')
-    .controller('StokDaftarObatCtrl', function ($scope, Restangular, socket, $alert, uiGridConstants) {
+    .controller('StokDaftarObatCtrl', function ($scope, Restangular, socket, $alert, uiGridConstants, $modal) {
 
         var date = new Date();
         $scope.bulan = date.getMonth();
@@ -90,8 +90,32 @@ angular.module('kpmApp')
                 pinnedRight: true,
                 cellTemplate: 'app/stok/obat/daftar/template/edit.html',
                 width: 100,
+            }, {
+                name: 'delete',
+                displayName: '',
+                enableColumnMenu: false,
+                enableSorting: false,
+                enableFiltering: false,
+                pinnedRight: true,
+                cellTemplate: 'app/stok/obat/daftar/template/delete.html',
+                width: 100,
             }
         ];
+
+        $scope.deletemodal = function (data) {
+            var scope = $scope.$new();
+            scope.data = {
+                id: data._id,
+                obat: data.obat
+            };
+            var deletemodal = $modal({
+                scope: scope,
+                template: 'app/stok/obat/daftar/template/deletemodal.html',
+                show: false,
+                animation: 'am-fade-and-slide-top'
+            });
+            deletemodal.$promise.then(deletemodal.show);
+        };
 
         $scope.$on('$destroy', function () {
             socket.unsyncUpdates('obat');

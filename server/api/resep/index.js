@@ -13,6 +13,6 @@ router.get('/:id/:lid', auth.hasRole('oprstok'), controller.detail);
 router.post('/', controller.create);
 router.put('/:id', auth.hasRole('oprstok'), multipart(), controller.update);
 router.put('/upres/:id/:lid', auth.hasRole('oprstok'), multipart(), controller.upres);
-router.delete('/:id', controller.destroy);
+router.delete('/:id/:lid', auth.hasRole('oprstok'), controller.destroy);
 
 module.exports = router;
