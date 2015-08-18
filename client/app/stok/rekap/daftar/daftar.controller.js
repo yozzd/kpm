@@ -117,6 +117,13 @@ angular.module('kpmApp')
             $scope.getData($scope.bulan, $scope.tahun);
         };
 
+        $scope.popup = function (b, t) {
+            var left = screen.width / 2 - 400;
+            var top = screen.height / 2 - 250;
+            var url = '/api/reseps/cetak1/' + b + '/' + t;
+            window.open(url, '', 'top=' + top + ',left=' + left + ',width=800,height=500');
+        };
+
         $scope.$on('$destroy', function () {
             socket.unsyncUpdates('obat');
         });
