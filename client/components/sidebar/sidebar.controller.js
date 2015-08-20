@@ -141,6 +141,9 @@ angular.module('kpmApp')
             }, {
                 'title': 'Rekap Umum',
                 'link': 'stok.rekapumum',
+            }, {
+                'title': 'Rekap Per Jenis Obat',
+                'link': 'stok.rekapperobat',
             }]
         }, {
             bpjs: [{

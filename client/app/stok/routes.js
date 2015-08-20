@@ -115,6 +115,20 @@ angular.module('kpmApp')
                     label: 'Rekap Umum'
                 }
             })
+            .state('stok.rekapperobat', {
+                url: '/rekap/perobat',
+                views: {
+                    '@': {
+                        templateUrl: 'app/stok/rekap/perobat/perobat.html',
+                        controller: 'StokRekapPerObatCtrl'
+                    }
+                },
+                authenticate: true,
+                access: 'oprstok',
+                ncyBreadcrumb: {
+                    label: 'Rekap Per Jenis Obat'
+                }
+            })
             .state('stok.resepbpjs', {
                 url: '/resep/bpjs/daftar',
                 views: {

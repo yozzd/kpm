@@ -564,7 +564,19 @@ exports.cetak2 = function (req, res) {
             var arr3 = [];
             _.forEach(bydate, function (val1) {
                 _.forEach(arr2, function (val2) {
-                    var filter5 = _.findWhere(val2, {
+                    var filter = _.filter(val2, function (val) {
+                        return val.tanggal === val1;
+                    });
+                    var sum = 0;
+                    if (filter.length > 1) {
+                        _.forEach(filter, function (val) {
+                            sum += val.jumlah;
+                        });
+                        _.forEach(filter, function (val) {
+                            val.jumlah = sum;
+                        });
+                    }
+                    var filter5 = _.findWhere(filter, {
                         tanggal: val1
                     });
                     arr3.push(filter5);
@@ -769,7 +781,19 @@ exports.cetak3 = function (req, res) {
             var arr3 = [];
             _.forEach(bydate, function (val1) {
                 _.forEach(arr2, function (val2) {
-                    var filter5 = _.findWhere(val2, {
+                    var filter = _.filter(val2, function (val) {
+                        return val.tanggal === val1;
+                    });
+                    var sum = 0;
+                    if (filter.length > 1) {
+                        _.forEach(filter, function (val) {
+                            sum += val.jumlah;
+                        });
+                        _.forEach(filter, function (val) {
+                            val.jumlah = sum;
+                        });
+                    }
+                    var filter5 = _.findWhere(filter, {
                         tanggal: val1
                     });
                     arr3.push(filter5);

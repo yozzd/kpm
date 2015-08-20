@@ -67,7 +67,19 @@ angular.module('kpmApp')
                 var temp3 = [];
                 _.forEach($scope.bydate, function (val1) {
                     _.forEach(temp2, function (val2) {
-                        var filter4 = _.findWhere(val2, {
+                        var filter = _.filter(val2, function (val) {
+                            return val.tanggal === val1;
+                        });
+                        var sum = 0;
+                        if (filter.length > 1) {
+                            _.forEach(filter, function (val) {
+                                sum += val.jumlah;
+                            });
+                            _.forEach(filter, function (val) {
+                                val.jumlah = sum;
+                            });
+                        }
+                        var filter4 = _.findWhere(filter, {
                             tanggal: val1
                         });
                         temp3.push(filter4);
