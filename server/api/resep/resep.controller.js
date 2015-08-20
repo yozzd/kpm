@@ -398,7 +398,7 @@ exports.cetak1 = function (req, res) {
             });
 
             var arr4 = [];
-            _.forEach(obatObj, function (val) {
+            _.forEach(filter1, function (val) {
                 arr4.push({
                     id: val._id,
                     obat: val.obat,
