@@ -85,7 +85,8 @@ angular.module('kpmApp')
                             tinggi: $scope.data.tinggi,
                             did: $scope.diagnosa.selected.oid,
                             diagnosa: $scope.diagnosa.selected.opsi,
-                            terapi: $scope.data.terapi
+                            terapi: $scope.data.terapi,
+                            status: $scope.data.status
                         },
                     }).progress(function (evt) {
                         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);

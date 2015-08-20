@@ -104,7 +104,7 @@ exports.files = function (req, res) {
                         did: req.body.did,
                         diagnosa: req.body.diagnosa,
                         terapi: req.body.terapi,
-                        status: 'L'
+                        status: req.body.status === 'B' ? req.body.status : 'L'
                     });
                     kartukontrol.save(function (data) {
                         callback();
@@ -126,7 +126,7 @@ exports.files = function (req, res) {
                         did: req.body.did,
                         diagnosa: req.body.diagnosa,
                         terapi: req.body.terapi,
-                        status: 'L'
+                        status: req.body.status === 'B' ? req.body.status : 'L'
                     });
                     kartukontrol.save(function (data) {
                         callback();
@@ -189,7 +189,7 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].did = req.body.did;
                     kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
                     kartukontrol.kontrol[index].terapi = req.body.terapi;
-                    kartukontrol.kontrol[index].status = 'L';
+                    kartukontrol.kontrol[index].status = req.body.status === 'B' ? req.body.status : 'L';
                     kartukontrol.save(function (data) {
                         callback();
                     });
@@ -209,7 +209,7 @@ exports.update = function (req, res) {
                     kartukontrol.kontrol[index].did = req.body.did;
                     kartukontrol.kontrol[index].diagnosa = req.body.diagnosa;
                     kartukontrol.kontrol[index].terapi = req.body.terapi;
-                    kartukontrol.kontrol[index].status = 'L';
+                    kartukontrol.kontrol[index].status = req.body.status === 'B' ? req.body.status : 'L';
                     kartukontrol.save(function (data) {
                         callback();
                     });
